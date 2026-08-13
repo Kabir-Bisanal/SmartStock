@@ -2,7 +2,7 @@
 
 SmartStock is a student portfolio project about forecasting retail demand and, in later stages, turning forecasts into inventory recommendations. It addresses the cost of both stockouts and excess inventory.
 
-> **Current status:** Stage 6 (leakage-safe feature engineering and chronological validation design) is complete. The project is under development; no forecasting model, model evaluation, optimization, database, or dashboard has been implemented.
+> **Current status:** Stage 7 (forecast-origin-safe baseline forecasting and validation evaluation) is complete. The project is under development; no advanced forecasting model, final-test evaluation, optimization, database, or dashboard has been implemented.
 
 ## Dataset
 
@@ -178,6 +178,27 @@ Generated but Git-ignored output:
 
 No model is trained by this command. The actual target-week price is scenario-only;
 it is not part of the default forecast-safe feature set.
+
+## Run the Stage 7 baseline evaluation
+
+Stage 7 evaluates zero, persistence, 7-day seasonal naive, 28-day mean, and
+Croston-SBA rules across the three frozen validation folds:
+
+```powershell
+python src/smartstock/models/baseline_evaluation.py
+```
+
+Every 30-day forecast is generated once from its fold origin; no validation-period
+actual sales update later horizon days. Outputs include:
+
+- `reports/stage7_baseline_metrics.csv` — fold, horizon, aggregate, and segment metrics.
+- `reports/stage7_summary.json` — machine-readable conclusions and leakage audits.
+- `reports/stage7_baseline_evaluation_report.md` — detailed findings and trade-offs.
+- `reports/figures/stage7/` — eight validation-only comparison figures.
+- `data/processed/baselines/baseline_validation_predictions.csv` — Git-ignored predictions.
+
+The locked final test (`2016-04-23` through `2016-05-22`) is explicitly blocked
+and is not forecast or scored by Stage 7.
 
 ## Run tests
 

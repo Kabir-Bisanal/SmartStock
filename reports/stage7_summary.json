@@ -1,0 +1,1387 @@
+{
+  "stage": "Stage 7 - Baseline Forecasting & Evaluation Framework",
+  "generated_at_utc": "2026-08-13T06:50:02+00:00",
+  "baseline_definitions": {
+    "zero": "0 for every target day",
+    "last_value": "final pre-origin observed sale repeated for 30 days",
+    "seasonal_naive_7": "final seven pre-origin sales repeated across 30 days",
+    "mean_28": "mean of final 28 pre-origin sales repeated across 30 days",
+    "croston_sba": "constant Croston-SBA forecast with alpha=0.1",
+    "croston_formula": "(1 - alpha/2) * smoothed_nonzero_demand_size / smoothed_inter_demand_interval"
+  },
+  "metric_definitions": {
+    "mae": "mean(abs(forecast - actual))",
+    "rmse": "sqrt(mean((forecast - actual)^2))",
+    "wape": "sum(abs(forecast - actual)) / sum(actual); undefined when denominator is zero",
+    "rmsse": "mean across series of sqrt(series forecast MSE / training-only mean squared one-step naive error)",
+    "aggregate_rmsse": "mean across series of abs(total forecast error) / sqrt(horizon_days * training-only naive scale)",
+    "bias": "mean(forecast - actual); positive is overforecast and negative is underforecast",
+    "aggregate_bias": "sum(forecast - actual)"
+  },
+  "forecast_origin_audits": [
+    {
+      "fold": "validation_fold_1",
+      "forecast_origin": "2016-01-23",
+      "validation_start": "2016-01-24",
+      "validation_end": "2016-02-22",
+      "prediction_rows": 45000,
+      "series": 300,
+      "checks": {
+        "history_ends_at_origin": true,
+        "last_value_uses_final_preorigin_value": true,
+        "seasonal_naive_uses_final_preorigin_week": true,
+        "mean_28_uses_final_preorigin_28_days": true,
+        "croston_receives_preorigin_history_only": true,
+        "expected_prediction_rows": true,
+        "five_baselines": true,
+        "all_targets_after_origin": true,
+        "all_targets_within_fold": true,
+        "no_final_test_targets": true,
+        "finite_nonnegative_forecasts": true,
+        "demand_band_attached_after_forecasting": true,
+        "no_price_inputs_loaded": true
+      },
+      "intermittency_class_counts": {
+        "highly_intermittent": 18,
+        "intermittent": 144,
+        "regular": 138
+      }
+    },
+    {
+      "fold": "validation_fold_2",
+      "forecast_origin": "2016-02-22",
+      "validation_start": "2016-02-23",
+      "validation_end": "2016-03-23",
+      "prediction_rows": 45000,
+      "series": 300,
+      "checks": {
+        "history_ends_at_origin": true,
+        "last_value_uses_final_preorigin_value": true,
+        "seasonal_naive_uses_final_preorigin_week": true,
+        "mean_28_uses_final_preorigin_28_days": true,
+        "croston_receives_preorigin_history_only": true,
+        "expected_prediction_rows": true,
+        "five_baselines": true,
+        "all_targets_after_origin": true,
+        "all_targets_within_fold": true,
+        "no_final_test_targets": true,
+        "finite_nonnegative_forecasts": true,
+        "demand_band_attached_after_forecasting": true,
+        "no_price_inputs_loaded": true
+      },
+      "intermittency_class_counts": {
+        "highly_intermittent": 18,
+        "intermittent": 143,
+        "regular": 139
+      }
+    },
+    {
+      "fold": "validation_fold_3",
+      "forecast_origin": "2016-03-23",
+      "validation_start": "2016-03-24",
+      "validation_end": "2016-04-22",
+      "prediction_rows": 45000,
+      "series": 300,
+      "checks": {
+        "history_ends_at_origin": true,
+        "last_value_uses_final_preorigin_value": true,
+        "seasonal_naive_uses_final_preorigin_week": true,
+        "mean_28_uses_final_preorigin_28_days": true,
+        "croston_receives_preorigin_history_only": true,
+        "expected_prediction_rows": true,
+        "five_baselines": true,
+        "all_targets_after_origin": true,
+        "all_targets_within_fold": true,
+        "no_final_test_targets": true,
+        "finite_nonnegative_forecasts": true,
+        "demand_band_attached_after_forecasting": true,
+        "no_price_inputs_loaded": true
+      },
+      "intermittency_class_counts": {
+        "highly_intermittent": 17,
+        "intermittent": 144,
+        "regular": 139
+      }
+    }
+  ],
+  "metric_leakage_audit": {
+    "rmsse_scale_training_only": true,
+    "intermittency_segments_training_only": true,
+    "demand_band_analysis_only": true,
+    "no_price_inputs": true,
+    "no_final_test_predictions": true,
+    "no_final_test_metrics": true,
+    "wape_zero_denominator_returns_nan": true,
+    "undefined_rmsse_scales_counted": true
+  },
+  "predictions": {
+    "rows": 135000,
+    "folds": 3,
+    "baselines": 5,
+    "item_store_pairs": 300,
+    "date_min": "2016-01-24",
+    "date_max": "2016-04-22",
+    "file": "data/processed/baselines/baseline_validation_predictions.csv",
+    "file_size_bytes": 18772832,
+    "sha256": "3b65d1eccc868258d1a5317c26ceb7a49dc83ce05d5021f02af42140dc24897d"
+  },
+  "metrics": {
+    "rows": 1300,
+    "file": "reports/stage7_baseline_metrics.csv",
+    "file_size_bytes": 261542
+  },
+  "results": {
+    "primary_comparison": [
+      {
+        "baseline_name": "croston_sba",
+        "mae": 1.58804104308853,
+        "rmse": 2.9259730512121167,
+        "wape": 0.7155367415414834,
+        "rmsse": 0.7672729700987975,
+        "bias": -0.05388060192446466,
+        "aggregate_bias": -1454.7762519605458,
+        "rmsse_undefined_series": 0
+      },
+      {
+        "baseline_name": "last_value",
+        "mae": 1.7735925925925926,
+        "rmse": 3.449718184947222,
+        "wape": 0.7991422325317491,
+        "rmsse": 0.919096795188126,
+        "bias": -0.11048148148148149,
+        "aggregate_bias": -2983.0,
+        "rmsse_undefined_series": 0
+      },
+      {
+        "baseline_name": "mean_28",
+        "mae": 1.4617539687468497,
+        "rmse": 2.8005500074317324,
+        "wape": 0.6586345335875197,
+        "rmsse": 0.735954971951298,
+        "bias": -0.06571958396970122,
+        "aggregate_bias": -1774.428767181933,
+        "rmsse_undefined_series": 0
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "mae": 1.7081481481481482,
+        "rmse": 3.3089329151611757,
+        "wape": 0.7696543898002437,
+        "rmsse": 0.9341127483171108,
+        "bias": -0.08466666666666667,
+        "aggregate_bias": -2286.0,
+        "rmsse_undefined_series": 0
+      },
+      {
+        "baseline_name": "zero",
+        "mae": 2.2193703703703704,
+        "rmse": 4.9583935570572315,
+        "wape": 1.0,
+        "rmsse": 1.0088967898657395,
+        "bias": -2.2193703703703704,
+        "aggregate_bias": -59923.0,
+        "rmsse_undefined_series": 0
+      }
+    ],
+    "best_by_metric": {
+      "mae": "mean_28",
+      "rmse": "mean_28",
+      "wape": "mean_28",
+      "rmsse": "mean_28",
+      "absolute_bias": "croston_sba"
+    },
+    "balanced_ranking": [
+      {
+        "baseline_name": "mean_28",
+        "mean_rank": 1.2,
+        "mae": 1.4617539687468497,
+        "rmse": 2.8005500074317324,
+        "wape": 0.6586345335875197,
+        "rmsse": 0.735954971951298,
+        "absolute_bias": 0.06571958396970122
+      },
+      {
+        "baseline_name": "croston_sba",
+        "mean_rank": 1.8,
+        "mae": 1.58804104308853,
+        "rmse": 2.9259730512121167,
+        "wape": 0.7155367415414834,
+        "rmsse": 0.7672729700987975,
+        "absolute_bias": 0.05388060192446466
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "mean_rank": 3.2,
+        "mae": 1.7081481481481482,
+        "rmse": 3.3089329151611757,
+        "wape": 0.7696543898002437,
+        "rmsse": 0.9341127483171108,
+        "absolute_bias": 0.08466666666666667
+      },
+      {
+        "baseline_name": "last_value",
+        "mean_rank": 3.8,
+        "mae": 1.7735925925925926,
+        "rmse": 3.449718184947222,
+        "wape": 0.7991422325317491,
+        "rmsse": 0.919096795188126,
+        "absolute_bias": 0.11048148148148149
+      },
+      {
+        "baseline_name": "zero",
+        "mean_rank": 5.0,
+        "mae": 2.2193703703703704,
+        "rmse": 4.9583935570572315,
+        "wape": 1.0,
+        "rmsse": 1.0088967898657395,
+        "absolute_bias": 2.2193703703703704
+      }
+    ],
+    "strongest_overall_baseline": "mean_28",
+    "croston_by_intermittency": [
+      {
+        "intermittency_class": "highly_intermittent",
+        "croston_mae": 0.40376802446941534,
+        "croston_wape": 1.5469666479671575,
+        "croston_rmsse": 0.7771013972043948,
+        "mae_rank": 4,
+        "best_mae_baseline": "zero",
+        "best_mae": 0.2610062893081761
+      },
+      {
+        "intermittency_class": "intermittent",
+        "croston_mae": 0.9293185905924345,
+        "croston_wape": 0.8826273965300557,
+        "croston_rmsse": 0.7622397305188499,
+        "mae_rank": 2,
+        "best_mae_baseline": "mean_28",
+        "best_mae": 0.8537785873877293
+      },
+      {
+        "intermittency_class": "regular",
+        "croston_mae": 2.4213964445611986,
+        "croston_wape": 0.6584526872385009,
+        "croston_rmsse": 0.771235517267934,
+        "mae_rank": 2,
+        "best_mae_baseline": "mean_28",
+        "best_mae": 2.229475734232423
+      }
+    ],
+    "seasonal_naive_comparison": [
+      {
+        "baseline_name": "mean_28",
+        "mae": 1.4617539687468497,
+        "rmse": 2.8005500074317324,
+        "wape": 0.6586345335875197,
+        "rmsse": 0.735954971951298,
+        "bias": -0.06571958396970122
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "mae": 1.7081481481481482,
+        "rmse": 3.3089329151611757,
+        "wape": 0.7696543898002437,
+        "rmsse": 0.9341127483171108,
+        "bias": -0.08466666666666667
+      },
+      {
+        "baseline_name": "last_value",
+        "mae": 1.7735925925925926,
+        "rmse": 3.449718184947222,
+        "wape": 0.7991422325317491,
+        "rmsse": 0.919096795188126,
+        "bias": -0.11048148148148149
+      }
+    ],
+    "zero_baseline": {
+      "mae": 2.2193703703703704,
+      "best_nonzero_baseline": "mean_28",
+      "best_nonzero_mae": 1.4617539687468497,
+      "best_nonzero_mae_improvement_pct": 34.13654664124804
+    },
+    "fold_results": [
+      {
+        "fold": "validation_fold_1",
+        "baseline_name": "croston_sba",
+        "mae": 1.6465700770736569,
+        "rmse": 3.0592173655598387,
+        "wape": 0.7640302481781249,
+        "rmsse": 0.784742033822968,
+        "bias": -0.13302981790196564
+      },
+      {
+        "fold": "validation_fold_1",
+        "baseline_name": "last_value",
+        "mae": 1.8071111111111111,
+        "rmse": 3.416398363449113,
+        "wape": 0.8385234068880182,
+        "rmsse": 0.9361627553118799,
+        "bias": 0.4048888888888889
+      },
+      {
+        "fold": "validation_fold_1",
+        "baseline_name": "mean_28",
+        "mae": 1.3819920665514138,
+        "rmse": 2.6296765531410378,
+        "wape": 0.6412625592370965,
+        "rmsse": 0.7291166484950766,
+        "bias": -0.17475397938903836
+      },
+      {
+        "fold": "validation_fold_1",
+        "baseline_name": "seasonal_naive_7",
+        "mae": 1.6047777777777779,
+        "rmse": 2.9950514742376853,
+        "wape": 0.7446380697050938,
+        "rmsse": 0.9256212958629155,
+        "bias": -0.10988888888888888
+      },
+      {
+        "fold": "validation_fold_1",
+        "baseline_name": "zero",
+        "mae": 2.155111111111111,
+        "rmse": 4.811213753074974,
+        "wape": 1.0,
+        "rmsse": 1.0061106952150702,
+        "bias": -2.155111111111111
+      },
+      {
+        "fold": "validation_fold_2",
+        "baseline_name": "croston_sba",
+        "mae": 1.5488440724280146,
+        "rmse": 2.830239840363616,
+        "wape": 0.6777322370600997,
+        "rmsse": 0.7556345875806075,
+        "bias": 0.008789268501102924
+      },
+      {
+        "fold": "validation_fold_2",
+        "baseline_name": "last_value",
+        "mae": 1.7744444444444445,
+        "rmse": 3.5528079661648535,
+        "wape": 0.7764488525865422,
+        "rmsse": 0.9179263320205087,
+        "bias": -0.4053333333333333
+      },
+      {
+        "fold": "validation_fold_2",
+        "baseline_name": "mean_28",
+        "mae": 1.5143015860186684,
+        "rmse": 3.0339143598484974,
+        "wape": 0.6626173801131863,
+        "rmsse": 0.7394741089385363,
+        "bias": -0.13021429261316855
+      },
+      {
+        "fold": "validation_fold_2",
+        "baseline_name": "seasonal_naive_7",
+        "mae": 1.765111111111111,
+        "rmse": 3.555152754961608,
+        "wape": 0.7723648385842085,
+        "rmsse": 0.9401015658854012,
+        "bias": -0.198
+      },
+      {
+        "fold": "validation_fold_2",
+        "baseline_name": "zero",
+        "mae": 2.2853333333333334,
+        "rmse": 5.128547552670249,
+        "wape": 1.0,
+        "rmsse": 1.0084546092254072,
+        "bias": -2.2853333333333334
+      },
+      {
+        "fold": "validation_fold_3",
+        "baseline_name": "croston_sba",
+        "mae": 1.5687089797639184,
+        "rmse": 2.8835544811108194,
+        "wape": 0.7073691476464385,
+        "rmsse": 0.761442288892817,
+        "bias": -0.03740125637253126
+      },
+      {
+        "fold": "validation_fold_3",
+        "baseline_name": "last_value",
+        "mae": 1.7392222222222222,
+        "rmse": 3.377490850386488,
+        "wape": 0.7842577283431034,
+        "rmsse": 0.9032012982319896,
+        "bias": -0.331
+      },
+      {
+        "fold": "validation_fold_3",
+        "baseline_name": "mean_28",
+        "mae": 1.4889682536704674,
+        "rmse": 2.7220223943500144,
+        "wape": 0.6714121089751093,
+        "rmsse": 0.7392741584202811,
+        "bias": 0.10780952009310325
+      },
+      {
+        "fold": "validation_fold_3",
+        "baseline_name": "seasonal_naive_7",
+        "mae": 1.7545555555555556,
+        "rmse": 3.352262917294326,
+        "wape": 0.7911719023999199,
+        "rmsse": 0.9366153832030155,
+        "bias": 0.05388888888888889
+      },
+      {
+        "fold": "validation_fold_3",
+        "baseline_name": "zero",
+        "mae": 2.2176666666666667,
+        "rmse": 4.93023551386972,
+        "wape": 1.0,
+        "rmsse": 1.0121250651567408,
+        "bias": -2.2176666666666667
+      }
+    ],
+    "horizon_results": [
+      {
+        "baseline_name": "croston_sba",
+        "horizon": "day_1_daily",
+        "evaluation_type": "daily",
+        "mae": 1.524368382189423,
+        "rmse": 2.748333108629289,
+        "wape": 0.7332611138270875,
+        "rmsse": 0.5572455476681436,
+        "bias": 0.08660087955701683,
+        "aggregate_bias": 77.94079160131514
+      },
+      {
+        "baseline_name": "last_value",
+        "horizon": "day_1_daily",
+        "evaluation_type": "daily",
+        "mae": 1.498888888888889,
+        "rmse": 2.6884526735238947,
+        "wape": 0.721004810261892,
+        "rmsse": 0.5958587382324625,
+        "bias": 0.03,
+        "aggregate_bias": 27.0
+      },
+      {
+        "baseline_name": "mean_28",
+        "horizon": "day_1_daily",
+        "evaluation_type": "daily",
+        "mae": 1.307380953675343,
+        "rmse": 2.4490633055828317,
+        "wape": 0.6288844779838635,
+        "rmsse": 0.502948529306015,
+        "bias": 0.07476189751178026,
+        "aggregate_bias": 67.28570776060224
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "horizon": "day_1_daily",
+        "evaluation_type": "daily",
+        "mae": 1.5911111111111111,
+        "rmse": 2.9507061301774304,
+        "wape": 0.7653661143773384,
+        "rmsse": 0.6277689385311411,
+        "bias": 0.14222222222222222,
+        "aggregate_bias": 128.0
+      },
+      {
+        "baseline_name": "zero",
+        "horizon": "day_1_daily",
+        "evaluation_type": "daily",
+        "mae": 2.078888888888889,
+        "rmse": 4.567639798991744,
+        "wape": 1.0,
+        "rmsse": 0.652674962280891,
+        "bias": -2.078888888888889,
+        "aggregate_bias": -1871.0
+      },
+      {
+        "baseline_name": "croston_sba",
+        "horizon": "days_1_7_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 6.0713759430083964,
+        "rmse": 12.11695525328552,
+        "wape": 0.4214282237164551,
+        "rmsse": 0.8140816504654667,
+        "bias": 0.7517617276145352,
+        "aggregate_bias": 676.5855548530817
+      },
+      {
+        "baseline_name": "last_value",
+        "horizon": "days_1_7_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 8.973333333333333,
+        "rmse": 16.40860208007441,
+        "wape": 0.6228597871355854,
+        "rmsse": 1.3774043027673175,
+        "bias": 0.35555555555555557,
+        "aggregate_bias": 320.0
+      },
+      {
+        "baseline_name": "mean_28",
+        "horizon": "days_1_7_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 4.426111092567444,
+        "rmse": 8.152530243544,
+        "wape": 0.30722659133971153,
+        "rmsse": 0.6680297588530447,
+        "bias": 0.6688888714048598,
+        "aggregate_bias": 601.9999842643738
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "horizon": "days_1_7_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 4.702222222222222,
+        "rmse": 8.88856943870422,
+        "wape": 0.32639210242171834,
+        "rmsse": 0.7120176530120235,
+        "bias": 0.5466666666666666,
+        "aggregate_bias": 492.0
+      },
+      {
+        "baseline_name": "zero",
+        "horizon": "days_1_7_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 14.406666666666666,
+        "rmse": 29.443467489033587,
+        "wape": 1.0,
+        "rmsse": 1.7124631324453974,
+        "bias": -14.406666666666666,
+        "aggregate_bias": -12966.0
+      },
+      {
+        "baseline_name": "croston_sba",
+        "horizon": "days_1_7_daily",
+        "evaluation_type": "daily",
+        "mae": 1.5296935127648925,
+        "rmse": 2.8344837398332015,
+        "wape": 0.7432569127270416,
+        "rmsse": 0.6962844636082509,
+        "bias": 0.10739453035066762,
+        "aggregate_bias": 676.585541209206
+      },
+      {
+        "baseline_name": "last_value",
+        "horizon": "days_1_7_daily",
+        "evaluation_type": "daily",
+        "mae": 1.6314285714285715,
+        "rmse": 3.2454119018544336,
+        "wape": 0.7926885701064322,
+        "rmsse": 0.8122474210471751,
+        "bias": 0.050793650793650794,
+        "aggregate_bias": 320.0
+      },
+      {
+        "baseline_name": "mean_28",
+        "horizon": "days_1_7_daily",
+        "evaluation_type": "daily",
+        "mae": 1.3345918331537692,
+        "rmse": 2.528707621543472,
+        "wape": 0.6484597060673103,
+        "rmsse": 0.64434024241906,
+        "bias": 0.09555554830543106,
+        "aggregate_bias": 601.9999543242157
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "horizon": "days_1_7_daily",
+        "evaluation_type": "daily",
+        "mae": 1.5911111111111111,
+        "rmse": 3.1436002007606216,
+        "wape": 0.7730988739780965,
+        "rmsse": 0.84350942807787,
+        "bias": 0.07809523809523809,
+        "aggregate_bias": 492.0
+      },
+      {
+        "baseline_name": "zero",
+        "horizon": "days_1_7_daily",
+        "evaluation_type": "daily",
+        "mae": 2.058095238095238,
+        "rmse": 4.767615623155744,
+        "wape": 1.0,
+        "rmsse": 0.8751978918940366,
+        "bias": -2.058095238095238,
+        "aggregate_bias": -12966.0
+      },
+      {
+        "baseline_name": "croston_sba",
+        "horizon": "days_1_30_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 20.772105385528672,
+        "rmse": 46.58584489594824,
+        "wape": 0.31198195762855335,
+        "rmsse": 1.2875516805760192,
+        "bias": -1.6164181296692954,
+        "aggregate_bias": -1454.7763167023659
+      },
+      {
+        "baseline_name": "last_value",
+        "horizon": "days_1_30_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 40.88777777777778,
+        "rmse": 71.94132640175913,
+        "wape": 0.6141047677853245,
+        "rmsse": 2.980042653190482,
+        "bias": -3.3144444444444443,
+        "aggregate_bias": -2983.0
+      },
+      {
+        "baseline_name": "mean_28",
+        "horizon": "days_1_30_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 18.072539790603848,
+        "rmse": 39.03622343071313,
+        "wape": 0.27143644029076425,
+        "rmsse": 1.1595909203552281,
+        "bias": -1.971587710513009,
+        "aggregate_bias": -1774.428939461708
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "horizon": "days_1_30_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 20.14666666666667,
+        "rmse": 38.73514052008991,
+        "wape": 0.3025883216794887,
+        "rmsse": 1.429240209031025,
+        "bias": -2.54,
+        "aggregate_bias": -2286.0
+      },
+      {
+        "baseline_name": "zero",
+        "horizon": "days_1_30_aggregate",
+        "evaluation_type": "aggregate",
+        "mae": 66.58111111111111,
+        "rmse": 128.81053700860207,
+        "wape": 1.0,
+        "rmsse": 3.879474316353073,
+        "bias": -66.58111111111111,
+        "aggregate_bias": -59923.0
+      },
+      {
+        "baseline_name": "croston_sba",
+        "horizon": "days_1_30_daily",
+        "evaluation_type": "daily",
+        "mae": 1.58804104308853,
+        "rmse": 2.9259730512121167,
+        "wape": 0.7155367415414834,
+        "rmsse": 0.7672729700987975,
+        "bias": -0.05388060192446466,
+        "aggregate_bias": -1454.7762519605458
+      },
+      {
+        "baseline_name": "last_value",
+        "horizon": "days_1_30_daily",
+        "evaluation_type": "daily",
+        "mae": 1.7735925925925926,
+        "rmse": 3.449718184947222,
+        "wape": 0.7991422325317491,
+        "rmsse": 0.919096795188126,
+        "bias": -0.11048148148148149,
+        "aggregate_bias": -2983.0
+      },
+      {
+        "baseline_name": "mean_28",
+        "horizon": "days_1_30_daily",
+        "evaluation_type": "daily",
+        "mae": 1.4617539687468497,
+        "rmse": 2.8005500074317324,
+        "wape": 0.6586345335875197,
+        "rmsse": 0.735954971951298,
+        "bias": -0.06571958396970122,
+        "aggregate_bias": -1774.428767181933
+      },
+      {
+        "baseline_name": "seasonal_naive_7",
+        "horizon": "days_1_30_daily",
+        "evaluation_type": "daily",
+        "mae": 1.7081481481481482,
+        "rmse": 3.3089329151611757,
+        "wape": 0.7696543898002437,
+        "rmsse": 0.9341127483171108,
+        "bias": -0.08466666666666667,
+        "aggregate_bias": -2286.0
+      },
+      {
+        "baseline_name": "zero",
+        "horizon": "days_1_30_daily",
+        "evaluation_type": "daily",
+        "mae": 2.2193703703703704,
+        "rmse": 4.9583935570572315,
+        "wape": 1.0,
+        "rmsse": 1.0088967898657395,
+        "bias": -2.2193703703703704,
+        "aggregate_bias": -59923.0
+      }
+    ],
+    "intermittency_class_counts": [
+      {
+        "fold": "validation_fold_1",
+        "intermittency_class": "highly_intermittent",
+        "series": 18
+      },
+      {
+        "fold": "validation_fold_1",
+        "intermittency_class": "intermittent",
+        "series": 144
+      },
+      {
+        "fold": "validation_fold_1",
+        "intermittency_class": "regular",
+        "series": 138
+      },
+      {
+        "fold": "validation_fold_2",
+        "intermittency_class": "highly_intermittent",
+        "series": 18
+      },
+      {
+        "fold": "validation_fold_2",
+        "intermittency_class": "intermittent",
+        "series": 143
+      },
+      {
+        "fold": "validation_fold_2",
+        "intermittency_class": "regular",
+        "series": 139
+      },
+      {
+        "fold": "validation_fold_3",
+        "intermittency_class": "highly_intermittent",
+        "series": 17
+      },
+      {
+        "fold": "validation_fold_3",
+        "intermittency_class": "intermittent",
+        "series": 144
+      },
+      {
+        "fold": "validation_fold_3",
+        "intermittency_class": "regular",
+        "series": 139
+      }
+    ],
+    "segment_results": {
+      "demand_band": [
+        {
+          "segment_value": "high",
+          "baseline_name": "croston_sba",
+          "mae": 2.9546780591995763,
+          "rmse": 4.738585678271303,
+          "wape": 0.6037561119958771,
+          "rmsse": 0.7929938033890276,
+          "bias": -0.21554704215523904
+        },
+        {
+          "segment_value": "high",
+          "baseline_name": "last_value",
+          "mae": 3.2585858585858585,
+          "rmse": 5.44388782972072,
+          "wape": 0.6658563434547289,
+          "rmsse": 0.9184756528312527,
+          "bias": -0.30460157126823795
+        },
+        {
+          "segment_value": "high",
+          "baseline_name": "mean_28",
+          "mae": 2.7226230593442113,
+          "rmse": 4.526682981045078,
+          "wape": 0.5563382134381462,
+          "rmsse": 0.7641220233085735,
+          "bias": -0.14971943374568497
+        },
+        {
+          "segment_value": "high",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 3.1473625140291808,
+          "rmse": 5.246868554636149,
+          "wape": 0.6431290707274562,
+          "rmsse": 0.9158161165179844,
+          "bias": -0.21133557800224467
+        },
+        {
+          "segment_value": "high",
+          "baseline_name": "zero",
+          "mae": 4.893827160493827,
+          "rmse": 8.28637273262391,
+          "wape": 1.0,
+          "rmsse": 1.255834678921424,
+          "bias": -4.893827160493827
+        },
+        {
+          "segment_value": "low",
+          "baseline_name": "croston_sba",
+          "mae": 0.6994380697260969,
+          "rmse": 1.016175258004994,
+          "wape": 1.1502386860944118,
+          "rmsse": 0.7405072990025352,
+          "bias": 0.0027597026404005912
+        },
+        {
+          "segment_value": "low",
+          "baseline_name": "last_value",
+          "mae": 0.7375982042648709,
+          "rmse": 1.292124117974509,
+          "wape": 1.2129937246216316,
+          "rmsse": 0.8645037393368228,
+          "bias": -0.05925925925925926
+        },
+        {
+          "segment_value": "low",
+          "baseline_name": "mean_28",
+          "mae": 0.6634519798152241,
+          "rmse": 1.0137424946194882,
+          "wape": 1.0910589036828435,
+          "rmsse": 0.7165487052943479,
+          "bias": -0.016329967383583787
+        },
+        {
+          "segment_value": "low",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 0.7529741863075197,
+          "rmse": 1.3121635905785356,
+          "wape": 1.23827980804725,
+          "rmsse": 0.9339090022996901,
+          "bias": -0.011111111111111112
+        },
+        {
+          "segment_value": "low",
+          "baseline_name": "zero",
+          "mae": 0.6080808080808081,
+          "rmse": 1.2687206455003177,
+          "wape": 1.0,
+          "rmsse": 0.8302311793954583,
+          "bias": -0.6080808080808081
+        },
+        {
+          "segment_value": "medium",
+          "baseline_name": "croston_sba",
+          "mae": 1.1240668251266406,
+          "rmse": 1.5441275751839112,
+          "wape": 0.9466042981985654,
+          "rmsse": 0.7682870773811228,
+          "bias": 0.048056529751270685
+        },
+        {
+          "segment_value": "medium",
+          "baseline_name": "last_value",
+          "mae": 1.3377995642701526,
+          "rmse": 2.148693680260268,
+          "wape": 1.1265938904687642,
+          "rmsse": 0.9726870463901798,
+          "bias": 0.028213507625272333
+        },
+        {
+          "segment_value": "medium",
+          "baseline_name": "mean_28",
+          "mae": 1.0127917818359884,
+          "rmse": 1.4772436251674885,
+          "wape": 0.8528968495784216,
+          "rmsse": 0.7274518573892176,
+          "bias": -0.03212729881483096
+        },
+        {
+          "segment_value": "medium",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 1.2383442265795206,
+          "rmse": 1.9524299144415147,
+          "wape": 1.0428401064122557,
+          "rmsse": 0.9520689973743474,
+          "bias": -0.033115468409586055
+        },
+        {
+          "segment_value": "medium",
+          "baseline_name": "zero",
+          "mae": 1.1874727668845315,
+          "rmse": 2.0258406899579553,
+          "wape": 1.0,
+          "rmsse": 0.9426325194740242,
+          "bias": -1.1874727668845315
+        }
+      ],
+      "store_id": [
+        {
+          "segment_value": "CA_1",
+          "baseline_name": "croston_sba",
+          "mae": 1.7198259981473287,
+          "rmse": 3.099746189995169,
+          "wape": 0.690631535932802,
+          "rmsse": 0.7734879701118982,
+          "bias": -0.05377137250039313
+        },
+        {
+          "segment_value": "CA_1",
+          "baseline_name": "last_value",
+          "mae": 1.9973333333333334,
+          "rmse": 3.8445054587322702,
+          "wape": 0.8020703194717116,
+          "rmsse": 0.9422770450779248,
+          "bias": 0.0064444444444444445
+        },
+        {
+          "segment_value": "CA_1",
+          "baseline_name": "mean_28",
+          "mae": 1.5961507975202467,
+          "rmse": 3.0311577518991233,
+          "wape": 0.640967212996708,
+          "rmsse": 0.7412164497539989,
+          "bias": -0.0833174620328678
+        },
+        {
+          "segment_value": "CA_1",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 1.8457777777777777,
+          "rmse": 3.4632354814537227,
+          "wape": 0.7412100660360521,
+          "rmsse": 0.9345979015867971,
+          "bias": -0.08044444444444444
+        },
+        {
+          "segment_value": "CA_1",
+          "baseline_name": "zero",
+          "mae": 2.490222222222222,
+          "rmse": 5.679221386383485,
+          "wape": 1.0,
+          "rmsse": 1.026473862511079,
+          "bias": -2.490222222222222
+        },
+        {
+          "segment_value": "TX_2",
+          "baseline_name": "croston_sba",
+          "mae": 1.5411533644960986,
+          "rmse": 2.7463982764757877,
+          "wape": 0.702938388428182,
+          "rmsse": 0.7422285521588655,
+          "bias": -0.060495929987894166
+        },
+        {
+          "segment_value": "TX_2",
+          "baseline_name": "last_value",
+          "mae": 1.693111111111111,
+          "rmse": 3.1131263314481084,
+          "wape": 0.7722481248733023,
+          "rmsse": 0.8754067112169036,
+          "bias": -0.035777777777777776
+        },
+        {
+          "segment_value": "TX_2",
+          "baseline_name": "mean_28",
+          "mae": 1.398198413413432,
+          "rmse": 2.5682669617311147,
+          "wape": 0.637734934153704,
+          "rmsse": 0.7097649082720963,
+          "bias": -0.061849216120110614
+        },
+        {
+          "segment_value": "TX_2",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 1.676,
+          "rmse": 3.1308500798061574,
+          "wape": 0.7644435434826677,
+          "rmsse": 0.9054044561404214,
+          "bias": 0.034666666666666665
+        },
+        {
+          "segment_value": "TX_2",
+          "baseline_name": "zero",
+          "mae": 2.1924444444444444,
+          "rmse": 4.706236996440645,
+          "wape": 1.0,
+          "rmsse": 0.9826194880128344,
+          "bias": -2.1924444444444444
+        },
+        {
+          "segment_value": "WI_3",
+          "baseline_name": "croston_sba",
+          "mae": 1.5031437666221625,
+          "rmse": 2.9210999561534843,
+          "wape": 0.7609142189999135,
+          "rmsse": 0.7861023880256289,
+          "bias": -0.04737450328510669
+        },
+        {
+          "segment_value": "WI_3",
+          "baseline_name": "last_value",
+          "mae": 1.6303333333333334,
+          "rmse": 3.35110263777296,
+          "wape": 0.8252995106586423,
+          "rmsse": 0.9396066292695495,
+          "bias": -0.3021111111111111
+        },
+        {
+          "segment_value": "WI_3",
+          "baseline_name": "mean_28",
+          "mae": 1.3909126953068707,
+          "rmse": 2.7830430339396326,
+          "wape": 0.7041011450453815,
+          "rmsse": 0.7568835578277987,
+          "bias": -0.05199207375612524
+        },
+        {
+          "segment_value": "WI_3",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 1.6026666666666667,
+          "rmse": 3.324287726549687,
+          "wape": 0.8112942235221329,
+          "rmsse": 0.9623358872241136,
+          "bias": -0.20822222222222223
+        },
+        {
+          "segment_value": "WI_3",
+          "baseline_name": "zero",
+          "mae": 1.9754444444444443,
+          "rmse": 4.399406525632495,
+          "wape": 1.0,
+          "rmsse": 1.0175970190733046,
+          "bias": -1.9754444444444443
+        }
+      ],
+      "dept_id": [
+        {
+          "segment_value": "FOODS_1",
+          "baseline_name": "croston_sba",
+          "mae": 1.5191006193116858,
+          "rmse": 2.5819118538765964,
+          "wape": 0.7733950356018011,
+          "rmsse": 0.8302243877870623,
+          "bias": 0.032694169474236756
+        },
+        {
+          "segment_value": "FOODS_1",
+          "baseline_name": "last_value",
+          "mae": 1.9864197530864198,
+          "rmse": 3.8477506656727622,
+          "wape": 1.011313639220616,
+          "rmsse": 1.0558369515834185,
+          "bias": 0.43580246913580245
+        },
+        {
+          "segment_value": "FOODS_1",
+          "baseline_name": "mean_28",
+          "mae": 1.475185187022995,
+          "rmse": 2.5657177466745162,
+          "wape": 0.7510370845308775,
+          "rmsse": 0.8087256193073223,
+          "bias": 0.050088179838142274
+        },
+        {
+          "segment_value": "FOODS_1",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 1.7664197530864199,
+          "rmse": 3.086089858912723,
+          "wape": 0.8993086109365179,
+          "rmsse": 1.0713035787311445,
+          "bias": 0.04197530864197531
+        },
+        {
+          "segment_value": "FOODS_1",
+          "baseline_name": "zero",
+          "mae": 1.9641975308641975,
+          "rmse": 4.046000921501393,
+          "wape": 1.0,
+          "rmsse": 1.0460296479856535,
+          "bias": -1.9641975308641975
+        },
+        {
+          "segment_value": "FOODS_2",
+          "baseline_name": "croston_sba",
+          "mae": 1.4439396032245544,
+          "rmse": 2.7708165367128936,
+          "wape": 0.9950942024045243,
+          "rmsse": 0.7477707880390428,
+          "bias": 0.07062156068742591
+        },
+        {
+          "segment_value": "FOODS_2",
+          "baseline_name": "last_value",
+          "mae": 1.4087301587301588,
+          "rmse": 2.8626864209992586,
+          "wape": 0.9708295350957156,
+          "rmsse": 0.8770176274391513,
+          "bias": -0.3915343915343915
+        },
+        {
+          "segment_value": "FOODS_2",
+          "baseline_name": "mean_28",
+          "mae": 1.1810846552134506,
+          "rmse": 2.4506688028845884,
+          "wape": 0.8139471279319678,
+          "rmsse": 0.7119901668707999,
+          "bias": -0.20332577569833982
+        },
+        {
+          "segment_value": "FOODS_2",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 1.386111111111111,
+          "rmse": 2.904498426770294,
+          "wape": 0.9552415679124886,
+          "rmsse": 0.8894648038255285,
+          "bias": -0.2802910052910053
+        },
+        {
+          "segment_value": "FOODS_2",
+          "baseline_name": "zero",
+          "mae": 1.4510582010582012,
+          "rmse": 3.2663913068265673,
+          "wape": 1.0,
+          "rmsse": 0.9080402679206866,
+          "bias": -1.4510582010582012
+        },
+        {
+          "segment_value": "FOODS_3",
+          "baseline_name": "croston_sba",
+          "mae": 1.6769699320857927,
+          "rmse": 3.081267446783733,
+          "wape": 0.6295079578223414,
+          "rmsse": 0.7602868268066774,
+          "bias": -0.13782239357557793
+        },
+        {
+          "segment_value": "FOODS_3",
+          "baseline_name": "last_value",
+          "mae": 1.896816114359974,
+          "rmse": 3.5995090272378802,
+          "wape": 0.7120347334016294,
+          "rmsse": 0.9037830118730718,
+          "bias": -0.11617933723196881
+        },
+        {
+          "segment_value": "FOODS_3",
+          "baseline_name": "mean_28",
+          "mae": 1.5960920828660252,
+          "rmse": 3.012845739928462,
+          "wape": 0.5991476939194138,
+          "rmsse": 0.7285769865462731,
+          "bias": -0.028599287280504235
+        },
+        {
+          "segment_value": "FOODS_3",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 1.8510071474983756,
+          "rmse": 3.543794510431402,
+          "wape": 0.6948387726230548,
+          "rmsse": 0.9199422218180545,
+          "bias": -0.021897335932423653
+        },
+        {
+          "segment_value": "FOODS_3",
+          "baseline_name": "zero",
+          "mae": 2.6639376218323587,
+          "rmse": 5.795149323831964,
+          "wape": 1.0,
+          "rmsse": 1.0486685397370161,
+          "bias": -2.6639376218323587
+        }
+      ],
+      "intermittency_class": [
+        {
+          "segment_value": "highly_intermittent",
+          "baseline_name": "croston_sba",
+          "mae": 0.40376802446941534,
+          "rmse": 0.6074988950959134,
+          "wape": 1.5469666479671575,
+          "rmsse": 0.7771013972043948,
+          "bias": -0.004146763867458458
+        },
+        {
+          "segment_value": "highly_intermittent",
+          "baseline_name": "last_value",
+          "mae": 0.340251572327044,
+          "rmse": 0.6835902262937035,
+          "wape": 1.3036144578313253,
+          "rmsse": 0.8441731067890469,
+          "bias": -0.09119496855345911
+        },
+        {
+          "segment_value": "highly_intermittent",
+          "baseline_name": "mean_28",
+          "mae": 0.37996406164840335,
+          "rmse": 0.5971805674463199,
+          "wape": 1.4557659229420754,
+          "rmsse": 0.7595917096228761,
+          "bias": -0.01504941483807264
+        },
+        {
+          "segment_value": "highly_intermittent",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 0.42830188679245285,
+          "rmse": 0.926547659884658,
+          "wape": 1.6409638554216868,
+          "rmsse": 1.0310576884899503,
+          "bias": 0.03333333333333333
+        },
+        {
+          "segment_value": "highly_intermittent",
+          "baseline_name": "zero",
+          "mae": 0.2610062893081761,
+          "rmse": 0.6515583641446041,
+          "wape": 1.0,
+          "rmsse": 0.8035695162742408,
+          "bias": -0.2610062893081761
+        },
+        {
+          "segment_value": "intermittent",
+          "baseline_name": "croston_sba",
+          "mae": 0.9293185905924345,
+          "rmse": 1.518687292240294,
+          "wape": 0.8826273965300557,
+          "rmsse": 0.7622397305188499,
+          "bias": -0.003298720684585328
+        },
+        {
+          "segment_value": "intermittent",
+          "baseline_name": "last_value",
+          "mae": 1.0185614849187936,
+          "rmse": 1.952015239629631,
+          "wape": 0.9673865138827678,
+          "rmsse": 0.9210241558476826,
+          "bias": -0.0691415313225058
+        },
+        {
+          "segment_value": "intermittent",
+          "baseline_name": "mean_28",
+          "mae": 0.8537785873877293,
+          "rmse": 1.4881366490350392,
+          "wape": 0.8108827041959261,
+          "rmsse": 0.7276239585989821,
+          "bias": -0.05198873348551394
+        },
+        {
+          "segment_value": "intermittent",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 0.9802784222737819,
+          "rmse": 1.7737233026081052,
+          "wape": 0.9310268840899074,
+          "rmsse": 0.9378363953838739,
+          "bias": -0.06860015467904099
+        },
+        {
+          "segment_value": "intermittent",
+          "baseline_name": "zero",
+          "mae": 1.0529002320185614,
+          "rmse": 2.869984949743745,
+          "wape": 1.0,
+          "rmsse": 0.9063772484450761,
+          "bias": -1.0529002320185614
+        },
+        {
+          "segment_value": "regular",
+          "baseline_name": "croston_sba",
+          "mae": 2.4213964445611986,
+          "rmse": 4.010671874521686,
+          "wape": 0.6584526872385009,
+          "rmsse": 0.771235517267934,
+          "bias": -0.1126226313268909
+        },
+        {
+          "segment_value": "regular",
+          "baseline_name": "last_value",
+          "mae": 2.7384615384615385,
+          "rmse": 4.662521052403148,
+          "wape": 0.7446725062099621,
+          "rmsse": 0.9266455044210163,
+          "bias": -0.15576923076923077
+        },
+        {
+          "segment_value": "regular",
+          "baseline_name": "mean_28",
+          "mae": 2.229475734232423,
+          "rmse": 3.8247045695874995,
+          "wape": 0.6062635020530057,
+          "rmsse": 0.7415749711297945,
+          "bias": -0.08640111166840563
+        },
+        {
+          "segment_value": "regular",
+          "baseline_name": "seasonal_naive_7",
+          "mae": 2.625320512820513,
+          "rmse": 4.507650192329731,
+          "wape": 0.7139059572057349,
+          "rmsse": 0.9179036768869775,
+          "bias": -0.11634615384615385
+        },
+        {
+          "segment_value": "regular",
+          "baseline_name": "zero",
+          "mae": 3.677403846153846,
+          "rmse": 6.678491116243518,
+          "wape": 1.0,
+          "rmsse": 1.1412724337423148,
+          "bias": -3.677403846153846
+        }
+      ]
+    }
+  },
+  "figures": [
+    {
+      "filename": "01_mae_by_baseline.png",
+      "title": "30-day daily MAE by baseline"
+    },
+    {
+      "filename": "02_rmsse_by_baseline.png",
+      "title": "30-day daily RMSSE by baseline"
+    },
+    {
+      "filename": "03_wape_by_baseline.png",
+      "title": "30-day daily WAPE by baseline"
+    },
+    {
+      "filename": "04_bias_by_baseline.png",
+      "title": "30-day daily forecast bias"
+    },
+    {
+      "filename": "05_daily_mae_by_horizon.png",
+      "title": "Daily MAE by horizon"
+    },
+    {
+      "filename": "06_wape_by_demand_band.png",
+      "title": "WAPE by demand band"
+    },
+    {
+      "filename": "07_mae_by_intermittency.png",
+      "title": "MAE by training-history intermittency"
+    },
+    {
+      "filename": "08_fold_stability_mae.png",
+      "title": "Fold stability comparison"
+    }
+  ],
+  "final_test_lock": {
+    "start_date": "2016-04-23",
+    "end_date": "2016-05-22",
+    "locked": true,
+    "predictions_generated": false,
+    "metrics_calculated": false,
+    "latest_evaluated_target_date": "2016-04-22"
+  },
+  "source_integrity": {
+    "hashes_before": {
+      "feature_dataset": "050c0e35cb3d1dc59db38019b0655802bdbfd63bd5f2ee371232fd59bc609151",
+      "validation_manifest": "259e38027b8083ed5829ebd3addc64b3f2edb9a9383c376a28191f8fca4669c1",
+      "feature_manifest": "94270341bcf7f8d338f4815236ac12b5d68fd848309ed6efa5956fc064e80749",
+      "subset_manifest": "914f04e2431518e90bf468de2e844884c3c389df554181fefa8d483c124250bf",
+      "interim_dataset": "d1290663f4dce21384982a6b7b7c548818ecd9656bc1b72d14f37b8341f4ddba"
+    },
+    "hashes_after": {
+      "feature_dataset": "050c0e35cb3d1dc59db38019b0655802bdbfd63bd5f2ee371232fd59bc609151",
+      "validation_manifest": "259e38027b8083ed5829ebd3addc64b3f2edb9a9383c376a28191f8fca4669c1",
+      "feature_manifest": "94270341bcf7f8d338f4815236ac12b5d68fd848309ed6efa5956fc064e80749",
+      "subset_manifest": "914f04e2431518e90bf468de2e844884c3c389df554181fefa8d483c124250bf",
+      "interim_dataset": "d1290663f4dce21384982a6b7b7c548818ecd9656bc1b72d14f37b8341f4ddba"
+    },
+    "unchanged": true
+  },
+  "performance": {
+    "feature_csv_load_count": 1,
+    "prediction_rows": 135000,
+    "grouped_series_fold_forecasts": 900,
+    "runtime_seconds_before_report_write": 64.697,
+    "future_price_columns_loaded": false,
+    "baseline_history_policy": "all active pre-origin sales, including Stage 6 feature warm-up rows"
+  },
+  "scope": {
+    "advanced_models_trained": false,
+    "final_test_evaluated": false,
+    "hyperparameters_tuned": false,
+    "inventory_logic_implemented": false
+  }
+}

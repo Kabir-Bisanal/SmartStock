@@ -1,2 +1,1 @@
-"""Demand forecasting package placeholder for a later project stage."""
-
+"""Forecasting baselines and evaluation utilities for SmartStock."""
