@@ -1,1 +1,1 @@
-"""Forecasting baselines and evaluation utilities for SmartStock."""
+"""Forecasting baselines, global models, and evaluation utilities for SmartStock."""

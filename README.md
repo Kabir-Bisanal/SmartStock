@@ -2,7 +2,7 @@
 
 SmartStock is a student portfolio project about forecasting retail demand and, in later stages, turning forecasts into inventory recommendations. It addresses the cost of both stockouts and excess inventory.
 
-> **Current status:** Stage 7 (forecast-origin-safe baseline forecasting and validation evaluation) is complete. The project is under development; no advanced forecasting model, final-test evaluation, optimization, database, or dashboard has been implemented.
+> **Current status:** Stage 8 (global Ridge regression with recursive multi-step validation) is complete. The project is under development; no nonlinear forecasting model, final-test evaluation, optimization, database, or dashboard has been implemented.
 
 ## Dataset
 
@@ -199,6 +199,32 @@ actual sales update later horizon days. Outputs include:
 
 The locked final test (`2016-04-23` through `2016-05-22`) is explicitly blocked
 and is not forecast or scored by Stage 7.
+
+## Run the Stage 8 global Ridge evaluation
+
+Stage 8 fits one global regularized linear model per validation fold. Categorical
+features are one-hot encoded, numeric features are standardized, and each 30-day
+forecast is generated recursively so later lags use earlier predictions rather
+than validation-period actual demand:
+
+```powershell
+python src/smartstock/models/stage8_evaluation.py
+```
+
+Tracked outputs:
+
+- `config/v1_ridge.json` — frozen model, feature, preprocessing, and recursion policy.
+- `reports/stage8_ridge_metrics.csv` — fold, horizon, aggregate, segment, and Stage 7 comparison metrics.
+- `reports/stage8_summary.json` — machine-readable model results and leakage audits.
+- `reports/stage8_ridge_evaluation_report.md` — detailed interpretation and limitations.
+- `reports/figures/stage8/` — eight validation-only comparison figures.
+
+Generated but Git-ignored output:
+
+- `data/processed/models/stage8/ridge_validation_predictions.csv` — raw and clipped recursive validation predictions.
+
+Ridge v1 is intentionally price-agnostic. Its fixed `alpha=1.0` is not tuned, and
+the locked final test remains untouched.
 
 ## Run tests
 

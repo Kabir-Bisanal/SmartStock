@@ -6,3 +6,5 @@ pandas>=2.2,<3.0
 jupyterlab>=4.2,<5.0
 matplotlib>=3.8,<4.0
 
+# Stage 8 global Ridge regression and preprocessing pipeline
+scikit-learn>=1.5,<2.0

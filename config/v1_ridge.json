@@ -1,0 +1,114 @@
+{
+  "manifest_version": 1,
+  "project_stage": "Stage 8 - Global Ridge Regression & Recursive Multi-Step Forecasting",
+  "experiment_name": "ridge_global_v1",
+  "model": {
+    "type": "sklearn.linear_model.Ridge",
+    "alpha": 1.0,
+    "solver": "lsqr",
+    "fit_intercept": true,
+    "hyperparameter_tuning_performed": false
+  },
+  "target": "sales",
+  "categorical_features": [
+    "item_id",
+    "store_id",
+    "dept_id",
+    "event_name_1",
+    "event_type_1",
+    "event_name_2",
+    "event_type_2"
+  ],
+  "numeric_features": [
+    "year",
+    "day_of_month",
+    "is_weekend",
+    "day_of_week_sin",
+    "day_of_week_cos",
+    "month_sin",
+    "month_cos",
+    "is_event",
+    "snap_active",
+    "product_age_days",
+    "sales_lag_1",
+    "sales_lag_7",
+    "sales_lag_14",
+    "sales_lag_28",
+    "sales_roll_mean_7",
+    "sales_roll_mean_14",
+    "sales_roll_mean_28",
+    "sales_roll_std_7",
+    "sales_roll_std_28"
+  ],
+  "known_context_numeric_features": [
+    "year",
+    "day_of_month",
+    "is_weekend",
+    "day_of_week_sin",
+    "day_of_week_cos",
+    "month_sin",
+    "month_cos",
+    "is_event",
+    "snap_active",
+    "product_age_days"
+  ],
+  "recursive_demand_features": [
+    "sales_lag_1",
+    "sales_lag_7",
+    "sales_lag_14",
+    "sales_lag_28",
+    "sales_roll_mean_7",
+    "sales_roll_mean_14",
+    "sales_roll_mean_28",
+    "sales_roll_std_7",
+    "sales_roll_std_28"
+  ],
+  "feature_count_before_encoding": 26,
+  "expected_series": 300,
+  "preprocessing": {
+    "categorical_missing_value": "__NONE__",
+    "categorical_encoder": "OneHotEncoder(handle_unknown='ignore')",
+    "numeric_transformer": "StandardScaler",
+    "fit_scope": "fit independently on each fold's training rows only"
+  },
+  "training_policy": {
+    "architecture": "one global model per validation fold across all 300 item-store series",
+    "row_filter": "is_feature_ready == true and date < validation_start",
+    "warmup_rows_excluded": true,
+    "target_transformation": "none"
+  },
+  "forecast_policy": {
+    "strategy": "recursive",
+    "horizon_days": 30,
+    "history": "actual active demand through forecast origin, followed only by prior clipped predictions",
+    "non_negative_rule": "forecast = max(raw_forecast, 0)",
+    "round_forecasts": false
+  },
+  "price_policy": "all price and price-history features excluded",
+  "intermittency_history_feature_policy": "zero rates and days-since-last-positive excluded from Ridge v1",
+  "features_deliberately_excluded": [
+    "sales",
+    "demand_band",
+    "known_future_sell_price",
+    "sell_price",
+    "previous_week_price",
+    "price_change_previous_week",
+    "price_pct_change_previous_week",
+    "price_vs_4week_median_lagged",
+    "zero_rate_7",
+    "zero_rate_28",
+    "days_since_last_positive_sale",
+    "availability_date",
+    "is_active",
+    "product_age_weeks",
+    "state_id",
+    "cat_id"
+  ],
+  "references": {
+    "feature_manifest": "config/v1_features.json",
+    "validation_manifest": "config/v1_validation.json",
+    "subset_manifest": "config/v1_subset.json",
+    "baseline_metrics": "reports/stage7_baseline_metrics.csv",
+    "primary_baseline": "mean_28"
+  }
+}
