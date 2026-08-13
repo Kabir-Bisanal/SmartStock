@@ -1,0 +1,98 @@
+{
+  "stage": "Stage 11 - PostgreSQL + Streamlit End-to-End Application",
+  "status": "complete",
+  "architecture": {
+    "intended_data_source": "PostgreSQL",
+    "data_access": "SQLAlchemy Core with bound parameters",
+    "application": "Streamlit",
+    "fallback": "read-only local CSV demo files",
+    "fallback_is_visible": true,
+    "inventory_logic_reimplemented_in_ui": false
+  },
+  "tables": {
+    "demand_history": {
+      "expected_rows": 582300,
+      "primary_key": ["date", "store_id", "item_id"]
+    },
+    "forecasts": {
+      "expected_rows": 9000,
+      "primary_key": ["target_date", "store_id", "item_id"]
+    },
+    "inventory_snapshot": {
+      "expected_rows": 300,
+      "primary_key": ["store_id", "item_id"],
+      "data_source": "synthetic_demo_not_walmart"
+    },
+    "inventory_recommendations": {
+      "expected_rows": 300,
+      "primary_key": ["store_id", "item_id"],
+      "data_source": "derived_partly_from_synthetic_demo_inputs"
+    },
+    "model_metadata": {
+      "expected_rows": 1,
+      "primary_key": ["metadata_id"]
+    }
+  },
+  "application_sections": [
+    "Overview",
+    "Sales Analytics",
+    "Demand Forecasting",
+    "Inventory Health",
+    "Reorder Recommendations",
+    "Scenario Planner",
+    "Methodology / About"
+  ],
+  "data_modes": {
+    "auto": "prefer initialized PostgreSQL; show reason and use CSV when unavailable",
+    "postgres": "require initialized PostgreSQL",
+    "csv": "explicit read-only local demo files"
+  },
+  "validated_artifact_counts": {
+    "demand_history": 582300,
+    "forecasts": 9000,
+    "inventory_snapshot": 300,
+    "inventory_recommendations": 300,
+    "model_metadata": 1,
+    "items": 100,
+    "stores": 3,
+    "item_store_series": 300
+  },
+  "postgresql_verification": {
+    "live_server_available_in_codex_environment": false,
+    "database_url_configured": false,
+    "psql_available": false,
+    "live_database_initialized": false,
+    "reason": "No PostgreSQL service/client or DATABASE_URL was available; success was not fabricated."
+  },
+  "sqlite_loader_integration": {
+    "purpose": "SQLAlchemy-compatible temporary database verification without requiring live PostgreSQL",
+    "used_real_stage10_artifacts": true,
+    "runtime_seconds": 24.606,
+    "database_size_bytes": 150863872,
+    "counts_passed": true,
+    "cardinality_passed": true
+  },
+  "tests": {
+    "unittest_total": 79,
+    "unittest_passed": 79,
+    "unittest_failed": 0,
+    "streamlit_sections_smoke_tested": 7,
+    "streamlit_section_exceptions": 0,
+    "browser_visual_qa": true,
+    "browser_console_errors": 0,
+    "scenario_interaction_verified": true
+  },
+  "run_commands": {
+    "initialize_database": "python -m smartstock.database.initialize_database",
+    "refresh_database": "python -m smartstock.database.initialize_database --refresh",
+    "run_application": "streamlit run app/streamlit_app.py",
+    "run_tests": "python -m unittest discover -s tests -v"
+  },
+  "known_limitations": [
+    "M5 does not contain real inventory balances, lead times, service levels, or costs.",
+    "CSV fallback loads and caches the 582,300-row history locally; PostgreSQL is preferred for repeated filtered queries.",
+    "No live PostgreSQL server was available for end-to-end PostgreSQL connection verification in Codex.",
+    "No authentication, Docker, cloud deployment, CI/CD, or production monitoring was implemented in Stage 11."
+  ],
+  "stage12_ready": true
+}

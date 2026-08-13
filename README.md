@@ -2,7 +2,7 @@
 
 SmartStock is a student portfolio project about forecasting retail demand and, in later stages, turning forecasts into inventory recommendations. It addresses the cost of both stockouts and excess inventory.
 
-> **Current status:** Stage 10 (inventory optimization and reorder decisions) is complete. The project is under development; database integration, dashboard development, and deployment have not been implemented.
+> **Current status:** Stage 11 (PostgreSQL + Streamlit end-to-end application) is complete. SmartStock now runs locally with PostgreSQL or a clearly labeled read-only CSV demo fallback. Deployment and final portfolio QA remain for Stage 12.
 
 ## Dataset
 
@@ -30,18 +30,19 @@ Kaggle credentials and the Kaggle command-line client are not required by this r
 ## Planned architecture
 
 ```text
-M5 data -> Python ETL -> PostgreSQL -> Feature engineering
-        -> Demand forecasting -> Inventory optimization -> Streamlit dashboard
+M5 data -> Python ETL -> PostgreSQL/CSV data access -> Feature engineering
+        -> Demand forecasting -> Inventory optimization -> Streamlit application
 ```
 
 The acquisition, profiling, controlled Version 1 transformation, descriptive EDA,
-and leakage-safe modeling foundation are complete. Later architecture stages remain unbuilt.
+leakage-safe forecasting, inventory decisions, PostgreSQL integration, and local
+Streamlit application are complete. Deployment and final QA remain.
 
 ## Project structure
 
 ```text
 smartstock/
-├── app/                         # Future application code
+├── app/                         # Streamlit application and presentation helpers
 ├── data/
 │   ├── raw/                     # Original M5 files (not committed)
 │   ├── interim/                 # Future intermediate data
@@ -49,11 +50,11 @@ smartstock/
 │   └── simulated/               # Future, clearly labeled simulated business data
 ├── notebooks/                   # Future analysis notebooks
 ├── reports/                     # Generated profiling findings
-├── sql/                         # Future SQL files
+├── sql/                         # Versioned PostgreSQL schema
 ├── src/smartstock/
 │   ├── analysis/                # Reproducible exploratory analysis code
 │   ├── data/                    # Dataset acquisition and validation code
-│   ├── database/                # Future database code
+│   ├── database/                # PostgreSQL loading, queries, and CSV fallback
 │   ├── features/                # Future feature engineering code
 │   ├── inventory/               # Future inventory logic
 │   ├── models/                  # Future forecasting code
@@ -307,6 +308,54 @@ Generated and Git-ignored outputs:
 The Stage 9 evaluation artifact remains separate and unchanged. The reusable inventory
 API is `smartstock.inventory.engine.recommend_inventory`; it has no database or
 Streamlit dependency.
+
+## Run SmartStock locally
+
+Stage 11 provides seven application sections: Overview, Sales Analytics, Demand
+Forecasting, Inventory Health, Reorder Recommendations, Scenario Planner, and
+Methodology / About.
+
+First activate the environment, install requirements, and confirm the Stage 10
+generated artifacts listed above exist:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+### PostgreSQL mode (intended architecture)
+
+Install/start PostgreSQL, create an empty `smartstock` database, copy the environment
+template, and set your own credentials in the untracked `.env` file:
+
+```powershell
+Copy-Item .env.example .env
+python -m smartstock.database.initialize_database
+streamlit run app/streamlit_app.py
+```
+
+Use `python -m smartstock.database.initialize_database --refresh` to deliberately
+reload the five application tables from current generated artifacts. See
+`docs/database_setup.md` for focused setup, verification, and troubleshooting.
+
+### Read-only CSV demo mode
+
+Reviewers can run the application without PostgreSQL. Leave `DATABASE_URL` empty
+and use `SMARTSTOCK_DATA_MODE=auto` (automatic fallback), or explicitly set:
+
+```powershell
+$env:SMARTSTOCK_DATA_MODE = "csv"
+streamlit run app/streamlit_app.py
+```
+
+The sidebar always displays `Data source: PostgreSQL` or `Data source: Local demo
+files`; a failed database connection is never hidden. CSV mode reads the same frozen
+Stage 10 artifacts and does not write recommendations.
+
+All inventory balances, lead times, service levels, and cost values shown in either
+mode are visibly labeled synthetic/demo because Walmart M5 does not contain those
+operational fields. The Scenario Planner calls the existing Stage 10 engine in memory
+and never overwrites saved recommendations.
 
 ## Run tests
 

@@ -11,3 +11,9 @@ scikit-learn>=1.5,<2.0
 
 # Stage 9 production-quality nonlinear boosting benchmark
 xgboost>=2.1,<4.0
+
+# Stage 11 PostgreSQL-backed interactive application
+streamlit>=1.40,<2.0
+SQLAlchemy>=2.0,<3.0
+psycopg[binary]>=3.2,<4.0
+joblib>=1.4,<2.0
