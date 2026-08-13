@@ -1,0 +1,343 @@
+{
+  "stage": "Stage 10 - Inventory Optimization & Reorder Decision Engine",
+  "generated_at_utc": "2026-08-13T11:40:00+00:00",
+  "status": "complete",
+  "data_disclosure": {
+    "historical_demand_and_forecasts": "data_derived",
+    "forecast_error_calibration": "data_derived_from_validation_only",
+    "inventory_balances_and_business_costs": "synthetic_demo_not_walmart"
+  },
+  "policy": {
+    "path": "config/v1_inventory_policy.json",
+    "sha256": "addda2cd4c207e0ca43a07a1ed17f974b8709fd68e5ec185eb82a7e660522fa0",
+    "service_level": 0.95,
+    "lead_time_days": 7,
+    "review_period_days": 7,
+    "low_stock_days": 10,
+    "overstock_multiplier": 1.5,
+    "holding_cost_per_unit_per_day": 0.02,
+    "stockout_cost_per_unit": 5.0,
+    "fixed_order_cost": 25.0,
+    "scenario_count": 300,
+    "random_seed": 42,
+    "all_business_values_are_demo_defaults": true
+  },
+  "stage9_integrity": {
+    "hashes_before": {
+      "evaluation_forecaster": "332d3238f903cf2c006f29491f3cd01d56629a89c31b55e370f3873eea9b62cb",
+      "final_model_config": "4bcc1542c44434903d9f0be14715bf83c012b8caf1ceddef6ebb8ad979e4a543",
+      "test_receipt": "7b1dfee800bba6c1540cc791cf8f2a9898787461ec6d4c8ee97091c759a8b0ff",
+      "test_metrics": "0efea8a5112a599983626738e405e2417b1addd6f7b5866b695ae3bf2cad4bb6",
+      "stage9_summary": "ceb8b75efd9c710c96ef7c6a1cae719d7aca891877e122ba920ad4e2278b190e",
+      "stage9_report": "d37d74fc0b084e02d29320452f3845d1928cf16800fe5be614efeaba6bb58616"
+    },
+    "hashes_after": {
+      "evaluation_forecaster": "332d3238f903cf2c006f29491f3cd01d56629a89c31b55e370f3873eea9b62cb",
+      "final_model_config": "4bcc1542c44434903d9f0be14715bf83c012b8caf1ceddef6ebb8ad979e4a543",
+      "test_receipt": "7b1dfee800bba6c1540cc791cf8f2a9898787461ec6d4c8ee97091c759a8b0ff",
+      "test_metrics": "0efea8a5112a599983626738e405e2417b1addd6f7b5866b695ae3bf2cad4bb6",
+      "stage9_summary": "ceb8b75efd9c710c96ef7c6a1cae719d7aca891877e122ba920ad4e2278b190e",
+      "stage9_report": "d37d74fc0b084e02d29320452f3845d1928cf16800fe5be614efeaba6bb58616"
+    },
+    "unchanged": true,
+    "evaluation_artifact_trained_through": "2016-04-22",
+    "evaluation_artifact_overwritten": false,
+    "final_test_metrics_recomputed": false,
+    "final_test_used_for_calibration": false
+  },
+  "deployment_forecast": {
+    "evaluation_artifact_overwritten": false,
+    "model_family_matches_frozen_config": true,
+    "window_matches_frozen_config": true,
+    "trained_through": "2016-05-22",
+    "series_count": 300,
+    "artifact_path": "models/smartstock_v1_deployment_forecaster.joblib",
+    "artifact_size_bytes": 95662,
+    "artifact_sha256": "67dbf46cdddea991135509dc4063119b8489cbf02a85508faa3e67bf76c6f77a",
+    "model_family": "mean_28",
+    "rows": 9000,
+    "series": 300,
+    "date_min": "2016-05-23",
+    "date_max": "2016-06-21",
+    "forecast_1d_total": 674.3928571428571,
+    "forecast_7d_total": 4807.273609131163,
+    "forecast_30d_total": 20728.791489171068,
+    "output_path": "data/processed/production/smartstock_v1_30day_forecast.csv",
+    "output_sha256": "250ba4ce2fd181282a4db8d15b896e85febdae74c28dba78e58a456b40f121f7",
+    "output_size_bytes": 668591,
+    "future_event_snap_price_features_invented": false
+  },
+  "uncertainty_calibration": {
+    "baseline": "mean_28",
+    "residual_definition": "actual - forecast",
+    "validation_rows": 27000,
+    "date_min": "2016-01-24",
+    "date_max": "2016-04-22",
+    "final_test_rows_used": 0,
+    "series": 300,
+    "minimum_series_observations": 60,
+    "calibration_level_counts": {
+      "item_store": 300
+    },
+    "global_fallback": {
+      "residual_mean": 0.06571959062037036,
+      "residual_std": 2.799830639083825,
+      "residual_rmse": 2.800550006141495,
+      "calibration_count": 27000
+    },
+    "output_path": "data/processed/inventory/smartstock_v1_error_calibration.csv",
+    "output_sha256": "bcd062cbcccac1eea6f852e7d620716f37018d833a3648fd08b510bc263938ad",
+    "mean_sigma_daily": 1.9280610081761742,
+    "median_sigma_daily": 1.3360425121767094,
+    "mean_residual_bias_actual_minus_forecast": 0.06571959062037037
+  },
+  "synthetic_inventory": {
+    "rows": 300,
+    "source": "synthetic_demo_not_walmart",
+    "random_seed": 42,
+    "profile_counts": {
+      "critical": 45,
+      "healthy": 90,
+      "low": 30,
+      "overstock": 45,
+      "reorder": 66,
+      "stockout": 24
+    },
+    "lead_time_counts": {
+      "3": 28,
+      "5": 51,
+      "7": 143,
+      "10": 49,
+      "14": 29
+    },
+    "service_level_counts": {
+      "0.9": 51,
+      "0.95": 173,
+      "0.975": 45,
+      "0.99": 31
+    },
+    "output_path": "data/simulated/smartstock_v1_inventory_snapshot.csv",
+    "output_sha256": "33e422ccff17a2398421bf077a6b207b65f9255f8871d536890402de5f8e2a8b"
+  },
+  "recommendation_results": {
+    "series": 300,
+    "stock_status_counts": {
+      "STOCKOUT": 36,
+      "CRITICAL": 34,
+      "REORDER NOW": 72,
+      "LOW": 5,
+      "HEALTHY": 108,
+      "OVERSTOCK": 45
+    },
+    "priority_counts": {
+      "URGENT": 55,
+      "HIGH": 18,
+      "MEDIUM": 41,
+      "LOW": 84,
+      "NONE": 102
+    },
+    "stockout_items": 36,
+    "critical_items": 34,
+    "requiring_reorder": 198,
+    "healthy_items": 108,
+    "overstock_items": 45,
+    "cost_optimized_reorders": 136,
+    "total_recommended_units": 4143,
+    "total_cost_optimized_units": 5181,
+    "expected_shortage_without_order": 3312.6121677281303,
+    "expected_shortage_with_recommendation": 167.0241028964644,
+    "expected_shortage_reduction": 3145.588064831666,
+    "expected_excess_without_order": 2358.3404323329733,
+    "expected_excess_with_recommendation": 4393.752367501307,
+    "estimated_cost_without_order": 16937.497810365956,
+    "estimated_cost_with_recommendation": 4892.649730895901,
+    "estimated_cost_savings": 12044.848079470055
+  },
+  "store_results": [
+    {
+      "store_id": "CA_1",
+      "series": 100,
+      "requiring_reorder": 64,
+      "recommended_units": 1528,
+      "cost_optimized_units": 1834,
+      "expected_shortage_without_order": 1202.5498616143898,
+      "expected_shortage_with_recommendation": 54.26740368354007,
+      "estimated_cost_without_order": 6154.670296763906,
+      "estimated_cost_with_recommendation": 1655.498058160818,
+      "estimated_cost_savings": 4499.172238603088
+    },
+    {
+      "store_id": "TX_2",
+      "series": 100,
+      "requiring_reorder": 63,
+      "recommended_units": 1348,
+      "cost_optimized_units": 1725,
+      "expected_shortage_without_order": 1146.748852609138,
+      "expected_shortage_with_recommendation": 66.90451988645063,
+      "estimated_cost_without_order": 5865.952788544409,
+      "estimated_cost_with_recommendation": 1489.8124410040448,
+      "estimated_cost_savings": 4376.140347540362
+    },
+    {
+      "store_id": "WI_3",
+      "series": 100,
+      "requiring_reorder": 71,
+      "recommended_units": 1267,
+      "cost_optimized_units": 1622,
+      "expected_shortage_without_order": 963.3134535046021,
+      "expected_shortage_with_recommendation": 45.8521793264737,
+      "estimated_cost_without_order": 4916.874725057643,
+      "estimated_cost_with_recommendation": 1747.339231731038,
+      "estimated_cost_savings": 3169.5354933266067
+    }
+  ],
+  "department_results": [
+    {
+      "dept_id": "FOODS_1",
+      "series": 45,
+      "requiring_reorder": 22,
+      "recommended_units": 465,
+      "cost_optimized_units": 507,
+      "expected_shortage_without_order": 309.53850290684807,
+      "expected_shortage_with_recommendation": 30.32516440097254,
+      "estimated_cost_without_order": 1637.5224334253946,
+      "estimated_cost_with_recommendation": 625.250713880997,
+      "estimated_cost_savings": 1012.2717195443976
+    },
+    {
+      "dept_id": "FOODS_2",
+      "series": 84,
+      "requiring_reorder": 50,
+      "recommended_units": 947,
+      "cost_optimized_units": 1337,
+      "expected_shortage_without_order": 874.4063697173053,
+      "expected_shortage_with_recommendation": 36.065473530815645,
+      "estimated_cost_without_order": 4448.234880076691,
+      "estimated_cost_with_recommendation": 1246.3319276589805,
+      "estimated_cost_savings": 3201.9029524177117
+    },
+    {
+      "dept_id": "FOODS_3",
+      "series": 171,
+      "requiring_reorder": 126,
+      "recommended_units": 2731,
+      "cost_optimized_units": 3337,
+      "expected_shortage_without_order": 2128.6672951039764,
+      "expected_shortage_with_recommendation": 100.63346496467622,
+      "estimated_cost_without_order": 10851.74049686387,
+      "estimated_cost_with_recommendation": 3021.0670893559227,
+      "estimated_cost_savings": 7830.673407507948
+    }
+  ],
+  "priority_results": [
+    {
+      "priority_label": "HIGH",
+      "series": 18,
+      "requiring_reorder": 18,
+      "recommended_units": 925,
+      "cost_optimized_units": 1064,
+      "expected_shortage_without_order": 735.9969774709609,
+      "expected_shortage_with_recommendation": 1.2823883459184657,
+      "estimated_cost_without_order": 3679.9862301465023,
+      "estimated_cost_with_recommendation": 501.77111412309915,
+      "estimated_cost_savings": 3178.215116023403
+    },
+    {
+      "priority_label": "LOW",
+      "series": 84,
+      "requiring_reorder": 84,
+      "recommended_units": 1068,
+      "cost_optimized_units": 1360,
+      "expected_shortage_without_order": 790.6076903357125,
+      "expected_shortage_with_recommendation": 84.93277710081772,
+      "estimated_cost_without_order": 3983.1026786281664,
+      "estimated_cost_with_recommendation": 1322.6398620671694,
+      "estimated_cost_savings": 2660.462816560997
+    },
+    {
+      "priority_label": "MEDIUM",
+      "series": 41,
+      "requiring_reorder": 41,
+      "recommended_units": 985,
+      "cost_optimized_units": 1159,
+      "expected_shortage_without_order": 706.3269208888637,
+      "expected_shortage_with_recommendation": 29.379958476196567,
+      "estimated_cost_without_order": 3531.9029062969685,
+      "estimated_cost_with_recommendation": 1039.5181293272965,
+      "estimated_cost_savings": 2492.384776969672
+    },
+    {
+      "priority_label": "NONE",
+      "series": 102,
+      "requiring_reorder": 0,
+      "recommended_units": 0,
+      "cost_optimized_units": 119,
+      "expected_shortage_without_order": 69.92999758715185,
+      "expected_shortage_with_recommendation": 39.58632368361244,
+      "estimated_cost_without_order": 693.7530880671138,
+      "estimated_cost_with_recommendation": 601.5071760398599,
+      "estimated_cost_savings": 92.24591202725395
+    },
+    {
+      "priority_label": "URGENT",
+      "series": 55,
+      "requiring_reorder": 55,
+      "recommended_units": 1165,
+      "cost_optimized_units": 1479,
+      "expected_shortage_without_order": 1009.7505814454411,
+      "expected_shortage_with_recommendation": 11.842655289919218,
+      "estimated_cost_without_order": 5048.752907227206,
+      "estimated_cost_with_recommendation": 1427.2134493384756,
+      "estimated_cost_savings": 3621.5394578887303
+    }
+  ],
+  "recommendation_output": {
+    "path": "data/processed/inventory/smartstock_v1_inventory_recommendations.csv",
+    "sha256": "b5beaffe20d9ca3dc6f82fb0c58d3f3eaa5bc63ddadd3e252ab300b7216db3f8",
+    "size_bytes": 177712,
+    "rows": 300,
+    "columns": 52
+  },
+  "integrity_checks": {
+    "forecast_has_9000_rows": true,
+    "forecast_has_300_series": true,
+    "forecast_has_30_days": true,
+    "forecast_keys_unique": true,
+    "forecast_nonnegative": true,
+    "calibration_has_300_unique_series": true,
+    "calibration_is_validation_only": true,
+    "snapshot_has_300_unique_series": true,
+    "snapshot_is_explicitly_synthetic": true,
+    "recommendations_have_300_unique_series": true,
+    "inventory_position_formula": true,
+    "reorder_point_formula": true,
+    "reorder_raw_formula": true,
+    "rounded_orders_cover_raw": true,
+    "stockout_risk_bounded": true,
+    "nonnegative_orders": true,
+    "optimizer_never_worse_than_no_order": true
+  },
+  "figures": [
+    "reports/figures/stage10/01_stock_status_distribution.png",
+    "reports/figures/stage10/02_reorder_quantity_distribution.png",
+    "reports/figures/stage10/03_stockout_risk_distribution.png",
+    "reports/figures/stage10/04_priority_distribution.png",
+    "reports/figures/stage10/05_recommendations_by_store.png",
+    "reports/figures/stage10/06_cost_before_after.png",
+    "reports/figures/stage10/07_shortage_before_after.png",
+    "reports/figures/stage10/08_days_of_supply_distribution.png"
+  ],
+  "performance": {
+    "runtime_seconds_before_report_write": 2.467,
+    "demand_scenarios_per_series": 300,
+    "series_optimized": 300,
+    "maximum_candidate_points": 301
+  },
+  "scope": {
+    "historical_policy_simulation": "deferred_optional_component",
+    "postgresql": false,
+    "streamlit": false,
+    "docker": false,
+    "deployment": false
+  }
+}

@@ -2,7 +2,7 @@
 
 SmartStock is a student portfolio project about forecasting retail demand and, in later stages, turning forecasts into inventory recommendations. It addresses the cost of both stockouts and excess inventory.
 
-> **Current status:** Stage 9 (final forecasting model selection and locked-test evaluation) is complete. The project is under development; inventory optimization, database integration, dashboard development, and deployment have not been implemented.
+> **Current status:** Stage 10 (inventory optimization and reorder decisions) is complete. The project is under development; database integration, dashboard development, and deployment have not been implemented.
 
 ## Dataset
 
@@ -269,6 +269,44 @@ python -m smartstock.models.train_final_model
 
 The production forecaster remains price-agnostic and does not use demand band as a
 predictor. The locked test was evaluated exactly once after model selection froze.
+
+## Run the Stage 10 inventory optimization engine
+
+Stage 10 creates a separate deployment refresh of the frozen 28-day mean through
+`2016-05-22`, generates a 30-day application forecast, calibrates forecast error
+from validation-only residuals, and converts the forecast into inventory decisions:
+
+```powershell
+python -m smartstock.inventory.build_recommendations
+```
+
+The command produces safety stock, reorder points, target stock levels, service-level
+order quantities, stockout-risk estimates, stock statuses, priority scores, and a
+bounded scenario-based cost recommendation for all 300 item-store series.
+
+Important limitation: M5 does **not** include real on-hand inventory, purchase orders,
+backorders, supplier lead times, service targets, or inventory costs. Stage 10 creates
+deterministic synthetic/demo values for those inputs. They are explicitly labeled
+`synthetic_demo` and must never be presented as Walmart operational data.
+
+Tracked outputs:
+
+- `config/v1_inventory_policy.json` — demo assumptions, formulas, thresholds, and scenario policy.
+- `reports/stage10_inventory_optimization_report.md` — calculated business results and limitations.
+- `reports/stage10_summary.json` — machine-readable recommendations and integrity checks.
+- `reports/figures/stage10/` — eight inventory-decision figures.
+
+Generated and Git-ignored outputs:
+
+- `models/smartstock_v1_deployment_forecaster.joblib` — deployment refresh trained through `2016-05-22`.
+- `data/processed/production/smartstock_v1_30day_forecast.csv` — 9,000 daily forecasts.
+- `data/processed/inventory/smartstock_v1_error_calibration.csv` — validation-only uncertainty calibration.
+- `data/simulated/smartstock_v1_inventory_snapshot.csv` — synthetic inventory balances and assumptions.
+- `data/processed/inventory/smartstock_v1_inventory_recommendations.csv` — 300 application-ready decisions.
+
+The Stage 9 evaluation artifact remains separate and unchanged. The reusable inventory
+API is `smartstock.inventory.engine.recommend_inventory`; it has no database or
+Streamlit dependency.
 
 ## Run tests
 

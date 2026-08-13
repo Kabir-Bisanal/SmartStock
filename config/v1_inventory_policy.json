@@ -1,0 +1,91 @@
+{
+  "manifest_version": 1,
+  "project_stage": "Stage 10 - Inventory Optimization & Reorder Decision Engine",
+  "policy_name": "smartstock_v1_demo_inventory_policy",
+  "data_disclosure": {
+    "historical_demand_and_forecasts": "data_derived",
+    "forecast_error_calibration": "data_derived_from_validation_only",
+    "inventory_balances_and_business_costs": "synthetic_demo_not_walmart"
+  },
+  "defaults": {
+    "service_level": {"value": 0.95, "source": "demo_default"},
+    "lead_time_days": {"value": 7, "source": "demo_default"},
+    "review_period_days": {"value": 7, "source": "demo_default"},
+    "low_stock_days": {"value": 10, "source": "demo_default"},
+    "overstock_multiplier": {"value": 1.5, "source": "demo_default"},
+    "holding_cost_per_unit_per_day": {"value": 0.02, "source": "demo_default_currency_units"},
+    "stockout_cost_per_unit": {"value": 5.0, "source": "demo_default_currency_units"},
+    "fixed_order_cost": {"value": 25.0, "source": "demo_default_currency_units"},
+    "scenario_count": {"value": 300, "source": "demo_default"},
+    "random_seed": {"value": 42, "source": "demo_default"}
+  },
+  "supported_service_levels": [0.9, 0.95, 0.975, 0.99],
+  "supported_lead_time_days": {"minimum": 1, "maximum": 30},
+  "uncertainty": {
+    "residual_definition": "actual - forecast",
+    "calibration_source": "Stage 7 mean_28 validation predictions only; locked final-test residuals excluded",
+    "minimum_item_store_observations": 60,
+    "fallback_hierarchy": ["item_store", "department_store", "global"],
+    "normal_approximation": true,
+    "near_zero_sigma": 1e-09
+  },
+  "formulas": {
+    "inventory_position": "on_hand + on_order - backorders",
+    "safety_stock": "NormalDist.inv_cdf(service_level) * sigma_daily * sqrt(lead_time_days)",
+    "reorder_point": "lead_time_demand + safety_stock",
+    "target_stock_level": "forecast_demand_over_lead_time_plus_review_period + safety_stock",
+    "service_reorder_qty": "max(0, target_stock_level - inventory_position)",
+    "days_of_supply": "inventory_position / mean_daily_forecast",
+    "stockout_risk": "1 - NormalDist(mu=lead_time_demand, sigma=sigma_daily*sqrt(lead_time_days)).cdf(inventory_position)"
+  },
+  "stock_status": {
+    "precedence": ["STOCKOUT", "CRITICAL", "REORDER NOW", "LOW", "OVERSTOCK", "HEALTHY"],
+    "critical_risk_threshold": 0.75
+  },
+  "priority": {
+    "formula": "100 * (0.50*stockout_risk + 0.30*reorder_point_gap_ratio + 0.20*target_shortage_ratio)",
+    "weights": {
+      "stockout_risk": 0.5,
+      "reorder_point_gap_ratio": 0.3,
+      "target_shortage_ratio": 0.2
+    },
+    "thresholds": {
+      "urgent": 75,
+      "high": 50,
+      "medium": 25,
+      "low": 0
+    }
+  },
+  "cost_optimization": {
+    "planning_horizon": "lead_time_days + review_period_days",
+    "scenario_model": "independent daily Normal residual draws clipped to nonnegative demand",
+    "holding_cost_approximation": "ending surplus * daily holding cost * planning horizon / 2",
+    "maximum_candidate_points": 301,
+    "candidate_upper_quantile": 0.995,
+    "candidate_upper_buffer_multiplier": 1.1,
+    "random_seed": 42
+  },
+  "synthetic_inventory": {
+    "source_label": "synthetic_demo",
+    "generation_seed": 42,
+    "profile_probabilities": {
+      "stockout": 0.08,
+      "critical": 0.15,
+      "reorder": 0.22,
+      "low": 0.1,
+      "healthy": 0.3,
+      "overstock": 0.15
+    },
+    "lead_time_choices_days": [3, 5, 7, 10, 14],
+    "lead_time_probabilities": [0.1, 0.15, 0.5, 0.15, 0.1],
+    "service_level_choices": [0.9, 0.95, 0.975, 0.99],
+    "service_level_probabilities": [0.15, 0.6, 0.15, 0.1],
+    "policy": "Predetermined seeded coverage profiles are converted to on-hand, on-order, and backorder values before recommendation statuses are calculated."
+  },
+  "references": {
+    "final_forecast_config": "config/v1_final_model.json",
+    "evaluation_forecaster": "models/smartstock_v1_forecaster.joblib",
+    "deployment_forecaster": "models/smartstock_v1_deployment_forecaster.joblib",
+    "validation_predictions": "data/processed/baselines/baseline_validation_predictions.csv"
+  }
+}
