@@ -1,0 +1,52 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python-generated files and test artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter-generated files
+.ipynb_checkpoints/
+
+# IDE and operating-system files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.*
+kaggle.json
+.kaggle/
+
+# Local databases and logs
+*.db
+*.sqlite
+*.sqlite3
+logs/
+
+# Downloaded and generated data can be too large for normal Git storage.
+# Keep the directory placeholders so a fresh clone has the expected layout.
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/simulated/*
+!data/simulated/.gitkeep

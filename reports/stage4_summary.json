@@ -1,0 +1,906 @@
+{
+  "stage": "Stage 4 - Version 1 Subset Creation & Controlled Data Transformation",
+  "created_at_utc": "2026-08-13T02:28:14+00:00",
+  "stores": [
+    "CA_1",
+    "TX_2",
+    "WI_3"
+  ],
+  "category": "FOODS",
+  "eligibility": {
+    "starting_food_items": 1437,
+    "eligible_items": 1340,
+    "ineligible_items": 97,
+    "independent_failure_counts": {
+      "required_stores": 0,
+      "extreme_sparsity": 10,
+      "insufficient_remaining_history": 92,
+      "insufficient_active_period_price_coverage": 0
+    },
+    "items_failing_multiple_rules": 5,
+    "overlap_warning": "Rule failure counts are independent and may overlap; they must not be summed as sequential removals.",
+    "minimum_observed_active_period_price_coverage": 1.0
+  },
+  "demand_stratification": {
+    "metric": "mean daily units across all three selected stores and all 1,941 days",
+    "thresholds": {
+      "low_upper_inclusive": 0.5889289598717729,
+      "medium_upper_inclusive": 1.3705421031541587
+    },
+    "eligible_band_counts": {
+      "high": 447,
+      "low": 447,
+      "medium": 446
+    },
+    "quota_availability": [
+      {
+        "department": "FOODS_1",
+        "demand_band": "low",
+        "available": 86,
+        "required": 5
+      },
+      {
+        "department": "FOODS_1",
+        "demand_band": "medium",
+        "available": 73,
+        "required": 5
+      },
+      {
+        "department": "FOODS_1",
+        "demand_band": "high",
+        "available": 49,
+        "required": 5
+      },
+      {
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "available": 148,
+        "required": 9
+      },
+      {
+        "department": "FOODS_2",
+        "demand_band": "medium",
+        "available": 128,
+        "required": 10
+      },
+      {
+        "department": "FOODS_2",
+        "demand_band": "high",
+        "available": 87,
+        "required": 9
+      },
+      {
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "available": 213,
+        "required": 19
+      },
+      {
+        "department": "FOODS_3",
+        "demand_band": "medium",
+        "available": 245,
+        "required": 19
+      },
+      {
+        "department": "FOODS_3",
+        "demand_band": "high",
+        "available": 311,
+        "required": 19
+      }
+    ]
+  },
+  "selection": {
+    "random_seed": 42,
+    "selected_items": 100,
+    "department_counts": {
+      "FOODS_1": 15,
+      "FOODS_2": 28,
+      "FOODS_3": 57
+    },
+    "demand_band_counts": {
+      "high": 33,
+      "low": 33,
+      "medium": 34
+    },
+    "item_store_pairs": 300
+  },
+  "transformation": {
+    "source_selected_wide_rows": 300,
+    "daily_columns": 1941,
+    "final_rows": 582300,
+    "final_columns": 23,
+    "date_min": "2011-01-29",
+    "date_max": "2016-05-22",
+    "dataframe_memory_mib": 22.34,
+    "csv_file_size_mib": 70.54,
+    "output_path": "data/interim/smartstock_v1_long.csv"
+  },
+  "calendar_join": {
+    "rows_before": 582300,
+    "rows_after": 582300,
+    "unmatched_rows": 0,
+    "row_multiplier": 1.0
+  },
+  "price_join": {
+    "join_key": [
+      "store_id",
+      "item_id",
+      "wm_yr_wk"
+    ],
+    "rows_before": 582300,
+    "rows_after": 582300,
+    "row_multiplier": 1.0,
+    "duplicate_price_keys": 0,
+    "matched_rows": 480506,
+    "missing_price_rows": 101794
+  },
+  "missing_prices": {
+    "total_rows": 582300,
+    "missing_rows": 101794,
+    "missing_pct": 17.481367,
+    "before_first_known_price_rows": 101794,
+    "on_or_after_first_known_price_rows": 0,
+    "after_last_known_price_rows": 0,
+    "before_first_positive_sale_rows": 101794,
+    "on_or_after_first_positive_sale_rows": 0,
+    "on_or_after_first_positive_with_positive_sales_rows": 0,
+    "by_store": [
+      {
+        "store_id": "CA_1",
+        "total_rows": 194100,
+        "missing_rows": 34699,
+        "missing_pct": 17.8768675940237
+      },
+      {
+        "store_id": "TX_2",
+        "total_rows": 194100,
+        "missing_rows": 32095,
+        "missing_pct": 16.535291087068522
+      },
+      {
+        "store_id": "WI_3",
+        "total_rows": 194100,
+        "missing_rows": 35000,
+        "missing_pct": 18.031942297784646
+      }
+    ],
+    "products_with_missing_prices": 62,
+    "products_without_missing_prices": 38,
+    "by_product": [
+      {
+        "item_id": "FOODS_2_209",
+        "total_rows": 5823,
+        "missing_rows": 4130,
+        "missing_pct": 70.92563970461961
+      },
+      {
+        "item_id": "FOODS_3_601",
+        "total_rows": 5823,
+        "missing_rows": 3787,
+        "missing_pct": 65.03520522067663
+      },
+      {
+        "item_id": "FOODS_2_040",
+        "total_rows": 5823,
+        "missing_rows": 3647,
+        "missing_pct": 62.630946247638676
+      },
+      {
+        "item_id": "FOODS_3_661",
+        "total_rows": 5823,
+        "missing_rows": 3549,
+        "missing_pct": 60.94796496651211
+      },
+      {
+        "item_id": "FOODS_2_178",
+        "total_rows": 5823,
+        "missing_rows": 3493,
+        "missing_pct": 59.98626137729693
+      },
+      {
+        "item_id": "FOODS_2_095",
+        "total_rows": 5823,
+        "missing_rows": 3402,
+        "missing_pct": 58.42349304482226
+      },
+      {
+        "item_id": "FOODS_3_340",
+        "total_rows": 5823,
+        "missing_rows": 3318,
+        "missing_pct": 56.98093766099949
+      },
+      {
+        "item_id": "FOODS_3_482",
+        "total_rows": 5823,
+        "missing_rows": 3206,
+        "missing_pct": 55.05753048256912
+      },
+      {
+        "item_id": "FOODS_2_301",
+        "total_rows": 5823,
+        "missing_rows": 3073,
+        "missing_pct": 52.77348445818307
+      },
+      {
+        "item_id": "FOODS_3_641",
+        "total_rows": 5823,
+        "missing_rows": 2905,
+        "missing_pct": 49.88837369053752
+      },
+      {
+        "item_id": "FOODS_3_532",
+        "total_rows": 5823,
+        "missing_rows": 2884,
+        "missing_pct": 49.52773484458183
+      },
+      {
+        "item_id": "FOODS_3_795",
+        "total_rows": 5823,
+        "missing_rows": 2884,
+        "missing_pct": 49.52773484458183
+      },
+      {
+        "item_id": "FOODS_3_709",
+        "total_rows": 5823,
+        "missing_rows": 2821,
+        "missing_pct": 48.44581830671475
+      },
+      {
+        "item_id": "FOODS_2_028",
+        "total_rows": 5823,
+        "missing_rows": 2793,
+        "missing_pct": 47.96496651210716
+      },
+      {
+        "item_id": "FOODS_3_135",
+        "total_rows": 5823,
+        "missing_rows": 2730,
+        "missing_pct": 46.88304997424008
+      },
+      {
+        "item_id": "FOODS_3_354",
+        "total_rows": 5823,
+        "missing_rows": 2702,
+        "missing_pct": 46.40219817963249
+      },
+      {
+        "item_id": "FOODS_1_089",
+        "total_rows": 5823,
+        "missing_rows": 2646,
+        "missing_pct": 45.44049459041731
+      },
+      {
+        "item_id": "FOODS_3_658",
+        "total_rows": 5823,
+        "missing_rows": 2464,
+        "missing_pct": 42.31495792546797
+      },
+      {
+        "item_id": "FOODS_3_640",
+        "total_rows": 5823,
+        "missing_rows": 2436,
+        "missing_pct": 41.834106130860384
+      },
+      {
+        "item_id": "FOODS_3_312",
+        "total_rows": 5823,
+        "missing_rows": 2429,
+        "missing_pct": 41.71389318220849
+      },
+      {
+        "item_id": "FOODS_3_053",
+        "total_rows": 5823,
+        "missing_rows": 2422,
+        "missing_pct": 41.59368023355658
+      },
+      {
+        "item_id": "FOODS_1_099",
+        "total_rows": 5823,
+        "missing_rows": 2359,
+        "missing_pct": 40.51176369568951
+      },
+      {
+        "item_id": "FOODS_1_082",
+        "total_rows": 5823,
+        "missing_rows": 2310,
+        "missing_pct": 39.67027305512622
+      },
+      {
+        "item_id": "FOODS_1_210",
+        "total_rows": 5823,
+        "missing_rows": 2303,
+        "missing_pct": 39.55006010647433
+      },
+      {
+        "item_id": "FOODS_3_074",
+        "total_rows": 5823,
+        "missing_rows": 2303,
+        "missing_pct": 39.55006010647433
+      },
+      {
+        "item_id": "FOODS_2_180",
+        "total_rows": 5823,
+        "missing_rows": 2212,
+        "missing_pct": 37.98729177399966
+      },
+      {
+        "item_id": "FOODS_3_240",
+        "total_rows": 5823,
+        "missing_rows": 2149,
+        "missing_pct": 36.90537523613258
+      },
+      {
+        "item_id": "FOODS_3_550",
+        "total_rows": 5823,
+        "missing_rows": 2142,
+        "missing_pct": 36.78516228748068
+      },
+      {
+        "item_id": "FOODS_3_329",
+        "total_rows": 5823,
+        "missing_rows": 2023,
+        "missing_pct": 34.74154216039842
+      },
+      {
+        "item_id": "FOODS_1_155",
+        "total_rows": 5823,
+        "missing_rows": 1939,
+        "missing_pct": 33.298986776575646
+      },
+      {
+        "item_id": "FOODS_1_042",
+        "total_rows": 5823,
+        "missing_rows": 1932,
+        "missing_pct": 33.17877382792375
+      },
+      {
+        "item_id": "FOODS_3_321",
+        "total_rows": 5823,
+        "missing_rows": 1652,
+        "missing_pct": 28.370255881847847
+      },
+      {
+        "item_id": "FOODS_3_048",
+        "total_rows": 5823,
+        "missing_rows": 1260,
+        "missing_pct": 21.638330757341578
+      },
+      {
+        "item_id": "FOODS_1_017",
+        "total_rows": 5823,
+        "missing_rows": 1225,
+        "missing_pct": 21.03726601408209
+      },
+      {
+        "item_id": "FOODS_1_156",
+        "total_rows": 5823,
+        "missing_rows": 1211,
+        "missing_pct": 20.79684011677829
+      },
+      {
+        "item_id": "FOODS_1_175",
+        "total_rows": 5823,
+        "missing_rows": 1211,
+        "missing_pct": 20.79684011677829
+      },
+      {
+        "item_id": "FOODS_3_539",
+        "total_rows": 5823,
+        "missing_rows": 1064,
+        "missing_pct": 18.272368195088443
+      },
+      {
+        "item_id": "FOODS_3_179",
+        "total_rows": 5823,
+        "missing_rows": 1050,
+        "missing_pct": 18.031942297784646
+      },
+      {
+        "item_id": "FOODS_3_223",
+        "total_rows": 5823,
+        "missing_rows": 1008,
+        "missing_pct": 17.31066460587326
+      },
+      {
+        "item_id": "FOODS_3_801",
+        "total_rows": 5823,
+        "missing_rows": 924,
+        "missing_pct": 15.868109222050489
+      },
+      {
+        "item_id": "FOODS_2_336",
+        "total_rows": 5823,
+        "missing_rows": 889,
+        "missing_pct": 15.267044478791002
+      },
+      {
+        "item_id": "FOODS_3_263",
+        "total_rows": 5823,
+        "missing_rows": 833,
+        "missing_pct": 14.30534088957582
+      },
+      {
+        "item_id": "FOODS_3_511",
+        "total_rows": 5823,
+        "missing_rows": 714,
+        "missing_pct": 12.26172076249356
+      },
+      {
+        "item_id": "FOODS_3_327",
+        "total_rows": 5823,
+        "missing_rows": 574,
+        "missing_pct": 9.857461789455607
+      },
+      {
+        "item_id": "FOODS_2_136",
+        "total_rows": 5823,
+        "missing_rows": 455,
+        "missing_pct": 7.813841662373347
+      },
+      {
+        "item_id": "FOODS_2_184",
+        "total_rows": 5823,
+        "missing_rows": 427,
+        "missing_pct": 7.332989867765757
+      },
+      {
+        "item_id": "FOODS_2_302",
+        "total_rows": 5823,
+        "missing_rows": 420,
+        "missing_pct": 7.212776919113859
+      },
+      {
+        "item_id": "FOODS_2_170",
+        "total_rows": 5823,
+        "missing_rows": 329,
+        "missing_pct": 5.650008586639189
+      },
+      {
+        "item_id": "FOODS_3_068",
+        "total_rows": 5823,
+        "missing_rows": 329,
+        "missing_pct": 5.650008586639189
+      },
+      {
+        "item_id": "FOODS_1_214",
+        "total_rows": 5823,
+        "missing_rows": 217,
+        "missing_pct": 3.7266014082088272
+      },
+      {
+        "item_id": "FOODS_3_479",
+        "total_rows": 5823,
+        "missing_rows": 140,
+        "missing_pct": 2.404258973037953
+      },
+      {
+        "item_id": "FOODS_3_648",
+        "total_rows": 5823,
+        "missing_rows": 140,
+        "missing_pct": 2.404258973037953
+      },
+      {
+        "item_id": "FOODS_1_086",
+        "total_rows": 5823,
+        "missing_rows": 70,
+        "missing_pct": 1.2021294865189764
+      },
+      {
+        "item_id": "FOODS_3_635",
+        "total_rows": 5823,
+        "missing_rows": 70,
+        "missing_pct": 1.2021294865189764
+      },
+      {
+        "item_id": "FOODS_2_367",
+        "total_rows": 5823,
+        "missing_rows": 49,
+        "missing_pct": 0.8414906405632835
+      },
+      {
+        "item_id": "FOODS_3_360",
+        "total_rows": 5823,
+        "missing_rows": 49,
+        "missing_pct": 0.8414906405632835
+      },
+      {
+        "item_id": "FOODS_2_339",
+        "total_rows": 5823,
+        "missing_rows": 21,
+        "missing_pct": 0.36063884595569295
+      },
+      {
+        "item_id": "FOODS_3_099",
+        "total_rows": 5823,
+        "missing_rows": 21,
+        "missing_pct": 0.36063884595569295
+      },
+      {
+        "item_id": "FOODS_3_026",
+        "total_rows": 5823,
+        "missing_rows": 14,
+        "missing_pct": 0.2404258973037953
+      },
+      {
+        "item_id": "FOODS_3_383",
+        "total_rows": 5823,
+        "missing_rows": 14,
+        "missing_pct": 0.2404258973037953
+      },
+      {
+        "item_id": "FOODS_3_470",
+        "total_rows": 5823,
+        "missing_rows": 14,
+        "missing_pct": 0.2404258973037953
+      },
+      {
+        "item_id": "FOODS_3_724",
+        "total_rows": 5823,
+        "missing_rows": 7,
+        "missing_pct": 0.12021294865189765
+      },
+      {
+        "item_id": "FOODS_1_020",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_1_112",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_1_135",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_1_172",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_021",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_024",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_059",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_072",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_116",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_139",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_146",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_150",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_218",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_251",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_304",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_322",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_357",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_2_360",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_089",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_096",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_113",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_123",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_187",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_249",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_276",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_319",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_387",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_432",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_467",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_480",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_501",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_520",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_558",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_611",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_616",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_666",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_677",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      },
+      {
+        "item_id": "FOODS_3_817",
+        "total_rows": 5823,
+        "missing_rows": 0,
+        "missing_pct": 0.0
+      }
+    ],
+    "top_15_products": [
+      {
+        "item_id": "FOODS_2_209",
+        "total_rows": 5823,
+        "missing_rows": 4130,
+        "missing_pct": 70.92563970461961
+      },
+      {
+        "item_id": "FOODS_3_601",
+        "total_rows": 5823,
+        "missing_rows": 3787,
+        "missing_pct": 65.03520522067663
+      },
+      {
+        "item_id": "FOODS_2_040",
+        "total_rows": 5823,
+        "missing_rows": 3647,
+        "missing_pct": 62.630946247638676
+      },
+      {
+        "item_id": "FOODS_3_661",
+        "total_rows": 5823,
+        "missing_rows": 3549,
+        "missing_pct": 60.94796496651211
+      },
+      {
+        "item_id": "FOODS_2_178",
+        "total_rows": 5823,
+        "missing_rows": 3493,
+        "missing_pct": 59.98626137729693
+      },
+      {
+        "item_id": "FOODS_2_095",
+        "total_rows": 5823,
+        "missing_rows": 3402,
+        "missing_pct": 58.42349304482226
+      },
+      {
+        "item_id": "FOODS_3_340",
+        "total_rows": 5823,
+        "missing_rows": 3318,
+        "missing_pct": 56.98093766099949
+      },
+      {
+        "item_id": "FOODS_3_482",
+        "total_rows": 5823,
+        "missing_rows": 3206,
+        "missing_pct": 55.05753048256912
+      },
+      {
+        "item_id": "FOODS_2_301",
+        "total_rows": 5823,
+        "missing_rows": 3073,
+        "missing_pct": 52.77348445818307
+      },
+      {
+        "item_id": "FOODS_3_641",
+        "total_rows": 5823,
+        "missing_rows": 2905,
+        "missing_pct": 49.88837369053752
+      },
+      {
+        "item_id": "FOODS_3_532",
+        "total_rows": 5823,
+        "missing_rows": 2884,
+        "missing_pct": 49.52773484458183
+      },
+      {
+        "item_id": "FOODS_3_795",
+        "total_rows": 5823,
+        "missing_rows": 2884,
+        "missing_pct": 49.52773484458183
+      },
+      {
+        "item_id": "FOODS_3_709",
+        "total_rows": 5823,
+        "missing_rows": 2821,
+        "missing_pct": 48.44581830671475
+      },
+      {
+        "item_id": "FOODS_2_028",
+        "total_rows": 5823,
+        "missing_rows": 2793,
+        "missing_pct": 47.96496651210716
+      },
+      {
+        "item_id": "FOODS_3_135",
+        "total_rows": 5823,
+        "missing_rows": 2730,
+        "missing_pct": 46.88304997424008
+      }
+    ]
+  },
+  "integrity": {
+    "checks": {
+      "exactly_100_items": true,
+      "exact_frozen_stores": true,
+      "foods_only": true,
+      "department_quotas": true,
+      "demand_band_quotas": true,
+      "exactly_300_item_store_pairs": true,
+      "expected_rows": true,
+      "complete_day_history_per_pair": true,
+      "unique_date_store_item_key": true,
+      "no_negative_sales": true,
+      "all_calendar_rows_matched": true
+    },
+    "expected_rows": 582300,
+    "observed_rows": 582300,
+    "duplicate_final_keys": 0,
+    "minimum_days_per_item_store": 1941,
+    "maximum_days_per_item_store": 1941,
+    "negative_sales_rows": 0,
+    "calendar_unmatched_rows": 0
+  },
+  "raw_files": {
+    "sha256_before": {
+      "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+      "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef",
+      "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+    },
+    "sha256_after": {
+      "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+      "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef",
+      "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+    },
+    "unchanged": true
+  },
+  "performance": {
+    "filter_before_melt": true,
+    "full_m5_melt_performed": false,
+    "full_m5_rows_avoided": 59181090,
+    "selected_long_rows": 582300,
+    "safe_repeated_text_downcast": "categorical dtype in memory; identifiers remain text values in CSV"
+  }
+}

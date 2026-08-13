@@ -1,0 +1,8 @@
+# Data manipulation
+numpy>=1.26,<3.0
+pandas>=2.2,<3.0
+
+# Notebook-based exploration and basic plotting for upcoming stages
+jupyterlab>=4.2,<5.0
+matplotlib>=3.8,<4.0
+

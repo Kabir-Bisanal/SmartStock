@@ -1,0 +1,844 @@
+{
+  "stage": "Stage 3 - Data Understanding & Profiling",
+  "generated_at_utc": "2026-08-13T01:40:02+00:00",
+  "data_directory": "C:\\Users\\kabir\\OneDrive\\Documents\\ChatGPT\\smartstock\\data\\raw",
+  "performance": {
+    "sales_chunk_size_rows": 1000,
+    "full_sales_melt_performed": false,
+    "sales_daily_scan_dtype": "int32",
+    "sales_loading_method": "identifier-only DataFrame plus one chunked scan of daily columns",
+    "prices_loading_method": "one optimized DataFrame using categorical IDs, int32 weeks, and float32 prices"
+  },
+  "sales": {
+    "rows": 30490,
+    "columns": 1947,
+    "file_size_mib": 116.1,
+    "identifier_columns": [
+      "id",
+      "item_id",
+      "dept_id",
+      "cat_id",
+      "store_id",
+      "state_id"
+    ],
+    "identifier_memory_mib": 3.75,
+    "estimated_default_dataframe_memory_mib": 455.26,
+    "estimated_int32_dataframe_memory_mib": 229.5,
+    "daily_column_count": 1941,
+    "first_daily_column": "d_1",
+    "last_daily_column": "d_1941",
+    "daily_columns_contiguous": true,
+    "source_inferred_daily_dtypes": [
+      "int64"
+    ],
+    "unique_items": 3049,
+    "unique_stores": 10,
+    "unique_states": 3,
+    "unique_categories": 3,
+    "unique_departments": 7,
+    "category_row_counts": {
+      "HOBBIES": 5650,
+      "HOUSEHOLD": 10470,
+      "FOODS": 14370
+    },
+    "category_item_counts": {
+      "HOBBIES": 565,
+      "HOUSEHOLD": 1047,
+      "FOODS": 1437
+    },
+    "department_row_counts": {
+      "HOBBIES_1": 4160,
+      "HOBBIES_2": 1490,
+      "HOUSEHOLD_1": 5320,
+      "HOUSEHOLD_2": 5150,
+      "FOODS_1": 2160,
+      "FOODS_2": 3980,
+      "FOODS_3": 8230
+    },
+    "department_item_counts": {
+      "HOBBIES_1": 416,
+      "HOBBIES_2": 149,
+      "HOUSEHOLD_1": 532,
+      "HOUSEHOLD_2": 515,
+      "FOODS_1": 216,
+      "FOODS_2": 398,
+      "FOODS_3": 823
+    },
+    "store_row_counts": {
+      "CA_1": 3049,
+      "CA_2": 3049,
+      "CA_3": 3049,
+      "CA_4": 3049,
+      "TX_1": 3049,
+      "TX_2": 3049,
+      "TX_3": 3049,
+      "WI_1": 3049,
+      "WI_2": 3049,
+      "WI_3": 3049
+    },
+    "state_row_counts": {
+      "CA": 12196,
+      "TX": 9147,
+      "WI": 9147
+    },
+    "unique_item_store_combinations": 30490,
+    "id_is_unique": true,
+    "item_store_is_unique": true,
+    "identifier_missing_values": {
+      "id": 0,
+      "item_id": 0,
+      "dept_id": 0,
+      "cat_id": 0,
+      "store_id": 0,
+      "state_id": 0
+    },
+    "sales_values": {
+      "total_values": 59181090,
+      "missing_values": 0,
+      "negative_values": 0,
+      "zero_values": 40241819,
+      "zero_prevalence_pct": 67.9978,
+      "minimum": 0,
+      "maximum": 763,
+      "profiling_dtypes": [
+        "int32"
+      ]
+    },
+    "items_at_least_95_pct_zero": 72,
+    "foods_items_at_least_95_pct_zero": 8,
+    "foods_items_first_positive_after_day_365": 525,
+    "foods_items_never_positive": 0,
+    "highest_zero_food_items": [
+      {
+        "item_id": "FOODS_3_220",
+        "zero_prevalence_pct": 96.17722823286965,
+        "first_positive_day": 1009,
+        "total_units": 885
+      },
+      {
+        "item_id": "FOODS_3_472",
+        "zero_prevalence_pct": 95.79598145285935,
+        "first_positive_day": 1441,
+        "total_units": 1183
+      },
+      {
+        "item_id": "FOODS_3_296",
+        "zero_prevalence_pct": 95.7805255023184,
+        "first_positive_day": 1301,
+        "total_units": 1797
+      },
+      {
+        "item_id": "FOODS_2_071",
+        "zero_prevalence_pct": 95.37867078825347,
+        "first_positive_day": 1147,
+        "total_units": 1229
+      },
+      {
+        "item_id": "FOODS_2_073",
+        "zero_prevalence_pct": 95.37351880473983,
+        "first_positive_day": 1233,
+        "total_units": 1127
+      },
+      {
+        "item_id": "FOODS_1_079",
+        "zero_prevalence_pct": 95.30654301906235,
+        "first_positive_day": 6,
+        "total_units": 1734
+      },
+      {
+        "item_id": "FOODS_3_171",
+        "zero_prevalence_pct": 95.05409582689336,
+        "first_positive_day": 1176,
+        "total_units": 1142
+      },
+      {
+        "item_id": "FOODS_2_252",
+        "zero_prevalence_pct": 95.03348789283875,
+        "first_positive_day": 1408,
+        "total_units": 1429
+      },
+      {
+        "item_id": "FOODS_3_260",
+        "zero_prevalence_pct": 94.87377640391551,
+        "first_positive_day": 1424,
+        "total_units": 1558
+      },
+      {
+        "item_id": "FOODS_3_350",
+        "zero_prevalence_pct": 94.6780010303967,
+        "first_positive_day": 1106,
+        "total_units": 1805
+      }
+    ],
+    "store_sales_summary": [
+      {
+        "store_id": "CA_1",
+        "state_id": "CA",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 7832248,
+        "zero_days": 3773330,
+        "zero_prevalence_pct": 63.75904870964695
+      },
+      {
+        "store_id": "CA_2",
+        "state_id": "CA",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 5818395,
+        "zero_days": 4072268,
+        "zero_prevalence_pct": 68.81029058437416
+      },
+      {
+        "store_id": "CA_3",
+        "state_id": "CA",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 11363540,
+        "zero_days": 3515343,
+        "zero_prevalence_pct": 59.39976772986101
+      },
+      {
+        "store_id": "CA_4",
+        "state_id": "CA",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 4182534,
+        "zero_days": 4261010,
+        "zero_prevalence_pct": 71.99951876520016
+      },
+      {
+        "store_id": "TX_1",
+        "state_id": "TX",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 5692823,
+        "zero_days": 4184936,
+        "zero_prevalence_pct": 70.71407437747429
+      },
+      {
+        "store_id": "TX_2",
+        "state_id": "TX",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 7329642,
+        "zero_days": 3924545,
+        "zero_prevalence_pct": 66.31417231416319
+      },
+      {
+        "store_id": "TX_3",
+        "state_id": "TX",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 6205940,
+        "zero_days": 4125814,
+        "zero_prevalence_pct": 69.7150728383002
+      },
+      {
+        "store_id": "WI_1",
+        "state_id": "WI",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 5261506,
+        "zero_days": 4068940,
+        "zero_prevalence_pct": 68.75405640551737
+      },
+      {
+        "store_id": "WI_2",
+        "state_id": "WI",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 6697988,
+        "zero_days": 4171086,
+        "zero_prevalence_pct": 70.48004692039298
+      },
+      {
+        "store_id": "WI_3",
+        "state_id": "WI",
+        "item_rows": 3049,
+        "unique_items": 3049,
+        "total_units": 6542557,
+        "zero_days": 4144547,
+        "zero_prevalence_pct": 70.03160975913083
+      }
+    ]
+  },
+  "prices": {
+    "rows": 6841121,
+    "columns": 4,
+    "file_size_mib": 193.97,
+    "optimized_memory_mib": 72.01,
+    "source_inferred_dtypes": {
+      "store_id": "str",
+      "item_id": "str",
+      "wm_yr_wk": "int64",
+      "sell_price": "float64"
+    },
+    "profiling_dtypes": {
+      "store_id": "category",
+      "item_id": "category",
+      "wm_yr_wk": "int32",
+      "sell_price": "float32"
+    },
+    "unique_stores": 10,
+    "unique_items": 3049,
+    "unique_weeks": 282,
+    "earliest_week": 11101,
+    "latest_week": 11621,
+    "minimum_price": 0.01,
+    "maximum_price": 107.32,
+    "mean_price": 4.411,
+    "median_price": 3.47,
+    "missing_values": {
+      "store_id": 0,
+      "item_id": 0,
+      "wm_yr_wk": 0,
+      "sell_price": 0
+    },
+    "negative_prices": 0,
+    "zero_prices": 0,
+    "duplicate_rows": 0,
+    "duplicate_composite_keys": 0,
+    "unique_composite_price_records": 6841121,
+    "unique_item_store_pairs": 30490,
+    "possible_raw_week_grid_positions": 8598180,
+    "missing_raw_week_grid_positions": 1757059,
+    "overall_raw_week_grid_coverage_pct": 79.5648,
+    "store_coverage": [
+      {
+        "store_id": "CA_1",
+        "price_records": 698412,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 273.0,
+        "raw_week_grid_coverage_pct": 81.22788776229388
+      },
+      {
+        "store_id": "CA_2",
+        "price_records": 637395,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 239.0,
+        "raw_week_grid_coverage_pct": 74.13138594446731
+      },
+      {
+        "store_id": "CA_3",
+        "price_records": 693990,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 271.0,
+        "raw_week_grid_coverage_pct": 80.71359287663203
+      },
+      {
+        "store_id": "CA_4",
+        "price_records": 679025,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 256.0,
+        "raw_week_grid_coverage_pct": 78.97310826244623
+      },
+      {
+        "store_id": "TX_1",
+        "price_records": 699796,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 271.0,
+        "raw_week_grid_coverage_pct": 81.38885205938931
+      },
+      {
+        "store_id": "TX_2",
+        "price_records": 701214,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 273.0,
+        "raw_week_grid_coverage_pct": 81.5537706817024
+      },
+      {
+        "store_id": "TX_3",
+        "price_records": 691112,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 269.0,
+        "raw_week_grid_coverage_pct": 80.3788708773252
+      },
+      {
+        "store_id": "WI_1",
+        "price_records": 665912,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 225.0,
+        "raw_week_grid_coverage_pct": 77.44801806894017
+      },
+      {
+        "store_id": "WI_2",
+        "price_records": 678171,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 231.0,
+        "raw_week_grid_coverage_pct": 78.87378491727318
+      },
+      {
+        "store_id": "WI_3",
+        "price_records": 696094,
+        "unique_items": 3049,
+        "unique_weeks": 282,
+        "earliest_week": 11101,
+        "latest_week": 11621,
+        "median_weeks_per_item": 271.0,
+        "raw_week_grid_coverage_pct": 80.95829582539561
+      }
+    ],
+    "category_coverage": [
+      {
+        "cat_id": "FOODS",
+        "price_records": 3181789,
+        "unique_items": 1437,
+        "unique_stores": 10,
+        "unique_weeks": 282,
+        "item_store_pairs": 14370,
+        "raw_week_grid_coverage_pct": 78.51732579201153
+      },
+      {
+        "cat_id": "HOBBIES",
+        "price_records": 1283905,
+        "unique_items": 565,
+        "unique_stores": 10,
+        "unique_weeks": 282,
+        "item_store_pairs": 5650,
+        "raw_week_grid_coverage_pct": 80.58149752086864
+      },
+      {
+        "cat_id": "HOUSEHOLD",
+        "price_records": 2375427,
+        "unique_items": 1047,
+        "unique_stores": 10,
+        "unique_weeks": 282,
+        "item_store_pairs": 10470,
+        "raw_week_grid_coverage_pct": 80.45367717287488
+      }
+    ],
+    "distinct_prices_per_item": {
+      "minimum": 1,
+      "median": 5.0,
+      "mean": 5.64,
+      "maximum": 52,
+      "items_with_price_changes": 2733,
+      "items_with_one_distinct_price": 316
+    }
+  },
+  "calendar": {
+    "rows": 1969,
+    "columns": 14,
+    "memory_mib": 0.15,
+    "column_dtypes": {
+      "date": "datetime64[us]",
+      "wm_yr_wk": "int32",
+      "weekday": "category",
+      "wday": "int8",
+      "month": "int8",
+      "year": "int16",
+      "d": "string",
+      "event_name_1": "category",
+      "event_type_1": "category",
+      "event_name_2": "category",
+      "event_type_2": "category",
+      "snap_CA": "int8",
+      "snap_TX": "int8",
+      "snap_WI": "int8"
+    },
+    "date_min": "2011-01-29",
+    "date_max": "2016-06-19",
+    "unique_d": 1969,
+    "d_is_unique": true,
+    "unique_weeks": 282,
+    "week_min": 11101,
+    "week_max": 11621,
+    "years": [
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016
+    ],
+    "months": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "weekdays": [
+      "Saturday",
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "missing_values": {
+      "date": 0,
+      "wm_yr_wk": 0,
+      "weekday": 0,
+      "wday": 0,
+      "month": 0,
+      "year": 0,
+      "d": 0,
+      "event_name_1": 1807,
+      "event_type_1": 1807,
+      "event_name_2": 1964,
+      "event_type_2": 1964,
+      "snap_CA": 0,
+      "snap_TX": 0,
+      "snap_WI": 0
+    },
+    "event_value_counts": {
+      "event_name_1": {
+        "Chanukah End": 5,
+        "Christmas": 5,
+        "Cinco De Mayo": 5,
+        "ColumbusDay": 5,
+        "Easter": 5,
+        "Eid al-Fitr": 5,
+        "EidAlAdha": 5,
+        "Father's day": 4,
+        "Halloween": 5,
+        "IndependenceDay": 5,
+        "LaborDay": 5,
+        "LentStart": 6,
+        "LentWeek2": 6,
+        "MartinLutherKingDay": 5,
+        "MemorialDay": 6,
+        "Mother's day": 6,
+        "NBAFinalsEnd": 6,
+        "NBAFinalsStart": 6,
+        "NewYear": 5,
+        "OrthodoxChristmas": 5,
+        "OrthodoxEaster": 5,
+        "Pesach End": 6,
+        "PresidentsDay": 6,
+        "Purim End": 6,
+        "Ramadan starts": 6,
+        "StPatricksDay": 6,
+        "SuperBowl": 6,
+        "Thanksgiving": 5,
+        "ValentinesDay": 6,
+        "VeteransDay": 5
+      },
+      "event_name_2": {
+        "Cinco De Mayo": 1,
+        "Easter": 1,
+        "Father's day": 2,
+        "OrthodoxEaster": 1
+      },
+      "event_type_1": {
+        "Cultural": 37,
+        "National": 52,
+        "Religious": 55,
+        "Sporting": 18
+      },
+      "event_type_2": {
+        "Cultural": 4,
+        "Religious": 1
+      }
+    },
+    "event_type_distribution": {
+      "Cultural": 41,
+      "National": 52,
+      "Religious": 56,
+      "Sporting": 18
+    },
+    "event_days": 162,
+    "two_event_days": 5,
+    "snap_coverage": {
+      "California": {
+        "enabled_days": 650,
+        "coverage_pct": 33.0117
+      },
+      "Texas": {
+        "enabled_days": 650,
+        "coverage_pct": 33.0117
+      },
+      "Wisconsin": {
+        "enabled_days": 650,
+        "coverage_pct": 33.0117
+      }
+    }
+  },
+  "hierarchy": {
+    "stores_per_state": {
+      "CA": 4,
+      "TX": 3,
+      "WI": 3
+    },
+    "store_maps_to_one_state": true,
+    "department_maps_to_one_category": true,
+    "item_maps_to_one_department": true,
+    "item_maps_to_one_category": true,
+    "foods_unique_items": 1437,
+    "foods_departments": [
+      "FOODS_1",
+      "FOODS_2",
+      "FOODS_3"
+    ],
+    "foods_items_by_department": {
+      "FOODS_1": 216,
+      "FOODS_2": 398,
+      "FOODS_3": 823
+    },
+    "foods_items_by_store": {
+      "CA_1": 1437,
+      "CA_2": 1437,
+      "CA_3": 1437,
+      "CA_4": 1437,
+      "TX_1": 1437,
+      "TX_2": 1437,
+      "TX_3": 1437,
+      "WI_1": 1437,
+      "WI_2": 1437,
+      "WI_3": 1437
+    },
+    "foods_items_in_multiple_stores": 1437,
+    "foods_items_in_every_store": 1437,
+    "minimum_stores_per_food_item": 10,
+    "maximum_stores_per_food_item": 10
+  },
+  "relationships": {
+    "sales_calendar": {
+      "sales_day_columns": 1941,
+      "matched_sales_days": 1941,
+      "unmatched_sales_days": [],
+      "calendar_days_not_in_sales": 28,
+      "sales_date_min": "2011-01-29",
+      "sales_date_max": "2016-05-22",
+      "calendar_d_is_unique": true,
+      "key_cardinality": "one-to-one for day labels; many sales observations to one calendar day after reshaping"
+    },
+    "prices_calendar": {
+      "price_weeks": 282,
+      "matched_price_weeks": 282,
+      "unmatched_price_weeks": [],
+      "calendar_weeks_without_prices": [],
+      "calendar_days_per_week_min": 2,
+      "calendar_days_per_week_max": 7,
+      "key_cardinality": "many-to-many on wm_yr_wk alone; one weekly item-store price expands to multiple calendar days"
+    },
+    "sales_prices": {
+      "matched_items": 3049,
+      "sales_items_without_prices": [],
+      "price_items_without_sales": [],
+      "matched_stores": 10,
+      "sales_stores_without_prices": [],
+      "price_stores_without_sales": [],
+      "matched_item_store_pairs": 30490,
+      "sales_item_store_pairs_without_prices": 0,
+      "price_item_store_pairs_without_sales": 0,
+      "price_composite_key_is_unique": true,
+      "key_cardinality": "one sales item-store row to many weekly price rows; after adding week to daily sales, many sales rows to one composite price key"
+    }
+  },
+  "subset_strategies": [
+    {
+      "name": "A. Cross-state representative stores",
+      "stores": [
+        "CA_1",
+        "TX_2",
+        "WI_3"
+      ],
+      "rationale": "Uses the best raw price-coverage store from each state, adding geographic and SNAP-policy diversity.",
+      "tradeoff": "State effects become mixed with store effects, so direct store comparisons are less controlled.",
+      "store_evidence": [
+        {
+          "store_id": "CA_1",
+          "state_id": "CA",
+          "raw_week_grid_coverage_pct": 81.22788776229388,
+          "zero_prevalence_pct": 63.75904870964695
+        },
+        {
+          "store_id": "TX_2",
+          "state_id": "TX",
+          "raw_week_grid_coverage_pct": 81.5537706817024,
+          "zero_prevalence_pct": 66.31417231416319
+        },
+        {
+          "store_id": "WI_3",
+          "state_id": "WI",
+          "raw_week_grid_coverage_pct": 80.95829582539561,
+          "zero_prevalence_pct": 70.03160975913083
+        }
+      ],
+      "product_screen": {
+        "stores": [
+          "CA_1",
+          "TX_2",
+          "WI_3"
+        ],
+        "foods_items_in_all_sales_stores": 1437,
+        "foods_items_with_any_price_in_all_stores": 1437,
+        "foods_items_with_at_least_80_pct_raw_week_coverage_in_all_stores": 864,
+        "foods_items_active_by_day_365_in_all_stores": 842,
+        "foods_items_below_95_pct_zero_in_all_stores": 1378,
+        "foods_items_meeting_all_indicative_screens": 840
+      }
+    },
+    {
+      "name": "B. Same-state comparable stores (TX)",
+      "stores": [
+        "TX_2",
+        "TX_1",
+        "TX_3"
+      ],
+      "rationale": "Keeps state-level conditions and the state-specific SNAP flag constant while comparing stores.",
+      "tradeoff": "It reduces geographic diversity and may not generalize as well to the other states.",
+      "store_evidence": [
+        {
+          "store_id": "TX_1",
+          "state_id": "TX",
+          "raw_week_grid_coverage_pct": 81.38885205938931,
+          "zero_prevalence_pct": 70.71407437747429
+        },
+        {
+          "store_id": "TX_2",
+          "state_id": "TX",
+          "raw_week_grid_coverage_pct": 81.5537706817024,
+          "zero_prevalence_pct": 66.31417231416319
+        },
+        {
+          "store_id": "TX_3",
+          "state_id": "TX",
+          "raw_week_grid_coverage_pct": 80.3788708773252,
+          "zero_prevalence_pct": 69.7150728383002
+        }
+      ],
+      "product_screen": {
+        "stores": [
+          "TX_2",
+          "TX_1",
+          "TX_3"
+        ],
+        "foods_items_in_all_sales_stores": 1437,
+        "foods_items_with_any_price_in_all_stores": 1437,
+        "foods_items_with_at_least_80_pct_raw_week_coverage_in_all_stores": 862,
+        "foods_items_active_by_day_365_in_all_stores": 833,
+        "foods_items_below_95_pct_zero_in_all_stores": 1352,
+        "foods_items_meeting_all_indicative_screens": 825
+      }
+    },
+    {
+      "name": "C. Highest raw price-coverage stores",
+      "stores": [
+        "TX_2",
+        "TX_1",
+        "CA_1"
+      ],
+      "rationale": "Prioritizes complete weekly price histories and therefore simpler later joins.",
+      "tradeoff": "Coverage-driven store selection can overrepresent one geography and is not a business-representative sample by itself.",
+      "store_evidence": [
+        {
+          "store_id": "CA_1",
+          "state_id": "CA",
+          "raw_week_grid_coverage_pct": 81.22788776229388,
+          "zero_prevalence_pct": 63.75904870964695
+        },
+        {
+          "store_id": "TX_1",
+          "state_id": "TX",
+          "raw_week_grid_coverage_pct": 81.38885205938931,
+          "zero_prevalence_pct": 70.71407437747429
+        },
+        {
+          "store_id": "TX_2",
+          "state_id": "TX",
+          "raw_week_grid_coverage_pct": 81.5537706817024,
+          "zero_prevalence_pct": 66.31417231416319
+        }
+      ],
+      "product_screen": {
+        "stores": [
+          "TX_2",
+          "TX_1",
+          "CA_1"
+        ],
+        "foods_items_in_all_sales_stores": 1437,
+        "foods_items_with_any_price_in_all_stores": 1437,
+        "foods_items_with_at_least_80_pct_raw_week_coverage_in_all_stores": 885,
+        "foods_items_active_by_day_365_in_all_stores": 859,
+        "foods_items_below_95_pct_zero_in_all_stores": 1375,
+        "foods_items_meeting_all_indicative_screens": 857
+      }
+    }
+  ],
+  "quality_observations": [
+    {
+      "classification": "Expected Dataset Behavior",
+      "observation": "Daily demand is zero-heavy: 68.00% of sales cells are zero.",
+      "implication": "Zero usually means no recorded unit sales, not missing data; later modeling must preserve it."
+    },
+    {
+      "classification": "Expected Dataset Behavior",
+      "observation": "Event fields are sparse: event_name_1 is null on 1,807 of 1,969 days and event_name_2 is null on 1,964 days.",
+      "implication": "Null event fields normally mean no named event and should not be filled blindly."
+    },
+    {
+      "classification": "Expected Dataset Behavior",
+      "observation": "The price table covers 79.56% of the raw item-store-week grid, leaving 1,757,059 positions without a price row; store coverage varies because items enter or leave assortment over time.",
+      "implication": "A missing weekly price may be pre-launch or out-of-assortment behavior, not a defective record."
+    },
+    {
+      "classification": "Requires Investigation",
+      "observation": "525 FOODS items first record positive demand after day 365 across the full store set.",
+      "implication": "Product introduction timing should influence the final subset and later train/test design."
+    },
+    {
+      "classification": "Requires Investigation",
+      "observation": "2,733 items have more than one distinct observed price.",
+      "implication": "Price changes may later support promotion/price features, but no promotion effect is inferred in Stage 3."
+    },
+    {
+      "classification": "Requires Investigation",
+      "observation": "The calendar contains 28 day labels beyond the evaluation sales horizon.",
+      "implication": "Later joins must distinguish the observed sales period from future calendar rows."
+    },
+    {
+      "classification": "Requires Investigation",
+      "observation": "The wide sales table has 1,941 day columns and an estimated default pandas footprint of about 455.3 MiB.",
+      "implication": "Later reshaping can multiply row count dramatically and needs an explicit memory-aware design."
+    },
+    {
+      "classification": "Expected Dataset Behavior",
+      "observation": "Negative sales values found: 0.",
+      "implication": "No correction was made; any nonzero result would require source investigation."
+    },
+    {
+      "classification": "Expected Dataset Behavior",
+      "observation": "Duplicate (store_id, item_id, wm_yr_wk) price keys found: 0.",
+      "implication": "The future daily sales-to-price join is safe only when this composite key is unique."
+    }
+  ]
+}

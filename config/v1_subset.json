@@ -1,0 +1,1059 @@
+{
+  "manifest_version": 1,
+  "project_stage": "Stage 4 - Version 1 Subset Creation & Controlled Data Transformation",
+  "created_at_utc": "2026-08-13T02:28:14+00:00",
+  "source_dataset": {
+    "name": "Walmart M5 Forecasting - Accuracy",
+    "competition_identifier": "m5-forecasting-accuracy",
+    "files_sha256": {
+      "sales_train_evaluation.csv": "4b4a47c44c38380d2a9168216fea8c9ff2f31b1ddb772f8a0995952a038b8aa0",
+      "sell_prices.csv": "9da3ad1f8b8ccacdbdc70612191dd375ec24a4ac6625c24b75b3bc60b0bed2ef",
+      "calendar.csv": "d12b5914ef03e66649adf5dd9e996e6602251c22b7a6af8f1f7e3aa12f8860f5"
+    }
+  },
+  "category": "FOODS",
+  "stores": [
+    "CA_1",
+    "TX_2",
+    "WI_3"
+  ],
+  "random_seed": 42,
+  "selection_quotas": {
+    "FOODS_1": {
+      "low": 5,
+      "medium": 5,
+      "high": 5
+    },
+    "FOODS_2": {
+      "low": 9,
+      "medium": 10,
+      "high": 9
+    },
+    "FOODS_3": {
+      "low": 19,
+      "medium": 19,
+      "high": 19
+    }
+  },
+  "demand_metric": "total units across CA_1, TX_2, and WI_3 divided by (3 stores x 1,941 days)",
+  "demand_tertile_thresholds": {
+    "low_upper_inclusive": 0.5889289598717729,
+    "medium_upper_inclusive": 1.3705421031541587
+  },
+  "demand_band_boundary_policy": "low <= lower threshold; lower < medium <= upper threshold; high > upper threshold",
+  "eligibility": {
+    "required_stores": [
+      "CA_1",
+      "TX_2",
+      "WI_3"
+    ],
+    "maximum_zero_prevalence_exclusive": 0.95,
+    "minimum_remaining_history_days": 730,
+    "remaining_history_formula": "1941 - earliest positive-sale day across selected stores",
+    "minimum_active_period_price_coverage_per_store": 0.7,
+    "active_period_price_coverage_definition": "distinct priced weeks divided by distinct calendar weeks from each item-store's first positive-sale day through d_1941; all three stores must pass"
+  },
+  "item_count": 100,
+  "items": [
+    {
+      "item_id": "FOODS_1_017",
+      "department": "FOODS_1",
+      "demand_band": "low",
+      "mean_daily_demand": 0.3264640219817963,
+      "zero_prevalence": 0.8007899708054268,
+      "first_positive_day": 407,
+      "remaining_history_days": 1534,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_020",
+      "department": "FOODS_1",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.8365103898334192,
+      "zero_prevalence": 0.535119354284733,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_042",
+      "department": "FOODS_1",
+      "demand_band": "high",
+      "mean_daily_demand": 2.524471921689851,
+      "zero_prevalence": 0.48823630431049286,
+      "first_positive_day": 525,
+      "remaining_history_days": 1416,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_082",
+      "department": "FOODS_1",
+      "demand_band": "high",
+      "mean_daily_demand": 2.7053065430190624,
+      "zero_prevalence": 0.5158852825004293,
+      "first_positive_day": 776,
+      "remaining_history_days": 1165,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_086",
+      "department": "FOODS_1",
+      "demand_band": "high",
+      "mean_daily_demand": 2.527047913446677,
+      "zero_prevalence": 0.4434140477417139,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_089",
+      "department": "FOODS_1",
+      "demand_band": "low",
+      "mean_daily_demand": 0.1737935771938863,
+      "zero_prevalence": 0.8818478447535635,
+      "first_positive_day": 762,
+      "remaining_history_days": 1179,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_099",
+      "department": "FOODS_1",
+      "demand_band": "high",
+      "mean_daily_demand": 3.886484629915851,
+      "zero_prevalence": 0.4820539240941096,
+      "first_positive_day": 788,
+      "remaining_history_days": 1153,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_112",
+      "department": "FOODS_1",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.2412845612227374,
+      "zero_prevalence": 0.4923578911214151,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_135",
+      "department": "FOODS_1",
+      "demand_band": "low",
+      "mean_daily_demand": 0.2642967542503864,
+      "zero_prevalence": 0.8337626652928044,
+      "first_positive_day": 2,
+      "remaining_history_days": 1939,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_155",
+      "department": "FOODS_1",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.9699467628370256,
+      "zero_prevalence": 0.6160054954490812,
+      "first_positive_day": 532,
+      "remaining_history_days": 1409,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_156",
+      "department": "FOODS_1",
+      "demand_band": "low",
+      "mean_daily_demand": 0.3544564657393096,
+      "zero_prevalence": 0.7695346041559333,
+      "first_positive_day": 404,
+      "remaining_history_days": 1537,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_172",
+      "department": "FOODS_1",
+      "demand_band": "high",
+      "mean_daily_demand": 2.004121586810922,
+      "zero_prevalence": 0.28696548171045855,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_175",
+      "department": "FOODS_1",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.5952258286106817,
+      "zero_prevalence": 0.6505237849905547,
+      "first_positive_day": 404,
+      "remaining_history_days": 1537,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_210",
+      "department": "FOODS_1",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.1877039326807488,
+      "zero_prevalence": 0.592478104070067,
+      "first_positive_day": 763,
+      "remaining_history_days": 1178,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_1_214",
+      "department": "FOODS_1",
+      "demand_band": "low",
+      "mean_daily_demand": 0.5485145114202301,
+      "zero_prevalence": 0.6481195260175168,
+      "first_positive_day": 64,
+      "remaining_history_days": 1877,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_021",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 8.087927185299673,
+      "zero_prevalence": 0.2807831014940752,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_024",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.1071612570839773,
+      "zero_prevalence": 0.4899536321483771,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_028",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.3099776747381075,
+      "zero_prevalence": 0.817448050832904,
+      "first_positive_day": 934,
+      "remaining_history_days": 1007,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_040",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.15885282500429332,
+      "zero_prevalence": 0.9041731066460588,
+      "first_positive_day": 1160,
+      "remaining_history_days": 781,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_059",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 1.5382105443929246,
+      "zero_prevalence": 0.38777262579426414,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_072",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.6096513824489095,
+      "zero_prevalence": 0.6881332646402198,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_095",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.26395328868280954,
+      "zero_prevalence": 0.8468143568607247,
+      "first_positive_day": 1115,
+      "remaining_history_days": 826,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_116",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 1.5916194401511248,
+      "zero_prevalence": 0.4337970118495621,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_136",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.7870513481023528,
+      "zero_prevalence": 0.624763867422291,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_139",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 1.759230637128628,
+      "zero_prevalence": 0.3814185127940924,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_146",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.0982311523269792,
+      "zero_prevalence": 0.5191482053924094,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_150",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 1.8112656706165207,
+      "zero_prevalence": 0.36201270822600035,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_170",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.3630431049287308,
+      "zero_prevalence": 0.5081573072299502,
+      "first_positive_day": 112,
+      "remaining_history_days": 1829,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_178",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.2799244375751331,
+      "zero_prevalence": 0.8495620814013395,
+      "first_positive_day": 1152,
+      "remaining_history_days": 789,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_180",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.517774343122102,
+      "zero_prevalence": 0.7530482569122445,
+      "first_positive_day": 742,
+      "remaining_history_days": 1199,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_184",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 1.6192684183410613,
+      "zero_prevalence": 0.4353426069036579,
+      "first_positive_day": 31,
+      "remaining_history_days": 1910,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_209",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.145801133436373,
+      "zero_prevalence": 0.9081229606731925,
+      "first_positive_day": 761,
+      "remaining_history_days": 1180,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_218",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.32663575476558476,
+      "zero_prevalence": 0.7626652928043963,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_251",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.1753391722479822,
+      "zero_prevalence": 0.5435342606903658,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_301",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.4130173450111626,
+      "zero_prevalence": 0.7978705134810236,
+      "first_positive_day": 1003,
+      "remaining_history_days": 938,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_302",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.6036407350163147,
+      "zero_prevalence": 0.729005667181865,
+      "first_positive_day": 137,
+      "remaining_history_days": 1804,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_304",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.1737935771938863,
+      "zero_prevalence": 0.46505237849905545,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_322",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 2.3838227717671305,
+      "zero_prevalence": 0.2995019749270136,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_336",
+      "department": "FOODS_2",
+      "demand_band": "low",
+      "mean_daily_demand": 0.40563283530826033,
+      "zero_prevalence": 0.763695689507127,
+      "first_positive_day": 296,
+      "remaining_history_days": 1645,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_339",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.9823115232697922,
+      "zero_prevalence": 0.5801133436373004,
+      "first_positive_day": 11,
+      "remaining_history_days": 1930,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_357",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 1.8847673020779667,
+      "zero_prevalence": 0.3821054439292461,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_360",
+      "department": "FOODS_2",
+      "demand_band": "high",
+      "mean_daily_demand": 13.942126051863301,
+      "zero_prevalence": 0.25296239052035036,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_2_367",
+      "department": "FOODS_2",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.6618581487205908,
+      "zero_prevalence": 0.6017516743946419,
+      "first_positive_day": 2,
+      "remaining_history_days": 1939,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_026",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 1.729349132749442,
+      "zero_prevalence": 0.3235445646573931,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_048",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.252790657736562,
+      "zero_prevalence": 0.5418169328524816,
+      "first_positive_day": 409,
+      "remaining_history_days": 1532,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_053",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.9129314786192684,
+      "zero_prevalence": 0.6168641593680233,
+      "first_positive_day": 470,
+      "remaining_history_days": 1471,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_068",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.4408380559848875,
+      "zero_prevalence": 0.7480680061823802,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_074",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.602610338313584,
+      "zero_prevalence": 0.6706165206938004,
+      "first_positive_day": 768,
+      "remaining_history_days": 1173,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_089",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 1.9678859694315645,
+      "zero_prevalence": 0.4114717499570668,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_096",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.8614116434827409,
+      "zero_prevalence": 0.5347758887171561,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_099",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 15.347071956036407,
+      "zero_prevalence": 0.046196118839086385,
+      "first_positive_day": 10,
+      "remaining_history_days": 1931,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_113",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 4.761119697750301,
+      "zero_prevalence": 0.1947449768160742,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_123",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.49647947793233727,
+      "zero_prevalence": 0.729005667181865,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_135",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 3.2211918255194916,
+      "zero_prevalence": 0.5205220676627168,
+      "first_positive_day": 210,
+      "remaining_history_days": 1731,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_179",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.37712519319938176,
+      "zero_prevalence": 0.7286622016142882,
+      "first_positive_day": 345,
+      "remaining_history_days": 1596,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_187",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.9019405804568092,
+      "zero_prevalence": 0.6022668727460072,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_223",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.4250386398763524,
+      "zero_prevalence": 0.7157822428301562,
+      "first_positive_day": 251,
+      "remaining_history_days": 1690,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_240",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.3357375923063713,
+      "zero_prevalence": 0.8232869654817104,
+      "first_positive_day": 688,
+      "remaining_history_days": 1253,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_249",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.3159883221707025,
+      "zero_prevalence": 0.6136012364760433,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_263",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 4.786192684183411,
+      "zero_prevalence": 0.3520522067662717,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_276",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 1.5349476215009445,
+      "zero_prevalence": 0.3625279065773656,
+      "first_positive_day": 2,
+      "remaining_history_days": 1939,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_312",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.36664949338828784,
+      "zero_prevalence": 0.7727975270479135,
+      "first_positive_day": 808,
+      "remaining_history_days": 1133,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_319",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 11.428301562768333,
+      "zero_prevalence": 0.20384681435686072,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_321",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 2.026962047054783,
+      "zero_prevalence": 0.5347758887171561,
+      "first_positive_day": 321,
+      "remaining_history_days": 1620,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_327",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 3.538897475528078,
+      "zero_prevalence": 0.2466082775201786,
+      "first_positive_day": 159,
+      "remaining_history_days": 1782,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_329",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 9.455091877039326,
+      "zero_prevalence": 0.5117636956895071,
+      "first_positive_day": 679,
+      "remaining_history_days": 1262,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_340",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.31873604671131717,
+      "zero_prevalence": 0.795637987291774,
+      "first_positive_day": 1110,
+      "remaining_history_days": 831,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_354",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.4068349647947793,
+      "zero_prevalence": 0.7707367336424523,
+      "first_positive_day": 889,
+      "remaining_history_days": 1052,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_360",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.8138416623733471,
+      "zero_prevalence": 0.678516228748068,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_383",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 2.894556070753907,
+      "zero_prevalence": 0.39258114374034003,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_387",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.8080027477245406,
+      "zero_prevalence": 0.6761119697750301,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_432",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 1.7901425382105445,
+      "zero_prevalence": 0.3975613944702044,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_467",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.9027992443757513,
+      "zero_prevalence": 0.49613601236476046,
+      "first_positive_day": 2,
+      "remaining_history_days": 1939,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_470",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.76008930104757,
+      "zero_prevalence": 0.7025588184784476,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_479",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.2550231839258115,
+      "zero_prevalence": 0.4897818993645887,
+      "first_positive_day": 36,
+      "remaining_history_days": 1905,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_480",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.1095655160570153,
+      "zero_prevalence": 0.4435857805255023,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_482",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.388116091361841,
+      "zero_prevalence": 0.7987291773999656,
+      "first_positive_day": 1053,
+      "remaining_history_days": 888,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_501",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 13.642795809720075,
+      "zero_prevalence": 0.1375579598145286,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_511",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 4.843894899536322,
+      "zero_prevalence": 0.6197836166924265,
+      "first_positive_day": 241,
+      "remaining_history_days": 1700,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_520",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.8811609136184098,
+      "zero_prevalence": 0.5129658251760261,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_532",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.0946247638674222,
+      "zero_prevalence": 0.5825176026103384,
+      "first_positive_day": 962,
+      "remaining_history_days": 979,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_539",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.32096857290056674,
+      "zero_prevalence": 0.794435857805255,
+      "first_positive_day": 42,
+      "remaining_history_days": 1899,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_550",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.3697406834964795,
+      "zero_prevalence": 0.7697063369397218,
+      "first_positive_day": 717,
+      "remaining_history_days": 1224,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_558",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.5644856603125536,
+      "zero_prevalence": 0.649836853855401,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_601",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.06783444959642795,
+      "zero_prevalence": 0.9412673879443586,
+      "first_positive_day": 1150,
+      "remaining_history_days": 791,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_611",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 1.5114202301219304,
+      "zero_prevalence": 0.4574961360123648,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_616",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.197492701356689,
+      "zero_prevalence": 0.43809033144427273,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_635",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 15.22239395500601,
+      "zero_prevalence": 0.24746694143912074,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_640",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.45783960157994164,
+      "zero_prevalence": 0.8045680920487721,
+      "first_positive_day": 806,
+      "remaining_history_days": 1135,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_641",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.40546110252447193,
+      "zero_prevalence": 0.7983857118323888,
+      "first_positive_day": 967,
+      "remaining_history_days": 974,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_648",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.1463163317877383,
+      "zero_prevalence": 0.5583032800961704,
+      "first_positive_day": 35,
+      "remaining_history_days": 1906,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_658",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.3882878241456294,
+      "zero_prevalence": 0.7513309290743603,
+      "first_positive_day": 826,
+      "remaining_history_days": 1115,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_661",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 1.4691739653099776,
+      "zero_prevalence": 0.6443414047741713,
+      "first_positive_day": 1185,
+      "remaining_history_days": 756,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_666",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.9380044650523784,
+      "zero_prevalence": 0.5880130516915679,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_677",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.5273913790142538,
+      "zero_prevalence": 0.659110424179976,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_709",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.35926498368538556,
+      "zero_prevalence": 0.7822428301562768,
+      "first_positive_day": 936,
+      "remaining_history_days": 1005,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_724",
+      "department": "FOODS_3",
+      "demand_band": "low",
+      "mean_daily_demand": 0.1554181693285248,
+      "zero_prevalence": 0.8687961531856432,
+      "first_positive_day": 3,
+      "remaining_history_days": 1938,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_795",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 1.3326464021981796,
+      "zero_prevalence": 0.5612227374205736,
+      "first_positive_day": 962,
+      "remaining_history_days": 979,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_801",
+      "department": "FOODS_3",
+      "demand_band": "high",
+      "mean_daily_demand": 2.45801133436373,
+      "zero_prevalence": 0.394985402713378,
+      "first_positive_day": 303,
+      "remaining_history_days": 1638,
+      "minimum_active_period_price_coverage": 1.0
+    },
+    {
+      "item_id": "FOODS_3_817",
+      "department": "FOODS_3",
+      "demand_band": "medium",
+      "mean_daily_demand": 0.7719388631289713,
+      "zero_prevalence": 0.5548686244204019,
+      "first_positive_day": 1,
+      "remaining_history_days": 1940,
+      "minimum_active_period_price_coverage": 1.0
+    }
+  ]
+}
