@@ -1,0 +1,1499 @@
+{
+  "stage": "Stage 9 validation selection and pre-test model freeze",
+  "generated_at_utc": "2026-08-13T11:06:45+00:00",
+  "configuration_validation": {
+    "features_exist_in_stage6_manifest": true,
+    "feature_count_matches": true,
+    "features_are_unique": true,
+    "exact_candidate_families": true,
+    "target_is_sales": true,
+    "no_prohibited_feature": true,
+    "price_features_excluded": true,
+    "demand_band_excluded": true,
+    "optional_intermittency_features_excluded": true,
+    "recursive_strategy": true,
+    "thirty_day_horizon": true,
+    "fixed_random_seed": true,
+    "tuning_cap_respected": true
+  },
+  "selection_data_latest_date": "2016-04-22",
+  "final_test_targets_loaded_for_selection": false,
+  "base_candidate_ranking": [
+    {
+      "model_name": "xgboost_base",
+      "weighted_rank_sum": 69.05,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 1.3381782945736433,
+      "selection_rank": 1,
+      "days_1_30_mae": 1.499538758778936,
+      "days_1_30_rmse": 2.7133327143553885,
+      "days_1_30_wape": 0.6756595378574383,
+      "days_1_30_rmsse": 0.7513798350269086,
+      "days_1_30_bias": 0.12308858327087256,
+      "fold_mae_mean": 1.499538758778936,
+      "fold_mae_std": 0.00988484722685432
+    },
+    {
+      "model_name": "hist_gradient_boosting_base",
+      "weighted_rank_sum": 85.75,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 1.6618217054263564,
+      "selection_rank": 2,
+      "days_1_30_mae": 1.51935340622782,
+      "days_1_30_rmse": 2.6651984619926865,
+      "days_1_30_wape": 0.6845875868723386,
+      "days_1_30_rmsse": 0.7580423556807131,
+      "days_1_30_bias": 0.23729715437831875,
+      "fold_mae_mean": 1.5193534062278202,
+      "fold_mae_std": 0.02114359929658353
+    }
+  ],
+  "strongest_initial_nonlinear_family": "xgboost",
+  "tuning_configurations_evaluated": 6,
+  "tuning_ranking": [
+    {
+      "model_name": "xgb_tune_03",
+      "weighted_rank_sum": 125.8,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 2.437984496124031,
+      "selection_rank": 1,
+      "days_1_30_mae": 1.4929953441907748,
+      "days_1_30_rmse": 2.6639602508631555,
+      "days_1_30_wape": 0.6727112176151214,
+      "days_1_30_rmsse": 0.7533993028950073,
+      "days_1_30_bias": 0.1345083972228787,
+      "fold_mae_mean": 1.4929953441907748,
+      "fold_mae_std": 0.005731591109208547
+    },
+    {
+      "model_name": "xgb_tune_04",
+      "weighted_rank_sum": 145.35,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 2.816860465116279,
+      "selection_rank": 2,
+      "days_1_30_mae": 1.4777836168369416,
+      "days_1_30_rmse": 2.6555103125227753,
+      "days_1_30_wape": 0.6658571442450716,
+      "days_1_30_rmsse": 0.7591118714399195,
+      "days_1_30_bias": 0.009306128520346074,
+      "fold_mae_mean": 1.4777836168369418,
+      "fold_mae_std": 0.02164168569774944
+    },
+    {
+      "model_name": "xgb_tune_02",
+      "weighted_rank_sum": 173.65,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 3.36531007751938,
+      "selection_rank": 3,
+      "days_1_30_mae": 1.4983562300039404,
+      "days_1_30_rmse": 2.698231801349338,
+      "days_1_30_wape": 0.6751267161207949,
+      "days_1_30_rmsse": 0.7511581000575511,
+      "days_1_30_bias": 0.12412670731290106,
+      "fold_mae_mean": 1.4983562300039404,
+      "fold_mae_std": 0.0214472162968356
+    },
+    {
+      "model_name": "xgboost_base",
+      "weighted_rank_sum": 190.1,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 3.684108527131783,
+      "selection_rank": 4,
+      "days_1_30_mae": 1.499538758778936,
+      "days_1_30_rmse": 2.7133327143553885,
+      "days_1_30_wape": 0.6756595378574383,
+      "days_1_30_rmsse": 0.7513798350269086,
+      "days_1_30_bias": 0.12308858327087256,
+      "fold_mae_mean": 1.499538758778936,
+      "fold_mae_std": 0.00988484722685432
+    },
+    {
+      "model_name": "xgb_tune_06",
+      "weighted_rank_sum": 216.6,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 4.197674418604651,
+      "selection_rank": 5,
+      "days_1_30_mae": 1.5003119999876764,
+      "days_1_30_rmse": 2.6996288665459587,
+      "days_1_30_wape": 0.6760079435219742,
+      "days_1_30_rmsse": 0.7534775475017768,
+      "days_1_30_bias": 0.12171413512693861,
+      "fold_mae_mean": 1.5003119999876764,
+      "fold_mae_std": 0.012133177756277008
+    },
+    {
+      "model_name": "xgb_tune_05",
+      "weighted_rank_sum": 232.1,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 4.4980620155038755,
+      "selection_rank": 6,
+      "days_1_30_mae": 1.5244545811031627,
+      "days_1_30_rmse": 2.757343721915882,
+      "days_1_30_wape": 0.6868860652801995,
+      "days_1_30_rmsse": 0.7494683924781687,
+      "days_1_30_bias": 0.21894664241950873,
+      "fold_mae_mean": 1.5244545811031625,
+      "fold_mae_std": 0.01593137575601693
+    }
+  ],
+  "representative_nonlinear_configurations": {
+    "hist_gradient_boosting": {
+      "configuration_id": "hist_gradient_boosting_base",
+      "parameters": {
+        "learning_rate": 0.08,
+        "max_iter": 300,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "random_state": 42
+      }
+    },
+    "xgboost": {
+      "configuration_id": "xgb_tune_03",
+      "parameters": {
+        "n_estimators": 650,
+        "learning_rate": 0.04,
+        "max_depth": 6,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      }
+    }
+  },
+  "final_validation_ranking": [
+    {
+      "model_name": "mean_28",
+      "weighted_rank_sum": 94.2,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 1.8255813953488371,
+      "selection_rank": 1,
+      "days_1_30_mae": 1.4617539687468497,
+      "days_1_30_rmse": 2.8005500074317324,
+      "days_1_30_wape": 0.6586345335875197,
+      "days_1_30_rmsse": 0.735954971951298,
+      "days_1_30_bias": -0.0657195839697012,
+      "fold_mae_mean": 1.4617539687468497,
+      "fold_mae_std": 0.0702275958106343
+    },
+    {
+      "model_name": "ridge_global_v1",
+      "weighted_rank_sum": 121.6,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 2.3565891472868215,
+      "selection_rank": 2,
+      "days_1_30_mae": 1.474655497820289,
+      "days_1_30_rmse": 2.721901211713536,
+      "days_1_30_wape": 0.6644476818775396,
+      "days_1_30_rmsse": 0.762043062525269,
+      "days_1_30_bias": 0.0238695845471488,
+      "fold_mae_mean": 1.474655497820289,
+      "fold_mae_std": 0.05993814787694499
+    },
+    {
+      "model_name": "xgb_tune_03",
+      "weighted_rank_sum": 130.55,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 2.5300387596899228,
+      "selection_rank": 3,
+      "days_1_30_mae": 1.4929953441907748,
+      "days_1_30_rmse": 2.6639602508631555,
+      "days_1_30_wape": 0.6727112176151214,
+      "days_1_30_rmsse": 0.7533993028950073,
+      "days_1_30_bias": 0.1345083972228787,
+      "fold_mae_mean": 1.4929953441907748,
+      "fold_mae_std": 0.005731591109208547
+    },
+    {
+      "model_name": "hist_gradient_boosting_base",
+      "weighted_rank_sum": 169.65,
+      "total_weight": 51.6,
+      "comparison_components": 32,
+      "balanced_rank_score": 3.2877906976744184,
+      "selection_rank": 4,
+      "days_1_30_mae": 1.51935340622782,
+      "days_1_30_rmse": 2.6651984619926865,
+      "days_1_30_wape": 0.6845875868723386,
+      "days_1_30_rmsse": 0.7580423556807131,
+      "days_1_30_bias": 0.23729715437831875,
+      "fold_mae_mean": 1.5193534062278202,
+      "fold_mae_std": 0.02114359929658353
+    }
+  ],
+  "selected_model_name": "mean_28",
+  "selected_model_family": "mean_28",
+  "selected_parameters": {
+    "window_days": 28
+  },
+  "selected_days_1_30_daily": {
+    "fold": "combined",
+    "model_name": "mean_28",
+    "horizon": "days_1_30_daily",
+    "horizon_days": 30,
+    "evaluation_type": "daily",
+    "segment_type": "overall",
+    "segment_value": "all",
+    "mae": 1.4617539687468497,
+    "rmse": 2.8005500074317324,
+    "wape": 0.6586345335875197,
+    "bias": -0.0657195839697012,
+    "aggregate_bias": -1774.428767181933,
+    "actual_sum": 59923.0,
+    "forecast_sum": 58148.57123281807,
+    "observations": 27000,
+    "rmsse": 0.735954971951298,
+    "rmsse_defined_series": 900,
+    "rmsse_undefined_series": 0
+  },
+  "mae_improvement_vs_mean_28_pct": 0.0,
+  "mae_change_is_negligible_under_policy": true,
+  "fold_mae_wins_vs_mean_28": 0,
+  "candidate_audits": [
+    {
+      "configuration_id": "hist_gradient_boosting_base",
+      "model_family": "hist_gradient_boosting",
+      "parameters": {
+        "learning_rate": 0.08,
+        "max_iter": 300,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "random_state": 42
+      },
+      "fit_audits": [
+        {
+          "model_family": "hist_gradient_boosting",
+          "training_rows": 436106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-01-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_1",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "hist_gradient_boosting",
+          "training_rows": 445106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-02-22",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_2",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "hist_gradient_boosting",
+          "training_rows": 454106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-03-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_3",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        }
+      ],
+      "recursive_audits": [
+        {
+          "fold": "validation_fold_1",
+          "forecast_origin": "2016-01-23",
+          "validation_start": "2016-01-24",
+          "validation_end": "2016-02-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 8,
+            "percentage": 0.08888888888888889,
+            "most_negative": -0.03345040169442791
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 144,
+            "regular": 138
+          }
+        },
+        {
+          "fold": "validation_fold_2",
+          "forecast_origin": "2016-02-22",
+          "validation_start": "2016-02-23",
+          "validation_end": "2016-03-23",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 23,
+            "percentage": 0.2555555555555556,
+            "most_negative": -0.011165304043841006
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 143,
+            "regular": 139
+          }
+        },
+        {
+          "fold": "validation_fold_3",
+          "forecast_origin": "2016-03-23",
+          "validation_start": "2016-03-24",
+          "validation_end": "2016-04-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 10,
+            "percentage": 0.1111111111111111,
+            "most_negative": -0.018042718500512388
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 17,
+            "intermittent": 144,
+            "regular": 139
+          }
+        }
+      ],
+      "fit_seconds_by_fold": {
+        "validation_fold_1": 10.416,
+        "validation_fold_2": 8.409,
+        "validation_fold_3": 8.749
+      },
+      "prediction_rows": 27000,
+      "latest_target_date": "2016-04-22",
+      "all_preprocessing_training_only": true,
+      "all_recursive_audits_passed": true,
+      "future_target_mutation_audit": {
+        "future_actual_mutation_does_not_change_forecasts": true,
+        "future_lag_rolling_mutation_does_not_change_forecasts": true,
+        "future_prices_absent_from_model_inputs": true
+      }
+    },
+    {
+      "configuration_id": "xgboost_base",
+      "model_family": "xgboost",
+      "parameters": {
+        "n_estimators": 500,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "fit_audits": [
+        {
+          "model_family": "xgboost",
+          "training_rows": 436106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-01-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_1",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 445106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-02-22",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_2",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 454106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-03-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_3",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        }
+      ],
+      "recursive_audits": [
+        {
+          "fold": "validation_fold_1",
+          "forecast_origin": "2016-01-23",
+          "validation_start": "2016-01-24",
+          "validation_end": "2016-02-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 0,
+            "percentage": 0.0,
+            "most_negative": 0.02675531804561615
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 144,
+            "regular": 138
+          }
+        },
+        {
+          "fold": "validation_fold_2",
+          "forecast_origin": "2016-02-22",
+          "validation_start": "2016-02-23",
+          "validation_end": "2016-03-23",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 49,
+            "percentage": 0.5444444444444444,
+            "most_negative": -0.07433955371379852
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 143,
+            "regular": 139
+          }
+        },
+        {
+          "fold": "validation_fold_3",
+          "forecast_origin": "2016-03-23",
+          "validation_start": "2016-03-24",
+          "validation_end": "2016-04-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 32,
+            "percentage": 0.35555555555555557,
+            "most_negative": -0.055856604129076004
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 17,
+            "intermittent": 144,
+            "regular": 139
+          }
+        }
+      ],
+      "fit_seconds_by_fold": {
+        "validation_fold_1": 21.538,
+        "validation_fold_2": 21.777,
+        "validation_fold_3": 22.055
+      },
+      "prediction_rows": 27000,
+      "latest_target_date": "2016-04-22",
+      "all_preprocessing_training_only": true,
+      "all_recursive_audits_passed": true,
+      "future_target_mutation_audit": {
+        "future_actual_mutation_does_not_change_forecasts": true,
+        "future_lag_rolling_mutation_does_not_change_forecasts": true,
+        "future_prices_absent_from_model_inputs": true
+      }
+    },
+    {
+      "configuration_id": "xgb_tune_02",
+      "model_family": "xgboost",
+      "parameters": {
+        "n_estimators": 400,
+        "learning_rate": 0.07,
+        "max_depth": 6,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "fit_audits": [
+        {
+          "model_family": "xgboost",
+          "training_rows": 436106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-01-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_1",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 445106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-02-22",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_2",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 454106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-03-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_3",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        }
+      ],
+      "recursive_audits": [
+        {
+          "fold": "validation_fold_1",
+          "forecast_origin": "2016-01-23",
+          "validation_start": "2016-01-24",
+          "validation_end": "2016-02-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 3,
+            "percentage": 0.03333333333333333,
+            "most_negative": -0.039788827300071716
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 144,
+            "regular": 138
+          }
+        },
+        {
+          "fold": "validation_fold_2",
+          "forecast_origin": "2016-02-22",
+          "validation_start": "2016-02-23",
+          "validation_end": "2016-03-23",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 32,
+            "percentage": 0.35555555555555557,
+            "most_negative": -0.0474163256585598
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 143,
+            "regular": 139
+          }
+        },
+        {
+          "fold": "validation_fold_3",
+          "forecast_origin": "2016-03-23",
+          "validation_start": "2016-03-24",
+          "validation_end": "2016-04-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 36,
+            "percentage": 0.4,
+            "most_negative": -0.045016031712293625
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 17,
+            "intermittent": 144,
+            "regular": 139
+          }
+        }
+      ],
+      "fit_seconds_by_fold": {
+        "validation_fold_1": 17.972,
+        "validation_fold_2": 18.205,
+        "validation_fold_3": 18.523
+      },
+      "prediction_rows": 27000,
+      "latest_target_date": "2016-04-22",
+      "all_preprocessing_training_only": true,
+      "all_recursive_audits_passed": true,
+      "future_target_mutation_audit": {
+        "future_actual_mutation_does_not_change_forecasts": true,
+        "future_lag_rolling_mutation_does_not_change_forecasts": true,
+        "future_prices_absent_from_model_inputs": true
+      }
+    },
+    {
+      "configuration_id": "xgb_tune_03",
+      "model_family": "xgboost",
+      "parameters": {
+        "n_estimators": 650,
+        "learning_rate": 0.04,
+        "max_depth": 6,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "fit_audits": [
+        {
+          "model_family": "xgboost",
+          "training_rows": 436106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-01-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_1",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 445106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-02-22",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_2",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 454106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-03-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_3",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        }
+      ],
+      "recursive_audits": [
+        {
+          "fold": "validation_fold_1",
+          "forecast_origin": "2016-01-23",
+          "validation_start": "2016-01-24",
+          "validation_end": "2016-02-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 1,
+            "percentage": 0.011111111111111112,
+            "most_negative": -0.006632291711866856
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 144,
+            "regular": 138
+          }
+        },
+        {
+          "fold": "validation_fold_2",
+          "forecast_origin": "2016-02-22",
+          "validation_start": "2016-02-23",
+          "validation_end": "2016-03-23",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 45,
+            "percentage": 0.5,
+            "most_negative": -0.0393078476190567
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 143,
+            "regular": 139
+          }
+        },
+        {
+          "fold": "validation_fold_3",
+          "forecast_origin": "2016-03-23",
+          "validation_start": "2016-03-24",
+          "validation_end": "2016-04-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 29,
+            "percentage": 0.32222222222222224,
+            "most_negative": -0.05747281014919281
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 17,
+            "intermittent": 144,
+            "regular": 139
+          }
+        }
+      ],
+      "fit_seconds_by_fold": {
+        "validation_fold_1": 27.167,
+        "validation_fold_2": 26.968,
+        "validation_fold_3": 27.252
+      },
+      "prediction_rows": 27000,
+      "latest_target_date": "2016-04-22",
+      "all_preprocessing_training_only": true,
+      "all_recursive_audits_passed": true,
+      "future_target_mutation_audit": {
+        "future_actual_mutation_does_not_change_forecasts": true,
+        "future_lag_rolling_mutation_does_not_change_forecasts": true,
+        "future_prices_absent_from_model_inputs": true
+      }
+    },
+    {
+      "configuration_id": "xgb_tune_04",
+      "model_family": "xgboost",
+      "parameters": {
+        "n_estimators": 500,
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "fit_audits": [
+        {
+          "model_family": "xgboost",
+          "training_rows": 436106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-01-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_1",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 445106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-02-22",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_2",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 454106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-03-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_3",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        }
+      ],
+      "recursive_audits": [
+        {
+          "fold": "validation_fold_1",
+          "forecast_origin": "2016-01-23",
+          "validation_start": "2016-01-24",
+          "validation_end": "2016-02-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 0,
+            "percentage": 0.0,
+            "most_negative": 0.06531768292188644
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 144,
+            "regular": 138
+          }
+        },
+        {
+          "fold": "validation_fold_2",
+          "forecast_origin": "2016-02-22",
+          "validation_start": "2016-02-23",
+          "validation_end": "2016-03-23",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 120,
+            "percentage": 1.3333333333333335,
+            "most_negative": -0.10780056565999985
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 143,
+            "regular": 139
+          }
+        },
+        {
+          "fold": "validation_fold_3",
+          "forecast_origin": "2016-03-23",
+          "validation_start": "2016-03-24",
+          "validation_end": "2016-04-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 42,
+            "percentage": 0.46666666666666673,
+            "most_negative": -0.09519835561513901
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 17,
+            "intermittent": 144,
+            "regular": 139
+          }
+        }
+      ],
+      "fit_seconds_by_fold": {
+        "validation_fold_1": 18.622,
+        "validation_fold_2": 18.912,
+        "validation_fold_3": 19.346
+      },
+      "prediction_rows": 27000,
+      "latest_target_date": "2016-04-22",
+      "all_preprocessing_training_only": true,
+      "all_recursive_audits_passed": true,
+      "future_target_mutation_audit": {
+        "future_actual_mutation_does_not_change_forecasts": true,
+        "future_lag_rolling_mutation_does_not_change_forecasts": true,
+        "future_prices_absent_from_model_inputs": true
+      }
+    },
+    {
+      "configuration_id": "xgb_tune_05",
+      "model_family": "xgboost",
+      "parameters": {
+        "n_estimators": 500,
+        "learning_rate": 0.05,
+        "max_depth": 8,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "fit_audits": [
+        {
+          "model_family": "xgboost",
+          "training_rows": 436106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-01-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_1",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 445106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-02-22",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_2",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 454106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-03-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_3",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        }
+      ],
+      "recursive_audits": [
+        {
+          "fold": "validation_fold_1",
+          "forecast_origin": "2016-01-23",
+          "validation_start": "2016-01-24",
+          "validation_end": "2016-02-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 1,
+            "percentage": 0.011111111111111112,
+            "most_negative": -0.005041779484599829
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 144,
+            "regular": 138
+          }
+        },
+        {
+          "fold": "validation_fold_2",
+          "forecast_origin": "2016-02-22",
+          "validation_start": "2016-02-23",
+          "validation_end": "2016-03-23",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 32,
+            "percentage": 0.35555555555555557,
+            "most_negative": -0.01701216958463192
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 143,
+            "regular": 139
+          }
+        },
+        {
+          "fold": "validation_fold_3",
+          "forecast_origin": "2016-03-23",
+          "validation_start": "2016-03-24",
+          "validation_end": "2016-04-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 24,
+            "percentage": 0.26666666666666666,
+            "most_negative": -0.133199080824852
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 17,
+            "intermittent": 144,
+            "regular": 139
+          }
+        }
+      ],
+      "fit_seconds_by_fold": {
+        "validation_fold_1": 24.974,
+        "validation_fold_2": 25.833,
+        "validation_fold_3": 25.86
+      },
+      "prediction_rows": 27000,
+      "latest_target_date": "2016-04-22",
+      "all_preprocessing_training_only": true,
+      "all_recursive_audits_passed": true,
+      "future_target_mutation_audit": {
+        "future_actual_mutation_does_not_change_forecasts": true,
+        "future_lag_rolling_mutation_does_not_change_forecasts": true,
+        "future_prices_absent_from_model_inputs": true
+      }
+    },
+    {
+      "configuration_id": "xgb_tune_06",
+      "model_family": "xgboost",
+      "parameters": {
+        "n_estimators": 500,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "min_child_weight": 6,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 2.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "fit_audits": [
+        {
+          "model_family": "xgboost",
+          "training_rows": 436106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-01-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_1",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 445106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-02-22",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_2",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        },
+        {
+          "model_family": "xgboost",
+          "training_rows": 454106,
+          "training_date_min": "2011-02-26",
+          "training_date_max": "2016-03-23",
+          "training_series": 300,
+          "feature_ready_only": true,
+          "encoder_categories_come_from_training_only": true,
+          "numeric_imputer_fitted_from_training": true,
+          "numeric_standardization_used": false,
+          "target_excluded_from_preprocessing": true,
+          "validation_statistics_used_for_fit": false,
+          "final_test_statistics_used_for_fit": false,
+          "fold": "validation_fold_3",
+          "training_strictly_before_validation": true,
+          "training_ends_at_forecast_origin": true
+        }
+      ],
+      "recursive_audits": [
+        {
+          "fold": "validation_fold_1",
+          "forecast_origin": "2016-01-23",
+          "validation_start": "2016-01-24",
+          "validation_end": "2016-02-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 3,
+            "percentage": 0.03333333333333333,
+            "most_negative": -0.09725647419691086
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 144,
+            "regular": 138
+          }
+        },
+        {
+          "fold": "validation_fold_2",
+          "forecast_origin": "2016-02-22",
+          "validation_start": "2016-02-23",
+          "validation_end": "2016-03-23",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 42,
+            "percentage": 0.46666666666666673,
+            "most_negative": -0.09699682146310806
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 18,
+            "intermittent": 143,
+            "regular": 139
+          }
+        },
+        {
+          "fold": "validation_fold_3",
+          "forecast_origin": "2016-03-23",
+          "validation_start": "2016-03-24",
+          "validation_end": "2016-04-22",
+          "checks": {
+            "single_forecast_origin": true,
+            "history_ends_at_origin": true,
+            "actual_validation_sales_excluded_from_recursive_history": true,
+            "recursive_lag_1_uses_prediction": true,
+            "recursive_lag_7_uses_prediction": true,
+            "recursive_rolling_uses_synthetic_history": true,
+            "precomputed_validation_demand_features_ignored": true,
+            "future_price_features_excluded": true,
+            "targets_within_fold": true,
+            "final_test_untouched": true,
+            "official_forecasts_nonnegative": true,
+            "expected_prediction_rows": true
+          },
+          "negative_predictions": {
+            "count": 29,
+            "percentage": 0.32222222222222224,
+            "most_negative": -0.05198749527335167
+          },
+          "intermittency_class_counts": {
+            "highly_intermittent": 17,
+            "intermittent": 144,
+            "regular": 139
+          }
+        }
+      ],
+      "fit_seconds_by_fold": {
+        "validation_fold_1": 21.314,
+        "validation_fold_2": 21.579,
+        "validation_fold_3": 22.339
+      },
+      "prediction_rows": 27000,
+      "latest_target_date": "2016-04-22",
+      "all_preprocessing_training_only": true,
+      "all_recursive_audits_passed": true,
+      "future_target_mutation_audit": {
+        "future_actual_mutation_does_not_change_forecasts": true,
+        "future_lag_rolling_mutation_does_not_change_forecasts": true,
+        "future_prices_absent_from_model_inputs": true
+      }
+    }
+  ],
+  "frozen_config": "config/v1_final_model.json",
+  "frozen_config_sha256": "4bcc1542c44434903d9f0be14715bf83c012b8caf1ceddef6ebb8ad979e4a543",
+  "test_evaluated": false,
+  "source_integrity_unchanged": true,
+  "prediction_rows_persisted": 54000,
+  "runtime_seconds": 881.411
+}

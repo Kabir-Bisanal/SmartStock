@@ -2,7 +2,7 @@
 
 SmartStock is a student portfolio project about forecasting retail demand and, in later stages, turning forecasts into inventory recommendations. It addresses the cost of both stockouts and excess inventory.
 
-> **Current status:** Stage 8 (global Ridge regression with recursive multi-step validation) is complete. The project is under development; no nonlinear forecasting model, final-test evaluation, optimization, database, or dashboard has been implemented.
+> **Current status:** Stage 9 (final forecasting model selection and locked-test evaluation) is complete. The project is under development; inventory optimization, database integration, dashboard development, and deployment have not been implemented.
 
 ## Dataset
 
@@ -225,6 +225,50 @@ Generated but Git-ignored output:
 
 Ridge v1 is intentionally price-agnostic. Its fixed `alpha=1.0` is not tuned, and
 the locked final test remains untouched.
+
+## Run the Stage 9 final forecasting workflow
+
+Stage 9 compares HistGradientBoosting and XGBoost against the frozen Global Ridge
+and 28-Day Historical Mean under the same recursive validation rules. Validation
+selected the 28-day mean as the Version 1 production forecaster: boosting improved
+some short-horizon and spike-sensitive metrics but did not provide a balanced,
+stable improvement across the full inventory horizon.
+
+The controlled workflow has two deliberately separate commands:
+
+```powershell
+python -m smartstock.models.stage9_evaluation --phase validation
+python -m smartstock.models.stage9_evaluation --phase final-test
+```
+
+The validation command freezes `config/v1_final_model.json` before the second
+command can access the locked test. The final-test command is guarded by a receipt
+and refuses a second evaluation. On a completed checkout, do not rerun selection or
+test evaluation; the freeze and receipt are the audit record.
+
+Tracked outputs include:
+
+- `config/v1_stage9_candidates.json` — controlled candidates, features, tuning grids, and policies.
+- `config/v1_final_model.json` — final family, parameters, recursive policy, and pre-test freeze evidence.
+- `reports/stage9_model_metrics.csv` — validation and one-time locked-test metrics.
+- `reports/stage9_summary.json` — machine-readable selection, test, integrity, and production metadata.
+- `reports/stage9_final_model_report.md` — full interpretation and limitations.
+- `reports/figures/stage9/` — ten model-selection and final-test figures.
+
+Generated, Git-ignored outputs include the validation/test prediction CSVs under
+`data/processed/models/stage9/` and the serialized production forecaster at
+`models/smartstock_v1_forecaster.joblib`.
+
+Downstream code can load the artifact and call
+`smartstock.models.production_forecaster.forecast_demand` for 1-, 7-, or 30-day
+daily forecasts. The same model can be trained reproducibly from the frozen config:
+
+```powershell
+python -m smartstock.models.train_final_model
+```
+
+The production forecaster remains price-agnostic and does not use demand band as a
+predictor. The locked test was evaluated exactly once after model selection froze.
 
 ## Run tests
 

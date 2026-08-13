@@ -1,0 +1,160 @@
+{
+  "manifest_version": 1,
+  "project_stage": "Stage 9 - Final Forecasting Model Selection & Locked Test Evaluation",
+  "random_seed": 42,
+  "target": "sales",
+  "categorical_features": [
+    "item_id",
+    "store_id",
+    "dept_id",
+    "event_name_1",
+    "event_type_1",
+    "event_name_2",
+    "event_type_2"
+  ],
+  "numeric_features": [
+    "year",
+    "day_of_month",
+    "is_weekend",
+    "day_of_week_sin",
+    "day_of_week_cos",
+    "month_sin",
+    "month_cos",
+    "is_event",
+    "snap_active",
+    "product_age_days",
+    "sales_lag_1",
+    "sales_lag_7",
+    "sales_lag_14",
+    "sales_lag_28",
+    "sales_roll_mean_7",
+    "sales_roll_mean_14",
+    "sales_roll_mean_28",
+    "sales_roll_std_7",
+    "sales_roll_std_28"
+  ],
+  "known_context_numeric_features": [
+    "year",
+    "day_of_month",
+    "is_weekend",
+    "day_of_week_sin",
+    "day_of_week_cos",
+    "month_sin",
+    "month_cos",
+    "is_event",
+    "snap_active",
+    "product_age_days"
+  ],
+  "recursive_demand_features": [
+    "sales_lag_1",
+    "sales_lag_7",
+    "sales_lag_14",
+    "sales_lag_28",
+    "sales_roll_mean_7",
+    "sales_roll_mean_14",
+    "sales_roll_mean_28",
+    "sales_roll_std_7",
+    "sales_roll_std_28"
+  ],
+  "feature_count_before_encoding": 26,
+  "expected_series": 300,
+  "candidate_models": {
+    "hist_gradient_boosting": {
+      "type": "sklearn.ensemble.HistGradientBoostingRegressor",
+      "base_configuration": {
+        "learning_rate": 0.08,
+        "max_iter": 300,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "random_state": 42
+      },
+      "preprocessing": "training-only ordinal encoding with unknown categories mapped to -1; median numeric imputation; no scaling"
+    },
+    "xgboost": {
+      "type": "xgboost.XGBRegressor",
+      "base_configuration": {
+        "n_estimators": 500,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "min_child_weight": 3,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "preprocessing": "training-only one-hot encoding with unknown categories ignored; median numeric imputation; no scaling"
+    }
+  },
+  "limited_tuning_grids": {
+    "hist_gradient_boosting": [
+      {"learning_rate": 0.08, "max_iter": 300, "max_leaf_nodes": 31, "l2_regularization": 1.0, "random_state": 42},
+      {"learning_rate": 0.05, "max_iter": 400, "max_leaf_nodes": 31, "l2_regularization": 1.0, "random_state": 42},
+      {"learning_rate": 0.10, "max_iter": 250, "max_leaf_nodes": 31, "l2_regularization": 1.0, "random_state": 42},
+      {"learning_rate": 0.08, "max_iter": 300, "max_leaf_nodes": 15, "l2_regularization": 1.0, "random_state": 42},
+      {"learning_rate": 0.08, "max_iter": 300, "max_leaf_nodes": 63, "l2_regularization": 1.0, "random_state": 42},
+      {"learning_rate": 0.08, "max_iter": 300, "max_leaf_nodes": 31, "l2_regularization": 3.0, "random_state": 42}
+    ],
+    "xgboost": [
+      {"n_estimators": 500, "learning_rate": 0.05, "max_depth": 6, "min_child_weight": 3, "subsample": 0.9, "colsample_bytree": 0.9, "reg_lambda": 1.0, "objective": "reg:squarederror", "tree_method": "hist", "random_state": 42, "n_jobs": -1},
+      {"n_estimators": 400, "learning_rate": 0.07, "max_depth": 6, "min_child_weight": 3, "subsample": 0.9, "colsample_bytree": 0.9, "reg_lambda": 1.0, "objective": "reg:squarederror", "tree_method": "hist", "random_state": 42, "n_jobs": -1},
+      {"n_estimators": 650, "learning_rate": 0.04, "max_depth": 6, "min_child_weight": 3, "subsample": 0.9, "colsample_bytree": 0.9, "reg_lambda": 1.0, "objective": "reg:squarederror", "tree_method": "hist", "random_state": 42, "n_jobs": -1},
+      {"n_estimators": 500, "learning_rate": 0.05, "max_depth": 4, "min_child_weight": 3, "subsample": 0.9, "colsample_bytree": 0.9, "reg_lambda": 1.0, "objective": "reg:squarederror", "tree_method": "hist", "random_state": 42, "n_jobs": -1},
+      {"n_estimators": 500, "learning_rate": 0.05, "max_depth": 8, "min_child_weight": 3, "subsample": 0.9, "colsample_bytree": 0.9, "reg_lambda": 1.0, "objective": "reg:squarederror", "tree_method": "hist", "random_state": 42, "n_jobs": -1},
+      {"n_estimators": 500, "learning_rate": 0.05, "max_depth": 6, "min_child_weight": 6, "subsample": 0.9, "colsample_bytree": 0.9, "reg_lambda": 2.0, "objective": "reg:squarederror", "tree_method": "hist", "random_state": 42, "n_jobs": -1}
+    ]
+  },
+  "selection_policy": {
+    "validation_only": true,
+    "candidate_priority": [
+      "fold consistency",
+      "30-day recursive daily performance",
+      "7-day and 30-day aggregate performance",
+      "short-horizon performance",
+      "absolute bias"
+    ],
+    "negligible_primary_mae_change_pct": 0.5,
+    "maximum_tuning_configurations": 6
+  },
+  "forecast_policy": {
+    "strategy": "recursive",
+    "horizon_days": 30,
+    "history": "actual active demand through forecast origin, followed only by prior clipped predictions",
+    "non_negative_rule": "forecast = max(raw_forecast, 0)",
+    "round_forecasts": false
+  },
+  "feature_expansion": {
+    "performed": false,
+    "excluded_optional_features": ["zero_rate_7", "zero_rate_28", "days_since_last_positive_sale"],
+    "reason": "The core nonlinear comparison answers the Version 1 question without introducing an additional predicted zero/non-zero threshold into recursion."
+  },
+  "price_policy": "price-agnostic; no current, known-future, or historical price feature is used",
+  "features_deliberately_excluded": [
+    "sales",
+    "demand_band",
+    "known_future_sell_price",
+    "sell_price",
+    "previous_week_price",
+    "price_change_previous_week",
+    "price_pct_change_previous_week",
+    "price_vs_4week_median_lagged",
+    "zero_rate_7",
+    "zero_rate_28",
+    "days_since_last_positive_sale",
+    "availability_date",
+    "is_active",
+    "product_age_weeks",
+    "state_id",
+    "cat_id"
+  ],
+  "references": {
+    "feature_manifest": "config/v1_features.json",
+    "validation_manifest": "config/v1_validation.json",
+    "subset_manifest": "config/v1_subset.json",
+    "ridge_config": "config/v1_ridge.json",
+    "baseline_metrics": "reports/stage7_baseline_metrics.csv",
+    "ridge_metrics": "reports/stage8_ridge_metrics.csv"
+  }
+}

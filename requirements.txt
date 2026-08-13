@@ -8,3 +8,6 @@ matplotlib>=3.8,<4.0
 
 # Stage 8 global Ridge regression and preprocessing pipeline
 scikit-learn>=1.5,<2.0
+
+# Stage 9 production-quality nonlinear boosting benchmark
+xgboost>=2.1,<4.0

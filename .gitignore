@@ -50,3 +50,7 @@ data/processed/*
 !data/processed/.gitkeep
 data/simulated/*
 !data/simulated/.gitkeep
+
+# Serialized production models are reproducible generated artifacts.
+models/*
+!models/.gitkeep
