@@ -1,0 +1,425 @@
+{
+  "stage": "Stage 6 - Leakage-Safe Feature Engineering & Chronological Validation Design",
+  "generated_at_utc": "2026-08-13T06:13:08+00:00",
+  "input_validation": {
+    "rows": 582300,
+    "columns": 23,
+    "items": 100,
+    "stores": 3,
+    "item_store_pairs": 300,
+    "date_min": "2011-01-29",
+    "date_max": "2016-05-22",
+    "memory_mib": 22.34,
+    "checks": {
+      "required_columns_present": true,
+      "expected_rows": true,
+      "expected_columns": true,
+      "expected_items": true,
+      "expected_stores": true,
+      "expected_pairs": true,
+      "complete_daily_history": true,
+      "expected_date_range": true,
+      "foods_only": true,
+      "manifest_items_match": true,
+      "no_negative_sales": true,
+      "unique_daily_key": true
+    }
+  },
+  "active_period": {
+    "availability_definition": "first known selling-price date per item-store; first positive sale only as fallback",
+    "active_rows": 480506,
+    "prelaunch_rows_excluded": 101794,
+    "prelaunch_pct": 17.481366992958957,
+    "active_zero_rows_retained": 235769,
+    "active_zero_pct": 49.066817063678705,
+    "prelaunch_positive_sales_rows": 0,
+    "prelaunch_nonmissing_price_rows": 0,
+    "active_missing_price_rows": 0,
+    "price_proxy_pairs": 300,
+    "positive_sale_fallback_pairs": 0,
+    "availability_date_min": "2011-01-29",
+    "availability_date_max": "2015-12-26",
+    "product_age_days_max": 1940
+  },
+  "calendar_validation": {
+    "source_weekday_matches_parsed_date": true,
+    "source_month_matches_parsed_date": true,
+    "source_year_matches_parsed_date": true
+  },
+  "event_snap": {
+    "event_rows": 39012,
+    "snap_active_rows": 158213,
+    "snap_mapping": {
+      "CA_1": "snap_CA",
+      "TX_2": "snap_TX",
+      "WI_3": "snap_WI"
+    }
+  },
+  "processed_dataset": {
+    "rows": 480506,
+    "columns": 49,
+    "feature_ready_rows": 472106,
+    "warmup_rows": 8400,
+    "feature_ready_pct": 98.25184284899669,
+    "items": 100,
+    "stores": 3,
+    "item_store_pairs": 300,
+    "date_min": "2011-01-29",
+    "date_max": "2016-05-22",
+    "feature_ready_date_min": "2011-02-26",
+    "feature_ready_date_max": "2016-05-22",
+    "first_ready_product_age_days_min": 28,
+    "first_ready_product_age_days_max": 28,
+    "memory_mib": 61.51,
+    "missingness": [
+      {
+        "feature": "sales_lag_1",
+        "missing_rows": 300,
+        "missing_pct": 0.06243418396440419
+      },
+      {
+        "feature": "sales_lag_7",
+        "missing_rows": 2100,
+        "missing_pct": 0.43703928775082934
+      },
+      {
+        "feature": "sales_lag_14",
+        "missing_rows": 4200,
+        "missing_pct": 0.8740785755016587
+      },
+      {
+        "feature": "sales_lag_28",
+        "missing_rows": 8400,
+        "missing_pct": 1.7481571510033174
+      },
+      {
+        "feature": "sales_roll_mean_7",
+        "missing_rows": 2100,
+        "missing_pct": 0.43703928775082934
+      },
+      {
+        "feature": "sales_roll_mean_14",
+        "missing_rows": 4200,
+        "missing_pct": 0.8740785755016587
+      },
+      {
+        "feature": "sales_roll_mean_28",
+        "missing_rows": 8400,
+        "missing_pct": 1.7481571510033174
+      },
+      {
+        "feature": "sales_roll_std_7",
+        "missing_rows": 2100,
+        "missing_pct": 0.43703928775082934
+      },
+      {
+        "feature": "sales_roll_std_28",
+        "missing_rows": 8400,
+        "missing_pct": 1.7481571510033174
+      },
+      {
+        "feature": "zero_rate_7",
+        "missing_rows": 2100,
+        "missing_pct": 0.43703928775082934
+      },
+      {
+        "feature": "zero_rate_28",
+        "missing_rows": 8400,
+        "missing_pct": 1.7481571510033174
+      },
+      {
+        "feature": "days_since_last_positive_sale",
+        "missing_rows": 910,
+        "missing_pct": 0.1893836913586927
+      },
+      {
+        "feature": "previous_week_price",
+        "missing_rows": 2100,
+        "missing_pct": 0.43703928775082934
+      },
+      {
+        "feature": "price_change_previous_week",
+        "missing_rows": 4200,
+        "missing_pct": 0.8740785755016587
+      },
+      {
+        "feature": "price_pct_change_previous_week",
+        "missing_rows": 4200,
+        "missing_pct": 0.8740785755016587
+      },
+      {
+        "feature": "price_vs_4week_median_lagged",
+        "missing_rows": 8400,
+        "missing_pct": 1.7481571510033174
+      }
+    ],
+    "checks": {
+      "active_rows_only": true,
+      "active_price_present": true,
+      "active_zeros_retained": true,
+      "expected_items": true,
+      "expected_stores": true,
+      "expected_pairs": true,
+      "unique_daily_key": true,
+      "nonnegative_product_age": true,
+      "lag_1_matches_prior_series_value": true,
+      "first_series_rows_have_no_lag": true,
+      "ready_rows_have_complete_required_history": true,
+      "warmup_rows_persisted": true,
+      "manifest_columns_match_dataset": true
+    },
+    "file_size_bytes": 129405219,
+    "file_size_mib": 123.41043376922607,
+    "sha256": "050c0e35cb3d1dc59db38019b0655802bdbfd63bd5f2ee371232fd59bc609151"
+  },
+  "price_review": {
+    "weekly_records": 68858,
+    "price_change_events": 1022,
+    "maximum_absolute_pct_change": 1012.0,
+    "largest_change_previous_price": 0.25,
+    "largest_change_new_price": 2.7799999713897705,
+    "largest_change_low_denominator": true,
+    "interpretation": "The largest percentage is denominator-sensitive. Prices are retained without clipping; any later transform or cap must be selected within training/validation data only."
+  },
+  "extreme_price_changes": [
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_3_658",
+      "wm_yr_wk": 11411,
+      "week_start": "2014-04-12T00:00:00",
+      "previous_week_price": 0.25,
+      "weekly_price": 2.7799999713897705,
+      "current_change_absolute": 2.5299999713897705,
+      "current_change_pct": 1012.0,
+      "absolute_pct_change": 1012.0
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_2_367",
+      "wm_yr_wk": 11536,
+      "week_start": "2015-10-03T00:00:00",
+      "previous_week_price": 1.0,
+      "weekly_price": 4.96999979019165,
+      "current_change_absolute": 3.9699997901916504,
+      "current_change_pct": 396.9999694824219,
+      "absolute_pct_change": 396.9999694824219
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_3_724",
+      "wm_yr_wk": 11210,
+      "week_start": "2012-03-31T00:00:00",
+      "previous_week_price": 2.0,
+      "weekly_price": 6.480000019073486,
+      "current_change_absolute": 4.480000019073486,
+      "current_change_pct": 224.0,
+      "absolute_pct_change": 224.0
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_2_170",
+      "wm_yr_wk": 11227,
+      "week_start": "2012-07-28T00:00:00",
+      "previous_week_price": 1.0,
+      "weekly_price": 2.8299999237060547,
+      "current_change_absolute": 1.8299999237060547,
+      "current_change_pct": 183.0,
+      "absolute_pct_change": 183.0
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_2_170",
+      "wm_yr_wk": 11435,
+      "week_start": "2014-09-27T00:00:00",
+      "previous_week_price": 1.0,
+      "weekly_price": 2.8299999237060547,
+      "current_change_absolute": 1.8299999237060547,
+      "current_change_pct": 183.0,
+      "absolute_pct_change": 183.0
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_3_539",
+      "wm_yr_wk": 11226,
+      "week_start": "2012-07-21T00:00:00",
+      "previous_week_price": 1.0,
+      "weekly_price": 2.7799999713897705,
+      "current_change_absolute": 1.7799999713897705,
+      "current_change_pct": 178.0,
+      "absolute_pct_change": 178.0
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_3_539",
+      "wm_yr_wk": 11405,
+      "week_start": "2014-03-01T00:00:00",
+      "previous_week_price": 1.0,
+      "weekly_price": 2.7799999713897705,
+      "current_change_absolute": 1.7799999713897705,
+      "current_change_pct": 178.0,
+      "absolute_pct_change": 178.0
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_3_539",
+      "wm_yr_wk": 11413,
+      "week_start": "2014-04-26T00:00:00",
+      "previous_week_price": 1.0,
+      "weekly_price": 2.7799999713897705,
+      "current_change_absolute": 1.7799999713897705,
+      "current_change_pct": 178.0,
+      "absolute_pct_change": 178.0
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_1_017",
+      "wm_yr_wk": 11222,
+      "week_start": "2012-06-23T00:00:00",
+      "previous_week_price": 0.9900000095367432,
+      "weekly_price": 2.680000066757202,
+      "current_change_absolute": 1.690000057220459,
+      "current_change_pct": 170.7070770263672,
+      "absolute_pct_change": 170.7070770263672
+    },
+    {
+      "store_id": "TX_2",
+      "item_id": "FOODS_1_017",
+      "wm_yr_wk": 11235,
+      "week_start": "2012-09-22T00:00:00",
+      "previous_week_price": 0.9900000095367432,
+      "weekly_price": 2.680000066757202,
+      "current_change_absolute": 1.690000057220459,
+      "current_change_pct": 170.7070770263672,
+      "absolute_pct_change": 170.7070770263672
+    }
+  ],
+  "leakage_audit": {
+    "passed": true,
+    "checks": {
+      "default_sources_allowed": true,
+      "demand_band_is_analysis_only": true,
+      "target_is_not_feature": true,
+      "current_price_is_scenario_only": true,
+      "no_duplicate_feature_names": true
+    },
+    "allowed_default_source_timings": [
+      "availability_proxy",
+      "past_price_history",
+      "past_target_history",
+      "same_day_known_calendar",
+      "static_identity"
+    ],
+    "default_feature_count": 39,
+    "prohibited_default_features": []
+  },
+  "chronological_validation": {
+    "checks": {
+      "three_validation_folds": true,
+      "each_validation_fold_is_30_days": true,
+      "validation_folds_disjoint": true,
+      "validation_folds_contiguous": true,
+      "final_test_disjoint_from_validation": true,
+      "final_test_starts_after_last_validation": true,
+      "final_test_is_30_days": true,
+      "random_split_disabled": true,
+      "final_test_locked": true,
+      "final_test_ends_on_last_observed_date": true,
+      "all_validation_rows_feature_ready": true,
+      "final_test_rows_feature_ready": true,
+      "expanding_training_rows_increase": true
+    },
+    "folds": [
+      {
+        "name": "validation_fold_1",
+        "training_end_date": "2016-01-23",
+        "training_rows": 436106,
+        "validation_start_date": "2016-01-24",
+        "validation_end_date": "2016-02-22",
+        "validation_calendar_days": 30,
+        "validation_rows": 9000,
+        "validation_items": 100,
+        "validation_stores": 3,
+        "validation_pairs": 300
+      },
+      {
+        "name": "validation_fold_2",
+        "training_end_date": "2016-02-22",
+        "training_rows": 445106,
+        "validation_start_date": "2016-02-23",
+        "validation_end_date": "2016-03-23",
+        "validation_calendar_days": 30,
+        "validation_rows": 9000,
+        "validation_items": 100,
+        "validation_stores": 3,
+        "validation_pairs": 300
+      },
+      {
+        "name": "validation_fold_3",
+        "training_end_date": "2016-03-23",
+        "training_rows": 454106,
+        "validation_start_date": "2016-03-24",
+        "validation_end_date": "2016-04-22",
+        "validation_calendar_days": 30,
+        "validation_rows": 9000,
+        "validation_items": 100,
+        "validation_stores": 3,
+        "validation_pairs": 300
+      }
+    ],
+    "locked_final_test": {
+      "start_date": "2016-04-23",
+      "end_date": "2016-05-22",
+      "calendar_days": 30,
+      "feature_ready_rows": 9000,
+      "items": 100,
+      "stores": 3,
+      "item_store_pairs": 300
+    }
+  },
+  "constant_columns": [
+    "cat_id",
+    "is_active"
+  ],
+  "feature_counts_by_category": {
+    "SNAP": 1,
+    "analysis_only": 1,
+    "calendar": 14,
+    "control": 1,
+    "event": 5,
+    "identity": 5,
+    "optional_known_future": 1,
+    "price_history": 4,
+    "product_age": 4,
+    "sales_history": 12,
+    "target": 1
+  },
+  "performance": {
+    "input_csv_load_count": 1,
+    "input_memory_mib": 22.34,
+    "feature_dataframe_memory_mib": 61.51,
+    "weekly_price_granularity": true,
+    "full_row_python_loops": false,
+    "split_labels_persisted": false,
+    "runtime_seconds_before_report_write": 29.305
+  },
+  "source_integrity": {
+    "interim_csv_sha256_before": "d1290663f4dce21384982a6b7b7c548818ecd9656bc1b72d14f37b8341f4ddba",
+    "interim_csv_sha256_after": "d1290663f4dce21384982a6b7b7c548818ecd9656bc1b72d14f37b8341f4ddba",
+    "subset_manifest_sha256_before": "914f04e2431518e90bf468de2e844884c3c389df554181fefa8d483c124250bf",
+    "subset_manifest_sha256_after": "914f04e2431518e90bf468de2e844884c3c389df554181fefa8d483c124250bf",
+    "unchanged": true
+  },
+  "output": {
+    "processed_dataset": "data/processed/smartstock_v1_features.csv",
+    "feature_manifest": "config/v1_features.json",
+    "validation_manifest": "config/v1_validation.json",
+    "report": "reports/stage6_feature_engineering_report.md",
+    "summary": "reports/stage6_summary.json"
+  },
+  "scope": {
+    "models_trained": false,
+    "forecasts_generated": false,
+    "model_metrics_calculated": false,
+    "persistent_target_transformation": false
+  }
+}

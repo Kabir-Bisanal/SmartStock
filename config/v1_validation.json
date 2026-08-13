@@ -1,0 +1,62 @@
+{
+  "manifest_version": 1,
+  "project_stage": "Stage 6 - Leakage-Safe Feature Engineering & Chronological Validation Design",
+  "dataset_version": "SmartStock Version 1",
+  "target_column": "sales",
+  "availability_policy": {
+    "primary_proxy": "first known selling-price date per store_id + item_id",
+    "fallback": "first positive-sale date only when no price is ever known",
+    "prelaunch_targets_excluded": true,
+    "active_zero_sales_retained": true
+  },
+  "feature_warmup_policy": {
+    "maximum_required_demand_history_days": 28,
+    "required_completed_price_weeks": 4,
+    "rule": "is_feature_ready is true only when all required past-demand and past-price features are non-missing",
+    "warmup_rows_are_persisted": true
+  },
+  "training_policy": "expanding window; all feature-ready rows strictly before each evaluation window start",
+  "random_split_allowed": false,
+  "validation_folds": [
+    {
+      "name": "validation_fold_1",
+      "start_date": "2016-01-24",
+      "end_date": "2016-02-22"
+    },
+    {
+      "name": "validation_fold_2",
+      "start_date": "2016-02-23",
+      "end_date": "2016-03-23"
+    },
+    {
+      "name": "validation_fold_3",
+      "start_date": "2016-03-24",
+      "end_date": "2016-04-22"
+    }
+  ],
+  "locked_final_test": {
+    "start_date": "2016-04-23",
+    "end_date": "2016-05-22",
+    "days": 30,
+    "locked": true,
+    "policy": "Do not use final-test target performance for feature, model, or hyperparameter selection.",
+    "historical_limitation": "Stage 5 descriptive EDA inspected the complete history before this lock; from Stage 6 onward model-selection decisions must not inspect final-test target performance."
+  },
+  "forecast_horizons_days": [
+    1,
+    7,
+    30
+  ],
+  "horizon_evaluation": {
+    "1_day": "evaluate daily Day+1 forecasts",
+    "7_day": "evaluate daily Day+1 through Day+7 errors and aggregate seven-day demand",
+    "30_day": "evaluate daily Day+1 through Day+30 errors and aggregate 30-day demand"
+  },
+  "split_label_policy": "Dates are persisted in this manifest instead of assigning one permanent dataset_role column because training eligibility changes by expanding fold.",
+  "source": {
+    "interim_dataset": "data/interim/smartstock_v1_long.csv",
+    "interim_dataset_sha256": "d1290663f4dce21384982a6b7b7c548818ecd9656bc1b72d14f37b8341f4ddba",
+    "subset_manifest": "config/v1_subset.json",
+    "subset_manifest_sha256": "914f04e2431518e90bf468de2e844884c3c389df554181fefa8d483c124250bf"
+  }
+}

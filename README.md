@@ -2,7 +2,7 @@
 
 SmartStock is a student portfolio project about forecasting retail demand and, in later stages, turning forecasts into inventory recommendations. It addresses the cost of both stockouts and excess inventory.
 
-> **Current status:** Stage 5 (exploratory data analysis and modeling-readiness assessment) is complete. The project is under development; no persistent feature engineering, data split, forecasting, optimization, database, or dashboard has been implemented.
+> **Current status:** Stage 6 (leakage-safe feature engineering and chronological validation design) is complete. The project is under development; no forecasting model, model evaluation, optimization, database, or dashboard has been implemented.
 
 ## Dataset
 
@@ -34,8 +34,8 @@ M5 data -> Python ETL -> PostgreSQL -> Feature engineering
         -> Demand forecasting -> Inventory optimization -> Streamlit dashboard
 ```
 
-The acquisition, profiling, controlled Version 1 transformation, and descriptive
-modeling-readiness assessment are complete. Later architecture stages remain unbuilt.
+The acquisition, profiling, controlled Version 1 transformation, descriptive EDA,
+and leakage-safe modeling foundation are complete. Later architecture stages remain unbuilt.
 
 ## Project structure
 
@@ -153,6 +153,31 @@ It produces:
 
 The analysis is descriptive and observational. Event, SNAP, and price comparisons
 must not be interpreted as causal effects.
+
+## Build the Stage 6 feature dataset
+
+Stage 6 excludes unavailable pre-launch targets, retains genuine active zero demand,
+and creates calendar, product-age, past-demand, intermittency, and completed-prior-week
+price features. Historical demand windows are shifted so the target day cannot enter
+its own predictors:
+
+```powershell
+python src/smartstock/features/build_features.py
+```
+
+Tracked outputs:
+
+- `config/v1_features.json` — feature timing, category, dtype, and leakage metadata.
+- `config/v1_validation.json` — three expanding validation folds and the locked final test.
+- `reports/stage6_feature_engineering_report.md` — calculated policies, results, and risks.
+- `reports/stage6_summary.json` — machine-readable Stage 6 statistics and checks.
+
+Generated but Git-ignored output:
+
+- `data/processed/smartstock_v1_features.csv` — active rows, warm-up flags, features, and target.
+
+No model is trained by this command. The actual target-week price is scenario-only;
+it is not part of the default forecast-safe feature set.
 
 ## Run tests
 
