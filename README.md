@@ -2,7 +2,7 @@
 
 SmartStock is a student portfolio project about forecasting retail demand and, in later stages, turning forecasts into inventory recommendations. It addresses the cost of both stockouts and excess inventory.
 
-> **Current status:** Stage 4 (Version 1 subset creation and controlled data transformation) is complete. The project is under development; no feature engineering, forecasting, optimization, database, or dashboard has been implemented.
+> **Current status:** Stage 5 (exploratory data analysis and modeling-readiness assessment) is complete. The project is under development; no persistent feature engineering, data split, forecasting, optimization, database, or dashboard has been implemented.
 
 ## Dataset
 
@@ -34,7 +34,8 @@ M5 data -> Python ETL -> PostgreSQL -> Feature engineering
         -> Demand forecasting -> Inventory optimization -> Streamlit dashboard
 ```
 
-Only the acquisition and validation foundation exists in the current stage.
+The acquisition, profiling, controlled Version 1 transformation, and descriptive
+modeling-readiness assessment are complete. Later architecture stages remain unbuilt.
 
 ## Project structure
 
@@ -50,6 +51,7 @@ smartstock/
 ├── reports/                     # Generated profiling findings
 ├── sql/                         # Future SQL files
 ├── src/smartstock/
+│   ├── analysis/                # Reproducible exploratory analysis code
 │   ├── data/                    # Dataset acquisition and validation code
 │   ├── database/                # Future database code
 │   ├── features/                # Future feature engineering code
@@ -133,10 +135,29 @@ Generated but Git-ignored data:
 Missing selling prices remain missing in Stage 4; no imputation or forecasting
 feature engineering is performed.
 
+## Run the Stage 5 exploratory analysis
+
+Stage 5 reads the frozen Version 1 interim CSV without modifying it. It separates
+pre-launch rows from active-period demand, profiles demand and price behavior, and
+assesses modeling readiness without creating feature tables or training models:
+
+```powershell
+python src/smartstock/analysis/stage5_eda.py
+```
+
+It produces:
+
+- `reports/stage5_eda_report.md` — detailed, beginner-readable findings and decisions.
+- `reports/stage5_summary.json` — machine-readable statistics and integrity results.
+- `reports/figures/stage5/` — 12 analysis figures used by the report.
+
+The analysis is descriptive and observational. Event, SNAP, and price comparisons
+must not be interpreted as causal effects.
+
 ## Run tests
 
 ```powershell
 python -m unittest discover -s tests -v
 ```
 
-The tests use only the standard library and generate tiny temporary CSV fixtures; they do not require the real M5 dataset.
+The tests use small synthetic fixtures and do not load the full M5 dataset.

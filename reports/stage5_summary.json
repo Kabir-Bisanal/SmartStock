@@ -1,0 +1,1569 @@
+{
+  "stage": "Stage 5 - Exploratory Data Analysis & Modeling Readiness",
+  "generated_at_utc": "2026-08-13T03:10:17+00:00",
+  "dataset_validation": {
+    "rows": 582300,
+    "columns": 23,
+    "memory_mib": 22.42,
+    "date_min": "2011-01-29",
+    "date_max": "2016-05-22",
+    "items": 100,
+    "stores": 3,
+    "item_store_pairs": 300,
+    "days_per_pair_min": 1941,
+    "days_per_pair_max": 1941,
+    "checks": {
+      "expected_rows": true,
+      "expected_columns": true,
+      "expected_items": true,
+      "expected_stores": true,
+      "expected_item_store_pairs": true,
+      "complete_days_per_pair": true,
+      "unique_date_store_item_key": true,
+      "foods_only": true,
+      "manifest_items_match": true,
+      "no_negative_sales": true
+    }
+  },
+  "prelaunch_vs_active": {
+    "boundary_definition": "first known price date; first positive sale is the fallback when no price exists",
+    "prelaunch_rows": 101794,
+    "prelaunch_pct": 17.481366992958957,
+    "active_rows": 480506,
+    "active_pct": 82.51863300704105,
+    "prelaunch_zero_sales_rows": 101794,
+    "prelaunch_positive_sales_rows": 0,
+    "prelaunch_missing_price_rows": 101794,
+    "active_missing_price_rows": 0,
+    "active_zero_sales_rows": 235769,
+    "active_zero_sales_pct": 49.0668170637,
+    "prelaunch_days_distribution": {
+      "minimum": 0,
+      "median": 35.0,
+      "mean": 339.31333333333333,
+      "p75": 763.0,
+      "p90": 973.7000000000002,
+      "maximum": 1792
+    },
+    "price_to_first_sale_lag_days": {
+      "minimum": 0,
+      "median": 1.0,
+      "mean": 2.033333333333333,
+      "p90": 5.0,
+      "maximum": 6
+    },
+    "latest_10_item_store_launches": [
+      {
+        "store_id": "CA_1",
+        "item_id": "FOODS_2_209",
+        "department": "FOODS_2",
+        "launch_date": "2015-12-26",
+        "first_positive_sale_date": "2015-12-31",
+        "prelaunch_days": 1792
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_2_209",
+        "department": "FOODS_2",
+        "launch_date": "2015-05-30",
+        "first_positive_sale_date": "2015-06-04",
+        "prelaunch_days": 1582
+      },
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_601",
+        "department": "FOODS_3",
+        "launch_date": "2014-10-04",
+        "first_positive_sale_date": "2014-10-10",
+        "prelaunch_days": 1344
+      },
+      {
+        "store_id": "CA_1",
+        "item_id": "FOODS_3_135",
+        "department": "FOODS_3",
+        "launch_date": "2014-08-30",
+        "first_positive_sale_date": "2014-09-05",
+        "prelaunch_days": 1309
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_601",
+        "department": "FOODS_3",
+        "launch_date": "2014-08-16",
+        "first_positive_sale_date": "2014-08-20",
+        "prelaunch_days": 1295
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_2_040",
+        "department": "FOODS_2",
+        "launch_date": "2014-07-26",
+        "first_positive_sale_date": "2014-07-30",
+        "prelaunch_days": 1274
+      },
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_2_040",
+        "department": "FOODS_2",
+        "launch_date": "2014-05-31",
+        "first_positive_sale_date": "2014-05-31",
+        "prelaunch_days": 1218
+      },
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_135",
+        "department": "FOODS_3",
+        "launch_date": "2014-05-31",
+        "first_positive_sale_date": "2014-06-06",
+        "prelaunch_days": 1218
+      },
+      {
+        "store_id": "CA_1",
+        "item_id": "FOODS_3_661",
+        "department": "FOODS_3",
+        "launch_date": "2014-04-26",
+        "first_positive_sale_date": "2014-04-29",
+        "prelaunch_days": 1183
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_661",
+        "department": "FOODS_3",
+        "launch_date": "2014-04-26",
+        "first_positive_sale_date": "2014-04-27",
+        "prelaunch_days": 1183
+      }
+    ]
+  },
+  "overall_demand": {
+    "all_rows": {
+      "observations": 582300,
+      "mean": 1.9680834621,
+      "median": 0.0,
+      "standard_deviation": 5.0545194178,
+      "minimum": 0,
+      "maximum": 196,
+      "skewness": 6.165878093,
+      "zero_rows": 337563,
+      "zero_pct": 57.970633694,
+      "percentiles": {
+        "0.25": 0.0,
+        "0.5": 0.0,
+        "0.75": 2.0,
+        "0.9": 5.0,
+        "0.95": 10.0,
+        "0.99": 25.0,
+        "0.999": 52.0,
+        "0.9999": 91.0
+      },
+      "rows_above_p99_9": 547,
+      "rows_above_p99_9_pct": 0.0939378327
+    },
+    "active_rows": {
+      "observations": 480506,
+      "mean": 2.3850170445,
+      "median": 1.0,
+      "standard_deviation": 5.4741298419,
+      "minimum": 0,
+      "maximum": 196,
+      "skewness": 5.6630808884,
+      "zero_rows": 235769,
+      "zero_pct": 49.0668170637,
+      "percentiles": {
+        "0.25": 0.0,
+        "0.5": 1.0,
+        "0.75": 2.0,
+        "0.9": 6.0,
+        "0.95": 11.0,
+        "0.99": 27.0,
+        "0.999": 54.0,
+        "0.9999": 94.94949999992969
+      },
+      "rows_above_p99_9": 468,
+      "rows_above_p99_9_pct": 0.097397327
+    }
+  },
+  "demand_band_analysis": [
+    {
+      "demand_band": "high",
+      "rows": 192159,
+      "total_sales": 884485,
+      "mean_sales": 4.602880947548645,
+      "median_sales": 2.0,
+      "standard_deviation": 7.9631190448953655,
+      "zero_rows": 72392,
+      "active_rows": 171943,
+      "active_total_sales": 884485,
+      "active_mean_sales": 5.144059368511658,
+      "active_median_sales": 2.0,
+      "active_standard_deviation": 8.251238969766398,
+      "active_zero_rows": 52176,
+      "selected_products": 33,
+      "zero_pct": 37.67296873942933,
+      "active_zero_pct": 30.344939892871476,
+      "sales_share_pct": 77.17918177336247,
+      "median_series_active_zero_pct": 27.865853658536587,
+      "median_series_adi": 1.386306001690617,
+      "median_series_cv": 1.0786214533940497
+    },
+    {
+      "demand_band": "low",
+      "rows": 192159,
+      "total_sales": 67904,
+      "mean_sales": 0.35337402879906743,
+      "median_sales": 0.0,
+      "standard_deviation": 0.8618992969307164,
+      "zero_rows": 151630,
+      "active_rows": 129404,
+      "active_total_sales": 67904,
+      "active_mean_sales": 0.5247442119254428,
+      "active_median_sales": 0.0,
+      "active_standard_deviation": 1.006580855514847,
+      "active_zero_rows": 88875,
+      "selected_products": 33,
+      "zero_pct": 78.9086121389058,
+      "active_zero_pct": 68.68025717906711,
+      "sales_share_pct": 5.925227854783751,
+      "median_series_active_zero_pct": 68.31530139103555,
+      "median_series_adi": 3.15609756097561,
+      "median_series_cv": 1.8193111417706773
+    },
+    {
+      "demand_band": "medium",
+      "rows": 197982,
+      "total_sales": 193626,
+      "mean_sales": 0.9779979998181653,
+      "median_sales": 0.0,
+      "standard_deviation": 1.6204252607277283,
+      "zero_rows": 113541,
+      "active_rows": 179159,
+      "active_total_sales": 193626,
+      "active_mean_sales": 1.0807495018391484,
+      "active_median_sales": 0.0,
+      "active_standard_deviation": 1.6705097100102262,
+      "active_zero_rows": 94718,
+      "selected_products": 34,
+      "zero_pct": 57.349152953298784,
+      "active_zero_pct": 52.86812272897259,
+      "sales_share_pct": 16.89559037185377,
+      "median_series_active_zero_pct": 54.22462648119526,
+      "median_series_adi": 2.1845980497222035,
+      "median_series_cv": 1.43270496703174
+    }
+  ],
+  "department_analysis": [
+    {
+      "dept_id": "FOODS_1",
+      "rows": 87345,
+      "total_sales": 117308,
+      "mean_sales": 1.3430419600435057,
+      "median_sales": 0.0,
+      "standard_deviation": 2.7937071786837633,
+      "zero_rows": 52623,
+      "active_rows": 69922,
+      "active_total_sales": 117308,
+      "active_mean_sales": 1.6776980063499327,
+      "active_median_sales": 0.0,
+      "active_standard_deviation": 3.0311960536179123,
+      "active_zero_rows": 35200,
+      "selected_products": 15,
+      "zero_pct": 60.24729520865533,
+      "active_zero_pct": 50.34180944480993,
+      "sales_share_pct": 10.236166193287174,
+      "median_series_active_zero_pct": 50.0,
+      "median_series_adi": 2.0,
+      "median_series_cv": 1.3301708748158405
+    },
+    {
+      "dept_id": "FOODS_2",
+      "rows": 163044,
+      "total_sales": 273692,
+      "mean_sales": 1.6786388950222026,
+      "median_sales": 0.0,
+      "standard_deviation": 4.3693024663851485,
+      "zero_rows": 95315,
+      "active_rows": 137704,
+      "active_total_sales": 273692,
+      "active_mean_sales": 1.987538488351827,
+      "active_median_sales": 0.0,
+      "active_standard_deviation": 4.6893416179166545,
+      "active_zero_rows": 69975,
+      "selected_products": 28,
+      "zero_pct": 58.45967959569196,
+      "active_zero_pct": 50.81551734154418,
+      "sales_share_pct": 23.882060880529487,
+      "median_series_active_zero_pct": 55.75878478541934,
+      "median_series_adi": 2.2605996348983726,
+      "median_series_cv": 1.4897201035469179
+    },
+    {
+      "dept_id": "FOODS_3",
+      "rows": 331911,
+      "total_sales": 755015,
+      "mean_sales": 2.2747513640704886,
+      "median_sales": 0.0,
+      "standard_deviation": 5.757743147696817,
+      "zero_rows": 189625,
+      "active_rows": 272880,
+      "active_total_sales": 755015,
+      "active_mean_sales": 2.7668389035473466,
+      "active_median_sales": 1.0,
+      "active_standard_deviation": 6.241926796098475,
+      "active_zero_rows": 130594,
+      "selected_products": 57,
+      "zero_pct": 57.13127916821075,
+      "active_zero_pct": 47.85766637349751,
+      "sales_share_pct": 65.88177292618334,
+      "median_series_active_zero_pct": 50.59247810407007,
+      "median_series_adi": 2.0239833159541187,
+      "median_series_cv": 1.4297373291231035
+    }
+  ],
+  "store_analysis": [
+    {
+      "store_id": "CA_1",
+      "rows": 194100,
+      "total_sales": 428887,
+      "mean_sales": 2.20961875321999,
+      "median_sales": 0.0,
+      "standard_deviation": 5.432187805166841,
+      "zero_rows": 107910,
+      "active_rows": 159401,
+      "active_total_sales": 428887,
+      "active_mean_sales": 2.6906167464445017,
+      "active_median_sales": 1.0,
+      "active_standard_deviation": 5.885411677314223,
+      "active_zero_rows": 73211,
+      "selected_products": 100,
+      "zero_pct": 55.595054095826896,
+      "active_zero_pct": 45.928821023707506,
+      "sales_share_pct": 37.424204744266,
+      "median_series_active_zero_pct": 47.83076177435217,
+      "median_series_adi": 1.9168384790604995,
+      "median_series_cv": 1.3332464942951199
+    },
+    {
+      "store_id": "TX_2",
+      "rows": 194100,
+      "total_sales": 384321,
+      "mean_sales": 1.980015455950541,
+      "median_sales": 0.0,
+      "standard_deviation": 4.947111290217145,
+      "zero_rows": 112053,
+      "active_rows": 162005,
+      "active_total_sales": 384321,
+      "active_mean_sales": 2.372278633375513,
+      "active_median_sales": 1.0,
+      "active_standard_deviation": 5.328407989384084,
+      "active_zero_rows": 79958,
+      "selected_products": 100,
+      "zero_pct": 57.72952086553323,
+      "active_zero_pct": 49.355266812752696,
+      "sales_share_pct": 33.53542492899307,
+      "median_series_active_zero_pct": 51.777434312210204,
+      "median_series_adi": 2.0737771253699755,
+      "median_series_cv": 1.4075685570466063
+    },
+    {
+      "store_id": "WI_3",
+      "rows": 194100,
+      "total_sales": 332807,
+      "mean_sales": 1.714616177228233,
+      "median_sales": 0.0,
+      "standard_deviation": 4.747574164782111,
+      "zero_rows": 117600,
+      "active_rows": 159100,
+      "active_total_sales": 332807,
+      "active_mean_sales": 2.0918101822752986,
+      "active_median_sales": 0.0,
+      "active_standard_deviation": 5.1680621472510815,
+      "active_zero_rows": 82600,
+      "selected_products": 100,
+      "zero_pct": 60.58732612055641,
+      "active_zero_pct": 51.91703331238215,
+      "sales_share_pct": 29.040370326740923,
+      "median_series_active_zero_pct": 56.82637815558991,
+      "median_series_adi": 2.3162324152750546,
+      "median_series_cv": 1.4993446958265637
+    }
+  ],
+  "store_department_mix": [
+    {
+      "store_id": "CA_1",
+      "dept_id": "FOODS_1",
+      "total_sales": 53939,
+      "store_sales_share_pct": 12.576506165959799
+    },
+    {
+      "store_id": "CA_1",
+      "dept_id": "FOODS_2",
+      "total_sales": 88970,
+      "store_sales_share_pct": 20.744391879446102
+    },
+    {
+      "store_id": "CA_1",
+      "dept_id": "FOODS_3",
+      "total_sales": 285978,
+      "store_sales_share_pct": 66.6791019545941
+    },
+    {
+      "store_id": "TX_2",
+      "dept_id": "FOODS_1",
+      "total_sales": 35652,
+      "store_sales_share_pct": 9.276620325196905
+    },
+    {
+      "store_id": "TX_2",
+      "dept_id": "FOODS_2",
+      "total_sales": 85461,
+      "store_sales_share_pct": 22.23688010803469
+    },
+    {
+      "store_id": "TX_2",
+      "dept_id": "FOODS_3",
+      "total_sales": 263208,
+      "store_sales_share_pct": 68.4864995667684
+    },
+    {
+      "store_id": "WI_3",
+      "dept_id": "FOODS_1",
+      "total_sales": 27717,
+      "store_sales_share_pct": 8.328250307235125
+    },
+    {
+      "store_id": "WI_3",
+      "dept_id": "FOODS_2",
+      "total_sales": 99261,
+      "store_sales_share_pct": 29.825394297595903
+    },
+    {
+      "store_id": "WI_3",
+      "dept_id": "FOODS_3",
+      "total_sales": 205829,
+      "store_sales_share_pct": 61.84635539516897
+    }
+  ],
+  "time_analysis": {
+    "monthly_linear_slope_units_per_month": 17.300437062937092,
+    "monthly_slope_as_pct_of_mean": 0.09812510386782991,
+    "yearly": [
+      {
+        "year": 2011,
+        "total_sales": 176586,
+        "mean_daily_observation": 1.746646884272997,
+        "observed_days": 337,
+        "average_daily_total": 523.9940652818991
+      },
+      {
+        "year": 2012,
+        "total_sales": 230739,
+        "mean_daily_observation": 2.101448087431694,
+        "observed_days": 366,
+        "average_daily_total": 630.4344262295082
+      },
+      {
+        "year": 2013,
+        "total_sales": 240756,
+        "mean_daily_observation": 2.1986849315068495,
+        "observed_days": 365,
+        "average_daily_total": 659.6054794520549
+      },
+      {
+        "year": 2014,
+        "total_sales": 208308,
+        "mean_daily_observation": 1.9023561643835616,
+        "observed_days": 365,
+        "average_daily_total": 570.7068493150684
+      },
+      {
+        "year": 2015,
+        "total_sales": 195019,
+        "mean_daily_observation": 1.7809954337899543,
+        "observed_days": 365,
+        "average_daily_total": 534.2986301369863
+      },
+      {
+        "year": 2016,
+        "total_sales": 94607,
+        "mean_daily_observation": 2.205291375291375,
+        "observed_days": 143,
+        "average_daily_total": 661.5874125874126
+      }
+    ],
+    "weekday": [
+      {
+        "weekday": "Monday",
+        "active_observations": 68558,
+        "total_sales": 163882,
+        "mean_sales": 2.3904139560663964,
+        "median_sales": 1.0
+      },
+      {
+        "weekday": "Tuesday",
+        "active_observations": 68558,
+        "total_sales": 146930,
+        "mean_sales": 2.143148866653053,
+        "median_sales": 0.0
+      },
+      {
+        "weekday": "Wednesday",
+        "active_observations": 68558,
+        "total_sales": 142505,
+        "mean_sales": 2.0786049768079584,
+        "median_sales": 0.0
+      },
+      {
+        "weekday": "Thursday",
+        "active_observations": 68558,
+        "total_sales": 140788,
+        "mean_sales": 2.053560488929082,
+        "median_sales": 0.0
+      },
+      {
+        "weekday": "Friday",
+        "active_observations": 68558,
+        "total_sales": 156319,
+        "mean_sales": 2.2800986026430174,
+        "median_sales": 1.0
+      },
+      {
+        "weekday": "Saturday",
+        "active_observations": 68858,
+        "total_sales": 191506,
+        "mean_sales": 2.781172848470766,
+        "median_sales": 1.0
+      },
+      {
+        "weekday": "Sunday",
+        "active_observations": 68858,
+        "total_sales": 204085,
+        "mean_sales": 2.963853147056261,
+        "median_sales": 1.0
+      }
+    ],
+    "monthly_overall": [
+      {
+        "month": 1,
+        "average_daily_sales": 586.3924050632911
+      },
+      {
+        "month": 2,
+        "average_daily_sales": 606.5
+      },
+      {
+        "month": 3,
+        "average_daily_sales": 603.5913978494624
+      },
+      {
+        "month": 4,
+        "average_daily_sales": 590.45
+      },
+      {
+        "month": 5,
+        "average_daily_sales": 587.5310734463277
+      },
+      {
+        "month": 6,
+        "average_daily_sales": 659.6933333333334
+      },
+      {
+        "month": 7,
+        "average_daily_sales": 634.8451612903226
+      },
+      {
+        "month": 8,
+        "average_daily_sales": 632.9225806451612
+      },
+      {
+        "month": 9,
+        "average_daily_sales": 576.12
+      },
+      {
+        "month": 10,
+        "average_daily_sales": 539.916129032258
+      },
+      {
+        "month": 11,
+        "average_daily_sales": 518.02
+      },
+      {
+        "month": 12,
+        "average_daily_sales": 544.8516129032258
+      }
+    ],
+    "highest_daily_total_10": [
+      {
+        "date": "2013-06-02",
+        "sales": 1146,
+        "year": 2013,
+        "month": 6
+      },
+      {
+        "date": "2016-03-06",
+        "sales": 1121,
+        "year": 2016,
+        "month": 3
+      },
+      {
+        "date": "2013-08-11",
+        "sales": 1116,
+        "year": 2013,
+        "month": 8
+      },
+      {
+        "date": "2013-06-29",
+        "sales": 1077,
+        "year": 2013,
+        "month": 6
+      },
+      {
+        "date": "2013-01-06",
+        "sales": 1075,
+        "year": 2013,
+        "month": 1
+      },
+      {
+        "date": "2013-06-09",
+        "sales": 1060,
+        "year": 2013,
+        "month": 6
+      },
+      {
+        "date": "2013-07-08",
+        "sales": 1039,
+        "year": 2013,
+        "month": 7
+      },
+      {
+        "date": "2013-07-14",
+        "sales": 1038,
+        "year": 2013,
+        "month": 7
+      },
+      {
+        "date": "2012-02-12",
+        "sales": 1025,
+        "year": 2012,
+        "month": 2
+      },
+      {
+        "date": "2013-01-12",
+        "sales": 1015,
+        "year": 2013,
+        "month": 1
+      }
+    ],
+    "trend_caution": "aggregate growth mixes demand changes with product launches and active assortment; recurring within-year patterns are seasonality, while multi-year movement is trend"
+  },
+  "event_analysis": {
+    "distinct_calendar_days": 1941,
+    "event_days": 158,
+    "non_event_days": 1783,
+    "active_observation_comparison": [
+      {
+        "event_day": false,
+        "observations": 441494,
+        "total_sales": 1056253,
+        "mean_sales": 2.3924515395452715,
+        "median_sales": 1.0,
+        "zero_pct": 48.891264660448385
+      },
+      {
+        "event_day": true,
+        "observations": 39012,
+        "total_sales": 89762,
+        "mean_sales": 2.300881779965139,
+        "median_sales": 0.0,
+        "zero_pct": 51.053521993232856
+      }
+    ],
+    "event_vs_non_event_mean_difference_pct": -3.827444697063198,
+    "event_type_summary": [
+      {
+        "event_type": "Cultural",
+        "event_occurrences": 40,
+        "mean_daily_sales": 590.925,
+        "median_daily_sales": 587.0
+      },
+      {
+        "event_type": "National",
+        "event_occurrences": 51,
+        "mean_daily_sales": 500.5098039215686,
+        "median_daily_sales": 521.0
+      },
+      {
+        "event_type": "Religious",
+        "event_occurrences": 55,
+        "mean_daily_sales": 597.5818181818182,
+        "median_daily_sales": 570.0
+      },
+      {
+        "event_type": "Sporting",
+        "event_occurrences": 16,
+        "mean_daily_sales": 653.4375,
+        "median_daily_sales": 657.0
+      }
+    ],
+    "interpretation_limit": "observational comparison only; event timing, seasonality, stores, products, and prices are confounded"
+  },
+  "snap_analysis": {
+    "overall": [
+      {
+        "snap_active": 0,
+        "observations": 322293,
+        "mean_sales": 2.222189126043693,
+        "median_sales": 0.0,
+        "total_sales": 716196
+      },
+      {
+        "snap_active": 1,
+        "observations": 158213,
+        "mean_sales": 2.7167110161617565,
+        "median_sales": 1.0,
+        "total_sales": 429819
+      }
+    ],
+    "by_store": [
+      {
+        "store_id": "CA_1",
+        "snap_active": 0,
+        "observations": 106965,
+        "total_sales": 275054,
+        "mean_sales": 2.5714392558313466,
+        "median_sales": 1.0,
+        "zero_pct": 46.79287617444959
+      },
+      {
+        "store_id": "CA_1",
+        "snap_active": 1,
+        "observations": 52436,
+        "total_sales": 153833,
+        "mean_sales": 2.9337287359829123,
+        "median_sales": 1.0,
+        "zero_pct": 44.166221679761996
+      },
+      {
+        "store_id": "TX_2",
+        "snap_active": 0,
+        "observations": 108641,
+        "total_sales": 244724,
+        "mean_sales": 2.252593403963513,
+        "median_sales": 0.0,
+        "zero_pct": 50.352997487136534
+      },
+      {
+        "store_id": "TX_2",
+        "snap_active": 1,
+        "observations": 53364,
+        "total_sales": 139597,
+        "mean_sales": 2.615939584738775,
+        "median_sales": 1.0,
+        "zero_pct": 47.324038677760285
+      },
+      {
+        "store_id": "WI_3",
+        "snap_active": 0,
+        "observations": 106687,
+        "total_sales": 196418,
+        "mean_sales": 1.8410677964513014,
+        "median_sales": 0.0,
+        "zero_pct": 53.99439481848772
+      },
+      {
+        "store_id": "WI_3",
+        "snap_active": 1,
+        "observations": 52413,
+        "total_sales": 136389,
+        "mean_sales": 2.602197927994963,
+        "median_sales": 1.0,
+        "zero_pct": 47.68855055043596
+      }
+    ],
+    "by_department": [
+      {
+        "dept_id": "FOODS_1",
+        "snap_active": 0,
+        "mean_sales": 1.642796230759391
+      },
+      {
+        "dept_id": "FOODS_1",
+        "snap_active": 1,
+        "mean_sales": 1.7488269030239834
+      },
+      {
+        "dept_id": "FOODS_2",
+        "snap_active": 0,
+        "mean_sales": 1.7353097220568012
+      },
+      {
+        "dept_id": "FOODS_2",
+        "snap_active": 1,
+        "mean_sales": 2.5012459479127616
+      },
+      {
+        "dept_id": "FOODS_3",
+        "snap_active": 0,
+        "mean_sales": 2.6163525105174017
+      },
+      {
+        "dept_id": "FOODS_3",
+        "snap_active": 1,
+        "mean_sales": 3.07338898163606
+      }
+    ],
+    "store_mean_difference_pct": {
+      "CA_1": 14.088976798887565,
+      "TX_2": 16.13012717412483,
+      "WI_3": 41.34177638709213
+    },
+    "interpretation_limit": "observational association; SNAP timing may overlap with payday, seasonality, and other factors"
+  },
+  "price_analysis": {
+    "weekly_price_records": 68858,
+    "mean": 2.7801554203,
+    "median": 2.5799999237,
+    "standard_deviation": 1.6017233133,
+    "minimum": 0.25,
+    "maximum": 11.5399999619,
+    "percentiles": {
+      "0.01": 0.7799999713897705,
+      "0.1": 1.0,
+      "0.25": 1.8799999952316284,
+      "0.5": 2.5799999237060547,
+      "0.75": 3.0,
+      "0.9": 4.480000019073486,
+      "0.99": 9.979999542236328
+    },
+    "by_department": [
+      {
+        "dept_id": "FOODS_1",
+        "observations": 10021,
+        "mean": 2.08219051361084,
+        "median": 1.9800000190734863,
+        "minimum": 0.75,
+        "maximum": 3.4800000190734863
+      },
+      {
+        "dept_id": "FOODS_2",
+        "observations": 19732,
+        "mean": 3.519366979598999,
+        "median": 2.9600000381469727,
+        "minimum": 0.5799999833106995,
+        "maximum": 11.539999961853027
+      },
+      {
+        "dept_id": "FOODS_3",
+        "observations": 39105,
+        "mean": 2.5860161781311035,
+        "median": 2.5,
+        "minimum": 0.25,
+        "maximum": 6.980000019073486
+      }
+    ],
+    "by_store": [
+      {
+        "store_id": "CA_1",
+        "observations": 22843,
+        "mean": 2.8125479221343994,
+        "median": 2.680000066757202,
+        "minimum": 0.6399999856948853,
+        "maximum": 11.539999961853027
+      },
+      {
+        "store_id": "TX_2",
+        "observations": 23215,
+        "mean": 2.7108006477355957,
+        "median": 2.5,
+        "minimum": 0.25,
+        "maximum": 11.539999961853027
+      },
+      {
+        "store_id": "WI_3",
+        "observations": 22800,
+        "mean": 2.8183188438415527,
+        "median": 2.680000066757202,
+        "minimum": 0.6399999856948853,
+        "maximum": 11.539999961853027
+      }
+    ],
+    "item_store_series": 300,
+    "series_with_price_change": 235,
+    "series_with_price_change_pct": 78.3333333333,
+    "distinct_prices_per_series": {
+      "minimum": 1,
+      "median": 3.0,
+      "mean": 3.2066666666666666,
+      "maximum": 11
+    },
+    "total_price_change_events": 1022,
+    "increase_events": 588,
+    "decrease_events": 434,
+    "absolute_change_pct": {
+      "median": 10.6060590744,
+      "mean": 21.51130867,
+      "p90": 45.9541072845,
+      "maximum": 1012.0
+    },
+    "most_frequent_10_price_changes": [
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_432",
+        "department": "FOODS_3",
+        "priced_weeks": 278,
+        "distinct_prices": 7,
+        "price_changes": 26,
+        "mean_absolute_change_pct": 3.036637783050537
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_383",
+        "department": "FOODS_3",
+        "priced_weeks": 277,
+        "distinct_prices": 6,
+        "price_changes": 21,
+        "mean_absolute_change_pct": 2.220902919769287
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_2_339",
+        "department": "FOODS_2",
+        "priced_weeks": 277,
+        "distinct_prices": 11,
+        "price_changes": 20,
+        "mean_absolute_change_pct": 1.5921803712844849
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_432",
+        "department": "FOODS_3",
+        "priced_weeks": 278,
+        "distinct_prices": 8,
+        "price_changes": 20,
+        "mean_absolute_change_pct": 1.6499963998794556
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_096",
+        "department": "FOODS_3",
+        "priced_weeks": 278,
+        "distinct_prices": 8,
+        "price_changes": 19,
+        "mean_absolute_change_pct": 2.4730448722839355
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_1_017",
+        "department": "FOODS_1",
+        "priced_weeks": 220,
+        "distinct_prices": 6,
+        "price_changes": 15,
+        "mean_absolute_change_pct": 6.4046244621276855
+      },
+      {
+        "store_id": "CA_1",
+        "item_id": "FOODS_2_339",
+        "department": "FOODS_2",
+        "priced_weeks": 277,
+        "distinct_prices": 8,
+        "price_changes": 14,
+        "mean_absolute_change_pct": 0.3196621537208557
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_2_218",
+        "department": "FOODS_2",
+        "priced_weeks": 278,
+        "distinct_prices": 8,
+        "price_changes": 13,
+        "mean_absolute_change_pct": 1.1777993440628052
+      },
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_096",
+        "department": "FOODS_3",
+        "priced_weeks": 278,
+        "distinct_prices": 7,
+        "price_changes": 13,
+        "mean_absolute_change_pct": 1.6786340475082397
+      },
+      {
+        "store_id": "CA_1",
+        "item_id": "FOODS_2_218",
+        "department": "FOODS_2",
+        "priced_weeks": 278,
+        "distinct_prices": 8,
+        "price_changes": 12,
+        "mean_absolute_change_pct": 0.5161033868789673
+      }
+    ],
+    "price_change_direction_demand": [
+      {
+        "change_direction": "decrease",
+        "weeks": 434,
+        "mean_weekly_sales": 15.306451612903226,
+        "median_weekly_sales": 6.0,
+        "mean_price_change_pct": -17.617616653442383
+      },
+      {
+        "change_direction": "increase",
+        "weeks": 588,
+        "mean_weekly_sales": 17.032312925170068,
+        "median_weekly_sales": 7.0,
+        "mean_price_change_pct": 24.385221481323242
+      },
+      {
+        "change_direction": "unchanged",
+        "weeks": 67536,
+        "mean_weekly_sales": 16.644796849087893,
+        "median_weekly_sales": 6.0,
+        "mean_price_change_pct": 0.0
+      }
+    ],
+    "within_series_price_demand_correlations": {
+      "series_analyzed": 235,
+      "median": -0.0910595274,
+      "mean": -0.0978377643,
+      "p25": -0.2680639421,
+      "p75": 0.0420026655,
+      "negative_pct": 66.8085106383,
+      "positive_pct": 33.1914893617
+    },
+    "interpretation_limit": "price-demand associations are observational and confounded by product, promotion, seasonality, events, and life cycle"
+  },
+  "intermittent_demand": {
+    "series": 300,
+    "active_zero_pct_distribution": {
+      "minimum": 1.3828867761,
+      "median": 51.6553961355,
+      "mean": 49.3574815943,
+      "p75": 66.1690676483,
+      "p90": 74.8470955661,
+      "maximum": 94.9860724234
+    },
+    "average_demand_interval_distribution": {
+      "minimum": 1.014022787,
+      "median": 2.0684994454,
+      "mean": 2.5145744536,
+      "p90": 3.9758221508,
+      "maximum": 19.9444444444
+    },
+    "intermittency_class_counts": {
+      "highly intermittent (>80% zero)": 17,
+      "intermittent (50-80% zero)": 142,
+      "regular (<50% zero)": 141
+    },
+    "most_intermittent_10_series": [
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_2_209",
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "active_days": 359,
+        "active_zero_pct": 94.98607242339833,
+        "average_demand_interval": 19.944444444444443,
+        "mean_positive_gap_days": 17.88235294117647
+      },
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_724",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "active_days": 1934,
+        "active_zero_pct": 92.0889348500517,
+        "average_demand_interval": 12.640522875816993,
+        "mean_positive_gap_days": 12.69078947368421
+      },
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_1_135",
+        "department": "FOODS_1",
+        "demand_band": "low",
+        "active_days": 1941,
+        "active_zero_pct": 88.87171561051005,
+        "average_demand_interval": 8.98611111111111,
+        "mean_positive_gap_days": 8.995348837209303
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_2_218",
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "active_days": 1941,
+        "active_zero_pct": 86.96548171045853,
+        "average_demand_interval": 7.67193675889328,
+        "mean_positive_gap_days": 7.611111111111111
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_601",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "active_days": 646,
+        "active_zero_pct": 86.53250773993808,
+        "average_demand_interval": 7.425287356321839,
+        "mean_positive_gap_days": 7.372093023255814
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_2_040",
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "active_days": 667,
+        "active_zero_pct": 86.05697151424287,
+        "average_demand_interval": 7.172043010752688,
+        "mean_positive_gap_days": 7.010869565217392
+      },
+      {
+        "store_id": "WI_3",
+        "item_id": "FOODS_1_089",
+        "department": "FOODS_1",
+        "demand_band": "low",
+        "active_days": 1185,
+        "active_zero_pct": 85.73839662447257,
+        "average_demand_interval": 7.011834319526627,
+        "mean_positive_gap_days": 7.005952380952381
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_1_135",
+        "department": "FOODS_1",
+        "demand_band": "low",
+        "active_days": 1941,
+        "active_zero_pct": 85.6259659969088,
+        "average_demand_interval": 6.956989247311828,
+        "mean_positive_gap_days": 6.956834532374101
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_724",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "active_days": 1941,
+        "active_zero_pct": 85.059247810407,
+        "average_demand_interval": 6.6931034482758625,
+        "mean_positive_gap_days": 6.705882352941177
+      },
+      {
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_068",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "active_days": 1941,
+        "active_zero_pct": 84.44100978876868,
+        "average_demand_interval": 6.427152317880795,
+        "mean_positive_gap_days": 6.428571428571429
+      }
+    ],
+    "croston_consideration": "specialized intermittent-demand baselines may be worth testing later for the most zero-heavy series; no such model was implemented"
+  },
+  "outlier_analysis": {
+    "population": "active-period rows only",
+    "p99": 27.0,
+    "p99_9": 54.0,
+    "p99_99": 94.9494999999,
+    "maximum": 196,
+    "rows_above_p99_9": 468,
+    "rows_above_p99_9_pct": 0.09739732698447054,
+    "extreme_rows_on_event_days": 45,
+    "extreme_event_day_pct": 9.6153846154,
+    "top_15_observations": [
+      {
+        "date": "2012-06-10",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 196,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2012-07-15",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 150,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2013-06-23",
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_319",
+        "dept_id": "FOODS_3",
+        "sales": 135,
+        "sell_price": 0.9399999976158142,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2012-07-03",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 132,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2011-02-05",
+        "store_id": "CA_1",
+        "item_id": "FOODS_3_383",
+        "dept_id": "FOODS_3",
+        "sales": 130,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2011-09-25",
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_501",
+        "dept_id": "FOODS_3",
+        "sales": 130,
+        "sell_price": 0.7799999713897705,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2012-07-06",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 129,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2012-09-03",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 129,
+        "sell_price": 1.0,
+        "event_name_1": "LaborDay",
+        "event_type_1": "National",
+        "demand_band": "high"
+      },
+      {
+        "date": "2015-04-14",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 128,
+        "sell_price": 0.9399999976158142,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2012-07-29",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 126,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2012-06-18",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 125,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2014-07-20",
+        "store_id": "CA_1",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 124,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2015-10-13",
+        "store_id": "CA_1",
+        "item_id": "FOODS_3_501",
+        "dept_id": "FOODS_3",
+        "sales": 120,
+        "sell_price": 0.800000011920929,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2013-07-01",
+        "store_id": "TX_2",
+        "item_id": "FOODS_3_501",
+        "dept_id": "FOODS_3",
+        "sales": 119,
+        "sell_price": 0.800000011920929,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      },
+      {
+        "date": "2012-06-11",
+        "store_id": "WI_3",
+        "item_id": "FOODS_3_635",
+        "dept_id": "FOODS_3",
+        "sales": 117,
+        "sell_price": 1.0,
+        "event_name_1": null,
+        "event_type_1": null,
+        "demand_band": "high"
+      }
+    ],
+    "classification": "requires investigation; values are retained and no evidence establishes a data error"
+  },
+  "product_launch_analysis": {
+    "products": 100,
+    "earliest_known_price_date": "2011-01-29",
+    "latest_earliest_known_price_date": "2014-04-26",
+    "earliest_positive_sale_date": "2011-01-29",
+    "latest_earliest_positive_sale_date": "2014-04-27",
+    "launch_year_distribution": {
+      "2011": 65,
+      "2012": 10,
+      "2013": 19,
+      "2014": 6
+    },
+    "latest_10_products": [
+      {
+        "item_id": "FOODS_3_661",
+        "department": "FOODS_3",
+        "demand_band": "high",
+        "earliest_known_price_date": "2014-04-26",
+        "earliest_positive_sale_date": "2014-04-27",
+        "maximum_store_prelaunch_days": 1183
+      },
+      {
+        "item_id": "FOODS_2_040",
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "earliest_known_price_date": "2014-03-29",
+        "earliest_positive_sale_date": "2014-04-02",
+        "maximum_store_prelaunch_days": 1274
+      },
+      {
+        "item_id": "FOODS_2_178",
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "earliest_known_price_date": "2014-03-22",
+        "earliest_positive_sale_date": "2014-03-25",
+        "maximum_store_prelaunch_days": 1176
+      },
+      {
+        "item_id": "FOODS_3_601",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "earliest_known_price_date": "2014-03-22",
+        "earliest_positive_sale_date": "2014-03-23",
+        "maximum_store_prelaunch_days": 1344
+      },
+      {
+        "item_id": "FOODS_2_095",
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "earliest_known_price_date": "2014-02-15",
+        "earliest_positive_sale_date": "2014-02-16",
+        "maximum_store_prelaunch_days": 1148
+      },
+      {
+        "item_id": "FOODS_3_340",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "earliest_known_price_date": "2014-02-08",
+        "earliest_positive_sale_date": "2014-02-11",
+        "maximum_store_prelaunch_days": 1106
+      },
+      {
+        "item_id": "FOODS_3_482",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "earliest_known_price_date": "2013-12-14",
+        "earliest_positive_sale_date": "2013-12-16",
+        "maximum_store_prelaunch_days": 1078
+      },
+      {
+        "item_id": "FOODS_2_301",
+        "department": "FOODS_2",
+        "demand_band": "low",
+        "earliest_known_price_date": "2013-10-26",
+        "earliest_positive_sale_date": "2013-10-27",
+        "maximum_store_prelaunch_days": 1057
+      },
+      {
+        "item_id": "FOODS_3_641",
+        "department": "FOODS_3",
+        "demand_band": "low",
+        "earliest_known_price_date": "2013-09-21",
+        "earliest_positive_sale_date": "2013-09-21",
+        "maximum_store_prelaunch_days": 973
+      },
+      {
+        "item_id": "FOODS_3_532",
+        "department": "FOODS_3",
+        "demand_band": "medium",
+        "earliest_known_price_date": "2013-09-14",
+        "earliest_positive_sale_date": "2013-09-16",
+        "maximum_store_prelaunch_days": 966
+      }
+    ],
+    "recommended_training_boundary": "train each series from apparent availability rather than treating pre-launch zeros as demand"
+  },
+  "modeling_readiness": {
+    "assessment": "ready for a controlled feature-engineering and chronological-split design after launch and missing-price policies are agreed",
+    "supported_future_features": [
+      {
+        "feature": "store_id",
+        "evidence": "store active-demand scales and SNAP associations differ"
+      },
+      {
+        "feature": "item_id and department",
+        "evidence": "demand bands, departments, and intermittency differ materially"
+      },
+      {
+        "feature": "weekday",
+        "evidence": "weekday mean demand varies in the active-period analysis"
+      },
+      {
+        "feature": "month and chronological trend",
+        "evidence": "monthly seasonality and multi-year structural movement are visible"
+      },
+      {
+        "feature": "event indicators",
+        "evidence": "event and non-event observations have different average demand, subject to confounding"
+      },
+      {
+        "feature": "state-specific SNAP flag",
+        "evidence": "SNAP/non-SNAP associations differ by store"
+      },
+      {
+        "feature": "sell_price and price-change proxies",
+        "evidence": "most item-store series change price and demand differs across price-change directions"
+      },
+      {
+        "feature": "product age or active flag",
+        "evidence": "pre-launch rows are structurally different from active zero-demand rows"
+      },
+      {
+        "feature": "lagged sales and rolling statistics",
+        "evidence": "daily demand has temporal structure and intermittency; must be calculated using past values only"
+      }
+    ],
+    "leakage_risks": [
+      "Random train/test splitting would mix future observations into training; use chronological splits.",
+      "Rolling and lag features must be shifted so the target day never contributes to its own predictors.",
+      "Demand bands and product statistics calculated over all 1,941 days contain future-period target information and must not be model inputs as currently defined.",
+      "Imputation, scaling, encoders, and aggregate statistics must be fitted on training periods only.",
+      "Launch boundaries based on first future positive sale can leak future knowledge; availability should use contemporaneously known price/assortment information in production.",
+      "Future event or promotion fields are valid only when genuinely known at forecast creation time."
+    ],
+    "forecasting_challenges": [
+      "zero-heavy and intermittent active demand",
+      "different product launch dates and active-history lengths",
+      "store-level demand-scale differences",
+      "department and product heterogeneity",
+      "weekday, seasonal, event, and SNAP-associated patterns",
+      "weekly price changes and confounded price-demand relationships",
+      "extreme but potentially plausible retail spikes",
+      "one-day, seven-day, and thirty-day forecast horizons"
+    ],
+    "decisions_before_next_stage": [
+      "Choose whether model-ready rows begin at first known price for each item-store series.",
+      "Choose a non-causal missing-price policy for any future active-period gaps; current V1 has none after launch.",
+      "Define chronological validation windows for all three forecast horizons.",
+      "Decide whether to use global models across series, per-series baselines, or both.",
+      "Decide how intermittent-demand baselines will be compared with general forecasting models."
+    ]
+  },
+  "figures": [
+    {
+      "filename": "01_overall_sales_distribution.png",
+      "title": "Overall active-period sales distribution"
+    },
+    {
+      "filename": "02_demand_band_comparison.png",
+      "title": "Demand-band comparison"
+    },
+    {
+      "filename": "03_department_comparison.png",
+      "title": "Department demand comparison"
+    },
+    {
+      "filename": "04_store_comparison.png",
+      "title": "Store demand and department mix"
+    },
+    {
+      "filename": "05_normalized_weekly_store_trends.png",
+      "title": "Normalized weekly store trends"
+    },
+    {
+      "filename": "06_monthly_sales_trend.png",
+      "title": "Monthly sales trend"
+    },
+    {
+      "filename": "07_weekday_pattern.png",
+      "title": "Weekday demand pattern"
+    },
+    {
+      "filename": "08_monthly_seasonality.png",
+      "title": "Monthly seasonality by store"
+    },
+    {
+      "filename": "09_event_and_snap_comparison.png",
+      "title": "Event and SNAP comparisons"
+    },
+    {
+      "filename": "10_price_distribution.png",
+      "title": "Price distribution by department"
+    },
+    {
+      "filename": "11_price_change_vs_demand.png",
+      "title": "Price-change direction and demand"
+    },
+    {
+      "filename": "12_intermittency_and_launches.png",
+      "title": "Intermittency and launch timing"
+    }
+  ],
+  "performance": {
+    "csv_load_count": 1,
+    "vectorized_operations": true,
+    "full_row_python_loops": false,
+    "persistent_feature_dataset_created": false,
+    "notes": [
+      "categorical dtypes reduce repeated identifier memory",
+      "daily/weekly/monthly aggregates are reused across report sections",
+      "price analysis uses one row per item-store-week instead of repeated daily prices",
+      "300 series are summarized through aggregates rather than plotted individually"
+    ]
+  },
+  "source_integrity": {
+    "interim_csv_sha256_before": "d1290663f4dce21384982a6b7b7c548818ecd9656bc1b72d14f37b8341f4ddba",
+    "interim_csv_sha256_after": "d1290663f4dce21384982a6b7b7c548818ecd9656bc1b72d14f37b8341f4ddba",
+    "manifest_sha256_before": "914f04e2431518e90bf468de2e844884c3c389df554181fefa8d483c124250bf",
+    "manifest_sha256_after": "914f04e2431518e90bf468de2e844884c3c389df554181fefa8d483c124250bf",
+    "unchanged": true
+  }
+}
