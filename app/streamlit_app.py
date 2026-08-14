@@ -1,4 +1,4 @@
-"""SmartStock Stage 11 PostgreSQL/CSV Streamlit application."""
+"""SmartStock V1 PostgreSQL/CSV Streamlit application."""
 
 from __future__ import annotations
 
@@ -344,13 +344,14 @@ def render_methodology(source: Any, resolution: Any) -> None:
 
 def main() -> None:
     st.title("SmartStock")
-    st.caption("Demand Forecasting & Inventory Optimization System")
+    st.caption("Demand Forecasting & Inventory Optimization System · Version 1.0")
     try:
         resolution = get_resolution()
     except Exception as exc:
         st.error(f"SmartStock could not start: {exc}")
         st.info("Generate Stage 10 artifacts or configure and initialize PostgreSQL, then reload the app.")
         st.stop()
+    st.sidebar.markdown("### SmartStock V1.0")
     st.sidebar.success(f"Data source: {resolution.source.label}")
     if resolution.fallback_used:
         st.sidebar.warning(resolution.notice)
@@ -370,6 +371,10 @@ def main() -> None:
         "Methodology / About": lambda: render_methodology(resolution.source, resolution),
     }
     renderers[section]()
+    st.divider()
+    st.caption(
+        "Portfolio demonstration. Forecasts are derived from M5 sales; inventory and cost inputs are synthetic demo assumptions."
+    )
 
 
 if __name__ == "__main__":

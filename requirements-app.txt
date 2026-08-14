@@ -1,0 +1,8 @@
+# Minimal dependencies for the Streamlit/PostgreSQL application container.
+-e .
+numpy>=1.26,<3.0
+pandas>=2.2,<3.0
+streamlit>=1.40,<2.0
+SQLAlchemy>=2.0,<3.0
+psycopg[binary]>=3.2,<4.0
+joblib>=1.4,<2.0

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smartstock"
+version = "1.0.0"
+description = "End-to-end retail demand forecasting and inventory optimization portfolio system"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+
+[tool.setuptools.packages.find]
+where = ["src"]

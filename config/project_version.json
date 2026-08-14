@@ -1,0 +1,19 @@
+{
+  "project_name": "SmartStock",
+  "version": "1.0.0",
+  "release_name": "SmartStock V1.0",
+  "status": "complete",
+  "readiness": "Portfolio-ready end-to-end Version 1",
+  "dataset": "Walmart M5 Forecasting - Accuracy",
+  "selected_forecast_model": "28-Day Historical Mean (mean_28)",
+  "stores": ["CA_1", "TX_2", "WI_3"],
+  "products": 100,
+  "series": 300,
+  "forecast_horizons_days": [1, 7, 30],
+  "inventory_policy_version": "v1",
+  "application_framework": "Streamlit",
+  "database": "PostgreSQL with read-only CSV demo fallback",
+  "python_version_target": "3.12",
+  "enterprise_production_claim": false,
+  "live_cloud_deployment_claim": false
+}

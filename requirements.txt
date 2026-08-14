@@ -1,18 +1,21 @@
+# Install the local src-layout package so `python -m smartstock...` works.
+-e .
+
 # Data manipulation
 numpy>=1.26,<3.0
 pandas>=2.2,<3.0
 
-# Notebook-based exploration and basic plotting for upcoming stages
+# Notebook-based exploration and report plotting
 jupyterlab>=4.2,<5.0
 matplotlib>=3.8,<4.0
 
-# Stage 8 global Ridge regression and preprocessing pipeline
+# Forecast evaluation and preprocessing
 scikit-learn>=1.5,<2.0
 
-# Stage 9 production-quality nonlinear boosting benchmark
+# Nonlinear boosting benchmark retained for reproducibility
 xgboost>=2.1,<4.0
 
-# Stage 11 PostgreSQL-backed interactive application
+# PostgreSQL-backed interactive application and model serialization
 streamlit>=1.40,<2.0
 SQLAlchemy>=2.0,<3.0
 psycopg[binary]>=3.2,<4.0

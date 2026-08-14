@@ -1,2 +1,1 @@
-"""Shared utility package placeholder for later project stages."""
-
+"""Shared environment and project-health utilities."""

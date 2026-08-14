@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-smartstock}
+      POSTGRES_USER: ${POSTGRES_USER:-smartstock}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-smartstock_local_demo}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - smartstock_postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  initialize:
+    build:
+      context: .
+    command: ["python", "-m", "smartstock.database.initialize_database"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-smartstock}:${POSTGRES_PASSWORD:-smartstock_local_demo}@postgres:5432/${POSTGRES_DB:-smartstock}
+      SMARTSTOCK_DATA_MODE: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes: &smartstock_artifacts
+      - ./data/interim:/app/data/interim:ro
+      - ./data/processed/production:/app/data/processed/production:ro
+      - ./data/processed/inventory:/app/data/processed/inventory:ro
+      - ./data/simulated:/app/data/simulated:ro
+      - ./models:/app/models:ro
+    restart: "no"
+
+  app:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-smartstock}:${POSTGRES_PASSWORD:-smartstock_local_demo}@postgres:5432/${POSTGRES_DB:-smartstock}
+      SMARTSTOCK_DATA_MODE: postgres
+    depends_on:
+      initialize:
+        condition: service_completed_successfully
+    volumes: *smartstock_artifacts
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
+
+volumes:
+  smartstock_postgres_data:

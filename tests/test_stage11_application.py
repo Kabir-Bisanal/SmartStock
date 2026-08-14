@@ -40,6 +40,7 @@ from smartstock.database.queries import (  # noqa: E402
     get_inventory_recommendations,
     get_overview_metrics,
 )
+from smartstock.database.verify_database import verify_database  # noqa: E402
 from smartstock.inventory.policy import load_policy  # noqa: E402
 
 
@@ -182,6 +183,21 @@ class Stage11ApplicationTests(unittest.TestCase):
         self.addCleanup(temp_dir.cleanup)
         with self.assertRaisesRegex(ValueError, "duplicate item-store"):
             validate_artifact_contracts(paths, strict_expected=False)
+
+    def test_database_verification_helper_accepts_valid_loaded_fixture(self) -> None:
+        engine = create_engine("sqlite+pysqlite:///:memory:", future=True)
+        paths, temp_dir = self._small_artifacts()
+        self.addCleanup(temp_dir.cleanup)
+        loaded = load_database_artifacts(engine, paths, strict_expected=False)
+        result = verify_database(
+            engine,
+            expected_counts=loaded["row_counts"],
+            strict_v1_cardinality=False,
+        )
+        self.assertEqual(result["connection"], "ok")
+        self.assertEqual(result["forecast_days"], 1)
+        self.assertEqual(result["synthetic_inventory_rows"], 1)
+        engine.dispose()
 
     def test_streamlit_module_imports_without_rendering(self) -> None:
         import app.streamlit_app as application
