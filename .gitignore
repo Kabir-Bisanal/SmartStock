@@ -57,3 +57,5 @@ data/simulated/*
 # Serialized production models are reproducible generated artifacts.
 models/*
 !models/.gitkeep
+/tmp/
+/resume/
