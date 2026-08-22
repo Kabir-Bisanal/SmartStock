@@ -13,7 +13,7 @@ This document is the shortest route for reverse-engineering how the finished sys
 | Stage 8: Ridge | Test a global regularized linear model with train-only preprocessing. | Ridge validation report and frozen config. | Short-horizon gains did not persist over the full recursive horizon. |
 | Stage 9: final model | Compare HistGradientBoosting and XGBoost with Ridge and the best baseline. | Frozen `mean_28` model, one-time locked-test receipt, production forecast API. | Balanced validation selected the simpler 28-day mean before the test was opened. |
 | Stage 10: inventory | Combine the forecast with validation-only uncertainty and synthetic operating assumptions. | 300 service/cost recommendations and policy manifest. | Inventory and cost fields are labeled `synthetic_demo`, never Walmart truth. |
-| Stage 11: application | Load validated artifacts into PostgreSQL and expose seven Streamlit sections. | SQL schema, idempotent loader, queries, CSV fallback, dashboard. | Failed PostgreSQL connections are visible; fallback is never hidden. |
+| Stage 11: application | Load validated artifacts into PostgreSQL and expose a focused Streamlit decision workflow. | SQL schema, idempotent loader, queries, CSV fallback, four-section dashboard. | Failed PostgreSQL connections are visible; fallback is never hidden. |
 | Stage 12: release | Audit integrity, packaging, documentation, secrets, large files, and deployment configuration. | V1.0 metadata, health tools, Docker files, portfolio documentation, final QA report. | “Deployment-ready” does not mean a live cloud deployment occurred. |
 
 ## Reproducing the generated layers

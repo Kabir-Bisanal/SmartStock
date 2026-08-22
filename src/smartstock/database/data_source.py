@@ -115,6 +115,7 @@ class CsvDataSource:
         latest = history["date"].max() if not history.empty else pd.NaT
         recent = history[history["date"].ge(latest - pd.Timedelta(days=29))] if pd.notna(latest) else history.iloc[0:0]
         return {
+            "sales_observations": int(len(history)),
             "products": int(history["item_id"].nunique()),
             "stores": int(history["store_id"].nunique()),
             "series": int(history.groupby(["store_id", "item_id"], observed=True).ngroups),

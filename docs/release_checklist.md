@@ -10,7 +10,7 @@ Items are marked only when verified during Stage 12.
 - [x] Source, tests, and app compiled
 - [x] Raw data validator passed
 - [x] CSV demo data source and query path passed
-- [x] All seven Streamlit sections passed automated smoke tests
+- [x] All four decision-focused Streamlit sections passed automated smoke tests
 - [x] Scenario Planner backend passed without overwriting artifacts
 - [x] Streamlit browser QA completed without console errors
 - [x] PostgreSQL schema/loader verified through the SQLAlchemy integration test

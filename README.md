@@ -24,7 +24,7 @@ It models 100 FOOD products in three stores (`CA_1`, `TX_2`, `WI_3`), producing 
 - Evidence-based selection of a simple 28-day historical mean.
 - Safety stock, reorder point, stockout risk, priority, and illustrative cost-aware ordering.
 - PostgreSQL schema, validated idempotent loader, reusable parameterized queries, and health checks.
-- Seven-section Streamlit dashboard with a transparent read-only CSV demo mode.
+- Four-section, decision-focused Streamlit dashboard with a transparent read-only CSV demo mode.
 - Automated tests, Docker Compose configuration, and interview/portfolio documentation.
 
 ## Architecture
@@ -77,7 +77,7 @@ The engine combines a 30-day forecast with validation-only residual uncertainty 
 
 ## Application
 
-The Streamlit app includes Overview, Sales Analytics, Demand Forecasting, Inventory Health, Reorder Recommendations, Scenario Planner, and Methodology / About. The sidebar always identifies `PostgreSQL` or `Local demo files`; a database failure is never silently hidden. See [application.md](docs/application.md).
+The Streamlit app is organized around four reviewer-friendly sections: **Overview**, **Demand forecast**, **Inventory recommendations**, and **Scenario planner**. Inventory recommendations are the centerpiece; sales context and methodology are summarized where they support a decision instead of becoming separate navigation pages. The sidebar always identifies `PostgreSQL` or `Local demo files`; a database failure is never silently hidden. See [application.md](docs/application.md).
 
 ## Technology Stack
 

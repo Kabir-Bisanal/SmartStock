@@ -65,6 +65,7 @@ def get_overview_metrics(engine: Engine, filters: dict[str, Any] | None = None) 
         history_row = connection.execute(
             _apply(
                 select(
+                    func.count().label("sales_observations"),
                     func.sum(history.c.sales).label("total_units"),
                     func.max(history.c.date).label("latest_date"),
                     func.count(func.distinct(history.c.item_id)).label("products"),
@@ -121,6 +122,7 @@ def _overview_dict(
             "estimated_savings": float(recommendations["estimated_cost_savings"].sum()),
         }
     return {
+        "sales_observations": int(history_row["sales_observations"] or 0),
         "products": int(history_row["products"] or 0),
         "stores": int(history_row["stores"] or 0),
         "series": int(pairs),

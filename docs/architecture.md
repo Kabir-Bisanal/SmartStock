@@ -38,7 +38,7 @@ flowchart TD
 - `src/smartstock/models` evaluates forecasts without allowing validation-period targets into a 30-day forecast path.
 - `src/smartstock/inventory` consumes forecasts plus explicitly synthetic business state; it has no UI or database dependency.
 - `src/smartstock/database` owns the schema, validated loading, parameterized queries, and source selection.
-- `app/` renders the seven-page Streamlit experience and delegates calculations to existing project logic.
+- `app/` renders a four-section decision experience and delegates all forecasting and inventory calculations to existing project logic.
 - `config/` freezes decisions; `reports/` preserves evidence; large generated datasets and models stay outside Git.
 
 PostgreSQL is the intended application store. The CSV adapter is a visible, read-only portfolio fallback that uses the same Stage 10 artifacts.

@@ -19,7 +19,16 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.app_utils import apply_inventory_scenario, forecast_chart_data  # noqa: E402
+from app.app_utils import (  # noqa: E402
+    add_order_action,
+    apply_inventory_scenario,
+    dataframe_to_csv_bytes,
+    filter_recommendations,
+    forecast_chart_data,
+    recommendation_table,
+    scenario_explanations,
+    shortage_reduction_pct,
+)
 from smartstock.database.connection import (  # noqa: E402
     DatabaseSettings,
     normalize_database_url,
@@ -155,8 +164,56 @@ class Stage11ApplicationTests(unittest.TestCase):
         future = pd.DataFrame({"target_date": pd.to_datetime(["2016-05-23"]), "forecast": [2.5]})
         chart = forecast_chart_data(history, future)
         future_row = chart.loc[chart["date"].eq(pd.Timestamp("2016-05-23"))].iloc[0]
-        self.assertTrue(pd.isna(future_row["Actual"]))
-        self.assertEqual(future_row["Forecast"], 2.5)
+        self.assertTrue(pd.isna(future_row["Actual demand"]))
+        self.assertEqual(future_row["Forecast demand"], 2.5)
+
+    def test_recommendation_presentation_filters_and_labels_actions(self) -> None:
+        rows = pd.concat(
+            [
+                small_csv_source()._recommendation_cache,
+                small_csv_source()._recommendation_cache.assign(
+                    item_id="FOODS_1_002",
+                    store_id="TX_2",
+                    stock_status="HEALTHY",
+                    priority_label="NONE",
+                    priority_score=0.0,
+                    recommended_order_qty=0,
+                    expected_shortage_without_order=0.0,
+                    expected_shortage_with_recommendation=0.0,
+                ),
+            ],
+            ignore_index=True,
+        )
+        labeled = add_order_action(rows)
+        self.assertEqual(labeled["order_action"].tolist(), ["REORDER", "NO ORDER"])
+        reorder = filter_recommendations(rows, action="Needs reorder")
+        self.assertEqual(reorder["item_id"].tolist(), ["FOODS_1_001"])
+        no_order = filter_recommendations(rows, action="No order", store_id="TX_2")
+        self.assertEqual(no_order["item_id"].tolist(), ["FOODS_1_002"])
+        table = recommendation_table(reorder)
+        self.assertEqual(table.loc[0, "Action"], "REORDER")
+        self.assertIn("Recommended units", table.columns)
+        self.assertNotIn("Unnamed: 0", dataframe_to_csv_bytes(table).decode("utf-8"))
+
+    def test_shortage_reduction_and_scenario_explanations_are_clear(self) -> None:
+        frame = pd.DataFrame(
+            {
+                "expected_shortage_without_order": [10.0, 0.0],
+                "expected_shortage_with_recommendation": [2.0, 0.0],
+            }
+        )
+        self.assertAlmostEqual(shortage_reduction_pct(frame), 0.8)
+        explanations = scenario_explanations(
+            {"inventory_position": 5.0, "recommended_order_qty": 8},
+            {"inventory_position": 2.0, "recommended_order_qty": 12},
+            {"lead_time_days": 7, "service_level": 0.95, "review_period_days": 7},
+            {"lead_time_days": 10, "service_level": 0.99, "review_period_days": 7},
+        )
+        text = " ".join(explanations)
+        self.assertIn("Inventory position decreased", text)
+        self.assertIn("10-day lead time", text)
+        self.assertIn("99.0%", text)
+        self.assertIn("12 units", text)
 
     def test_sqlite_schema_queries_and_parameter_safety(self) -> None:
         engine = create_engine("sqlite+pysqlite:///:memory:", future=True)
@@ -170,6 +227,7 @@ class Stage11ApplicationTests(unittest.TestCase):
         })
         overview = get_overview_metrics(engine)
         self.assertEqual(overview["series"], 1)
+        self.assertEqual(overview["sales_observations"], 2)
         self.assertEqual(len(get_forecast(engine, "CA_1", "FOODS_1_001", horizon_days=1)), 1)
         malicious = "CA_1'; DROP TABLE forecasts; --"
         self.assertTrue(get_inventory_recommendations(engine, {"store_id": malicious}).empty)

@@ -1,16 +1,20 @@
 # Streamlit application guide
 
-SmartStock's dashboard presents one consistent V1 decision workflow through seven sections:
+SmartStock presents one concise decision workflow through four sections:
 
-1. **Overview** — recent demand, forecast totals, inventory exposure, reorder count, and demo cost context.
-2. **Sales Analytics** — historical demand trends and product/store comparisons.
-3. **Demand Forecasting** — historical/forecast boundary, daily predictions, and 1-, 7-, and 30-day totals.
-4. **Inventory Health** — inventory position, days of supply, status, risk, and synthetic-data labels.
-5. **Reorder Recommendations** — filterable priorities and downloadable decisions.
-6. **Scenario Planner** — changes selected synthetic inputs in memory and calls the Stage 10 engine; it never overwrites saved outputs.
-7. **Methodology / About** — model, formulas, caveats, and data-source explanation.
+1. **Overview** — states the business question, shows the project scale and decision snapshot, and keeps methodology in a secondary expander.
+2. **Demand forecast** — lets a reviewer select an anonymized SKU and store, compare recent demand with a 1-, 7-, or 30-day forecast, and download the selected forecast.
+3. **Inventory recommendations** — the centerpiece. It defaults to products that need an order, explains the decision fields, prioritizes the largest needs, and provides a clean downloadable table.
+4. **Scenario planner** — changes selected synthetic assumptions in a form, compares the result with the saved recommendation, and explains why the decision changed. It never overwrites saved outputs.
 
-Filters cascade by store, department, and product. Empty selections and missing artifacts produce actionable messages instead of fabricated results.
+The interface deliberately groups sales context, inventory health, reorder priorities, and methodology around the decisions they support. This keeps the project easy to demonstrate without removing the underlying analytics.
+
+## Data meaning
+
+- Historical sales, calendar context, and anonymized item/store IDs come from the Walmart M5 dataset.
+- Production forecasts come from the frozen 28-day historical-mean model selected through chronological validation.
+- Inventory balances, lead times, service levels, costs, shortage reduction, and savings are synthetic demonstration values because M5 does not provide those operational fields.
+- `REORDER` is a presentation label derived only when the saved recommended quantity is greater than zero; the engine's original stock status and priority labels remain unchanged.
 
 ## Data-source modes
 
@@ -20,4 +24,13 @@ Filters cascade by store, department, and product. Empty selections and missing 
 
 The sidebar always states the active source. PostgreSQL access uses SQLAlchemy Core queries with bound parameters. CSV mode reads the same frozen application contract and is intended for local reviews when a database is not practical.
 
-Inventory balances, lead times, service levels, costs, and resulting savings are visibly described as synthetic/demo. There is no authentication, write-back workflow, or production monitoring in V1.
+## Portfolio demonstration path
+
+For a short walkthrough:
+
+1. Open **Overview** and state the question: which products should be reordered, how much, and why?
+2. Open **Demand forecast** and show how recent demand becomes a future 30-day demand estimate.
+3. Open **Inventory recommendations**, keep the default **Needs reorder** filter, and explain safety stock, reorder point, recommended units, risk, and priority.
+4. Open **Scenario planner**, change on-hand stock or lead time, recalculate, and compare the saved and revised decisions.
+
+There is no authentication, transaction workflow, write-back, or production monitoring in Version 1.
