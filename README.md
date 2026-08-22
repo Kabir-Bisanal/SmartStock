@@ -2,7 +2,7 @@
 
 SmartStock is an end-to-end retail demand forecasting and inventory optimization portfolio system built on the Walmart M5 dataset. It turns daily sales history into leakage-safe forecast evaluation, inventory recommendations, and an interactive application backed by PostgreSQL or a visible read-only CSV fallback.
 
-Version 1.0 is complete and deployment-ready for local/container demonstration. It is not a Walmart production system, and no live cloud deployment is claimed.
+Version 1.0 is complete and packaged for a self-contained Streamlit Community Cloud demonstration. It is not a Walmart production system, and no live cloud deployment is claimed.
 
 ## What SmartStock Does
 
@@ -55,7 +55,7 @@ data/raw/
 └── sell_prices.csv
 ```
 
-Downloaded and generated datasets are intentionally Git-ignored. Sign in to Kaggle, accept the competition terms, download the files, and place the three CSVs at those exact paths. Never commit Kaggle credentials.
+Downloaded and full generated datasets are intentionally Git-ignored. Sign in to Kaggle, accept the competition terms, download the files, and place the three CSVs at those exact paths. Never commit Kaggle credentials. The small `data/public_demo/` directory is an intentional exception: it contains only recent visualization history and frozen saved application outputs, not raw M5 or modeling data.
 
 ## Data Pipeline
 
@@ -114,11 +114,11 @@ These inventory figures demonstrate engine behavior under simulated assumptions;
 smartstock/
 ├── app/                   # Streamlit UI
 ├── config/                # Frozen version, model, feature, and policy manifests
-├── data/                  # Raw and generated data (large contents Git-ignored)
+├── data/                  # Ignored full data plus the tracked compact public demo bundle
 ├── docs/                  # Architecture, methods, deployment, and portfolio guides
 ├── models/                # Generated model artifacts (Git-ignored)
 ├── reports/               # Tracked evidence, metrics, summaries, and figures
-├── scripts/               # Safe local demo helper
+├── scripts/               # Local demo and deterministic public-bundle helpers
 ├── sql/                   # PostgreSQL schema
 ├── src/smartstock/        # Data, analysis, features, models, inventory, DB, utilities
 ├── tests/                 # Synthetic-fixture automated tests
@@ -130,7 +130,7 @@ smartstock/
 
 ## Quick Start
 
-Python 3.12 is the supported version. Restore the generated demo artifacts first; Git does not contain large data/model files.
+Python 3.12 is the supported version. A fresh clone contains the compact public bundle required by CSV demo mode; raw M5, full history, feature data, and generated models remain outside Git.
 
 ```powershell
 python -m venv .venv
@@ -144,6 +144,12 @@ python -m streamlit run app/streamlit_app.py
 ```
 
 On Windows, `./scripts/run_demo.ps1` runs the checks and starts CSV mode without changing execution policy.
+
+When complete local Stage 10 artifacts are present, CSV mode uses them. Otherwise it automatically uses `data/public_demo/`, which contains 120 recent history days for visualization plus unchanged saved forecasts, synthetic inventory state, recommendations, and explicit portfolio metadata. Rebuild that bundle from validated local artifacts with:
+
+```powershell
+python scripts/build_public_demo_bundle.py
+```
 
 ## PostgreSQL Setup
 

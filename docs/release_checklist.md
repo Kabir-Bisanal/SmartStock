@@ -13,6 +13,8 @@ Items are marked only when verified during Stage 12.
 - [x] All four decision-focused Streamlit sections passed automated smoke tests
 - [x] Scenario Planner backend passed without overwriting artifacts
 - [x] Streamlit browser QA completed without console errors
+- [x] Compact tracked public-demo bundle validated from a deployment-like clean checkout
+- [x] Public bundle excludes raw data, full feature data, model binaries, credentials, and machine paths
 - [x] PostgreSQL schema/loader verified through the SQLAlchemy integration test
 - [ ] Live PostgreSQL server initialized and verified on this machine
 - [x] Dockerfile and Compose configuration statically validated

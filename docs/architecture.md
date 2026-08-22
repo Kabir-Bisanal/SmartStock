@@ -26,9 +26,10 @@ flowchart TD
     G --> L
     K --> L
     L --> M["Streamlit dashboard"]
-    D -. "read-only fallback" .-> N["CSV data source"]
+    D -. "full local artifacts" .-> N["CSV data source"]
     G -.-> N
     K -.-> N
+    O["Tracked compact public bundle<br/>120-day history + saved outputs"] -. "clean cloud fallback" .-> N
     N --> M
 ```
 
@@ -39,6 +40,6 @@ flowchart TD
 - `src/smartstock/inventory` consumes forecasts plus explicitly synthetic business state; it has no UI or database dependency.
 - `src/smartstock/database` owns the schema, validated loading, parameterized queries, and source selection.
 - `app/` renders a four-section decision experience and delegates all forecasting and inventory calculations to existing project logic.
-- `config/` freezes decisions; `reports/` preserves evidence; large generated datasets and models stay outside Git.
+- `config/` freezes decisions; `reports/` preserves evidence; large generated datasets and models stay outside Git. `data/public_demo/` is the deliberate small exception for a self-contained portfolio deployment.
 
-PostgreSQL is the intended application store. The CSV adapter is a visible, read-only portfolio fallback that uses the same Stage 10 artifacts.
+PostgreSQL remains supported as the application store. The CSV adapter prefers complete local Stage 10 artifacts and otherwise uses the committed compact bundle. The bundle copies authoritative saved forecasts and recommendations without retraining or recalculating them.

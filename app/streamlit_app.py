@@ -132,6 +132,13 @@ def render_overview(source: Any) -> None:
             ("Forecast horizon", "30 days", "Daily demand forecasts used by the inventory engine."),
         ]
     )
+    bundled_rows = metrics.get("bundled_history_observations")
+    if bundled_rows and bundled_rows < metrics["sales_observations"]:
+        st.caption(
+            f"The project analyzed {metrics['sales_observations']:,} daily observations. "
+            f"This public deployment bundles the most recent {metrics['bundled_history_days']:,} days "
+            f"({bundled_rows:,} rows) for lightweight visualization."
+        )
 
     st.subheader("How SmartStock turns history into action")
     steps = [

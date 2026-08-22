@@ -5,8 +5,8 @@ SmartStock V1 supports three honest execution modes. No live cloud URL is claime
 ## Shared prerequisites
 
 - Python 3.12
-- The generated demo artifacts listed by `python -m smartstock.utils.health_check`
-- A local clone with large M5/generated files restored outside Git
+- A fresh clone for compact public CSV mode
+- Optional full M5/generated artifacts for local development or PostgreSQL loading
 
 Install the project and verify it:
 
@@ -25,6 +25,37 @@ python -m smartstock.utils.health_check
 $env:SMARTSTOCK_DATA_MODE="csv"
 python -m streamlit run app/streamlit_app.py
 ```
+
+CSV resolution is intentionally automatic:
+
+1. If every complete local Stage 10 artifact is present, use the full local data contract.
+2. Otherwise use the committed `data/public_demo/` bundle.
+
+The public bundle contains 36,000 recent history rows (120 days × 300 series), 9,000 unchanged production forecast rows, 300 synthetic inventory snapshots, 300 unchanged recommendations, and explicit metadata. The Overview still reports the factual 582,300 observations analyzed by the project. Raw M5 files, the full long table, feature data, and serialized forecasting models are excluded.
+
+Rebuild the bundle only from validated authoritative local artifacts:
+
+```powershell
+python scripts/build_public_demo_bundle.py
+python -m smartstock.utils.health_check --deployment-only
+```
+
+The build performs selection/copying only. It does not retrain a model, recompute a forecast, or alter inventory recommendations.
+
+## Streamlit Community Cloud target
+
+The intended public V1 configuration is:
+
+```text
+Repository: Kabir-Bisanal/SmartStock
+Branch: main
+Entrypoint: app/streamlit_app.py
+Python: 3.12
+SMARTSTOCK_DATA_MODE: csv
+DATABASE_URL: unset
+```
+
+No model artifact or secret is required. Community Cloud provides a configurable `*.streamlit.app` subdomain. A future `smartstock.kabirbisanal.com` address should redirect at the web/DNS provider to that URL unless the hosting platform later provides verified bring-your-own-domain support. Creating the deployment and changing DNS remain explicit owner-approved actions.
 
 This is read-only and requires no database. `scripts/run_demo.ps1` performs the checks and starts the same mode.
 

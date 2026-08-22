@@ -1,0 +1,99 @@
+{
+  "build": {
+    "history_selection": "latest 120 dates, inclusive, for every frozen item-store series",
+    "model_artifact_included": false,
+    "row_order": "date/store/item for compact history; frozen source order retained for saved outputs",
+    "source_paths": {
+      "forecasts": "data/processed/production/smartstock_v1_30day_forecast.csv",
+      "history": "data/interim/smartstock_v1_long.csv",
+      "inventory_snapshot": "data/simulated/smartstock_v1_inventory_snapshot.csv",
+      "recommendations": "data/processed/inventory/smartstock_v1_inventory_recommendations.csv"
+    }
+  },
+  "bundle_name": "SmartStock compact public demo",
+  "bundle_version": "1.0.0",
+  "files": {
+    "forecasts": {
+      "path": "data/public_demo/production_forecasts.csv",
+      "sha256": "f78c6ff1af846ce984a947df8d8d85585c30490a709498b05cf5932c57b2e3cd",
+      "size_bytes": 659590
+    },
+    "history": {
+      "path": "data/public_demo/history_120d.csv",
+      "sha256": "6fc54a0e41c81d4a194d090f4a4dce1018402c99c89f1f4d842ff7703e7cf681",
+      "size_bytes": 1835993
+    },
+    "inventory_snapshot": {
+      "path": "data/public_demo/inventory_snapshot.csv",
+      "sha256": "1ea0ac50478241855744429d6b77aebb3a1e157cafecfad6cdfec2fef3c9bb8e",
+      "size_bytes": 24650
+    },
+    "recommendations": {
+      "path": "data/public_demo/inventory_recommendations.csv",
+      "sha256": "c3d8e2e71e8a3152f825a4b465506cbbf1727bca3e4ae04480800987dda6df71",
+      "size_bytes": 177411
+    }
+  },
+  "history": {
+    "bundled_days_per_series": 120,
+    "bundled_observations": 36000,
+    "columns": [
+      "date",
+      "store_id",
+      "item_id",
+      "dept_id",
+      "sales",
+      "sell_price",
+      "weekday"
+    ],
+    "date_end": "2016-05-22",
+    "date_start": "2016-01-24",
+    "source_observations_analyzed": 582300
+  },
+  "model": {
+    "display_name": "28-Day Historical Mean",
+    "forecast_horizon_days": 30,
+    "forecast_origin": "2016-05-22",
+    "locked_test": {
+      "aggregate_30d_wape": 0.2214487577504241,
+      "bias": -0.1077531248165501,
+      "mae": 1.382047548065583,
+      "rmse": 2.387401623686153,
+      "rmsse": 0.7643274435653633,
+      "wape": 0.6120068850910375
+    },
+    "runtime_model_required": false,
+    "selected_model": "mean_28"
+  },
+  "portfolio_facts": {
+    "category": "FOODS",
+    "dataset": "Walmart M5 Forecasting - Accuracy",
+    "expected_shortage_after": 167.0241028964644,
+    "expected_shortage_before": 3312.6121677281303,
+    "forecast_horizon_days": 30,
+    "inventory_data_source": "synthetic_demo_not_walmart",
+    "inventory_decisions": 300,
+    "item_store_series": 300,
+    "production_forecast_rows": 9000,
+    "products": 100,
+    "recommended_units": 4143,
+    "reorder_decisions": 198,
+    "source_observations": 582300,
+    "stores": [
+      "CA_1",
+      "TX_2",
+      "WI_3"
+    ]
+  },
+  "purpose": "Committed recruiter-facing data; not raw M5 or the full modeling dataset.",
+  "scientific_integrity": {
+    "expected_recommended_units": 4143,
+    "expected_reorder_decisions": 198,
+    "forecasts_recomputed": false,
+    "inventory_formulas_changed": false,
+    "inventory_recommendations_recomputed": false,
+    "source_forecast_sha256": "250ba4ce2fd181282a4db8d15b896e85febdae74c28dba78e58a456b40f121f7",
+    "source_recommendations_sha256": "b5beaffe20d9ca3dc6f82fb0c58d3f3eaa5bc63ddadd3e252ab300b7216db3f8",
+    "source_snapshot_sha256": "33e422ccff17a2398421bf077a6b207b65f9255f8871d536890402de5f8e2a8b"
+  }
+}

@@ -1,0 +1,3 @@
+# Keep checksum-verified public demo artifacts byte-stable on every platform.
+data/public_demo/*.csv text eol=lf
+data/public_demo/*.json text eol=lf

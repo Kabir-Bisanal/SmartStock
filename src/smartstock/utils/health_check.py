@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Sequence
 
 from smartstock.database.loaders import ArtifactPaths, csv_row_count, validate_artifact_contracts
+from smartstock.data.public_demo_bundle import PublicDemoPaths, validate_public_demo_bundle
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -30,6 +31,14 @@ DEMO_ASSETS = [
     "data/simulated/smartstock_v1_inventory_snapshot.csv",
     "models/smartstock_v1_deployment_forecaster.joblib",
     "config/v1_final_model.json",
+    "config/v1_inventory_policy.json",
+]
+PUBLIC_DEMO_ASSETS = [
+    "data/public_demo/history_120d.csv",
+    "data/public_demo/production_forecasts.csv",
+    "data/public_demo/inventory_snapshot.csv",
+    "data/public_demo/inventory_recommendations.csv",
+    "data/public_demo/metadata.json",
     "config/v1_inventory_policy.json",
 ]
 CORE_REPORTS = [
@@ -108,7 +117,8 @@ def run_health_check(
 
     root = project_root.resolve()
     checks = [
-        *_asset_checks(root, DEMO_ASSETS, "dashboard_demo"),
+        *_asset_checks(root, PUBLIC_DEMO_ASSETS, "dashboard_demo"),
+        *_asset_checks(root, DEMO_ASSETS, "full_development"),
         *_asset_checks(root, DEVELOPMENT_ASSETS, "full_development"),
         *_asset_checks(root, CORE_REPORTS, "full_development"),
     ]
@@ -119,6 +129,25 @@ def run_health_check(
         checks.append(HealthResult("Project version metadata", "PASS" if version_ok else "FAIL", "dashboard_demo", f"version={metadata.get('version')}, status={metadata.get('status')}"))
     else:
         checks.append(HealthResult("Project version metadata", "FAIL", "dashboard_demo", "missing"))
+
+    public_paths = PublicDemoPaths.from_directory(root / "data/public_demo")
+    if all((root / relative).is_file() for relative in PUBLIC_DEMO_ASSETS):
+        try:
+            contract = validate_public_demo_bundle(public_paths)
+            checks.append(
+                HealthResult(
+                    "Public deployment bundle contract",
+                    "PASS",
+                    "dashboard_demo",
+                    json.dumps(contract["row_counts"], sort_keys=True),
+                )
+            )
+        except Exception as exc:
+            checks.append(
+                HealthResult(
+                    "Public deployment bundle contract", "FAIL", "dashboard_demo", str(exc)
+                )
+            )
 
     paths = ArtifactPaths(
         history=root / "data/interim/smartstock_v1_long.csv",
@@ -132,9 +161,9 @@ def run_health_check(
     if all((root / relative).is_file() for relative in DEMO_ASSETS):
         try:
             contract = validate_artifact_contracts(paths)
-            checks.append(HealthResult("Stage 10 application data contract", "PASS", "dashboard_demo", json.dumps(contract["row_counts"], sort_keys=True)))
+            checks.append(HealthResult("Stage 10 application data contract", "PASS", "full_development", json.dumps(contract["row_counts"], sort_keys=True)))
         except Exception as exc:
-            checks.append(HealthResult("Stage 10 application data contract", "FAIL", "dashboard_demo", str(exc)))
+            checks.append(HealthResult("Stage 10 application data contract", "FAIL", "full_development", str(exc)))
 
     feature_path = root / "data/processed/smartstock_v1_features.csv"
     if feature_path.is_file():
@@ -149,7 +178,7 @@ def run_health_check(
                 if not path.is_file():
                     continue
                 actual = file_sha256(path)
-                scope = "dashboard_demo" if relative in DEMO_ASSETS else "full_development"
+                scope = "full_development"
                 checks.append(HealthResult(f"Frozen hash: {relative}", "PASS" if actual == expected else "FAIL", scope, actual))
         except Exception as exc:
             checks.append(HealthResult("Frozen hash manifest", "FAIL", "full_development", str(exc)))
@@ -170,6 +199,11 @@ def run_health_check(
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-hashes", action="store_true", help="Skip slower SHA-256 comparisons.")
+    parser.add_argument(
+        "--deployment-only",
+        action="store_true",
+        help="Return success when the committed public dashboard bundle is ready, even if local development data is absent.",
+    )
     return parser
 
 
@@ -181,6 +215,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"[{check['status']}] [{check['scope']}] {check['name']}: {check['message']}")
     print("Dashboard demo readiness:", "PASS" if result["dashboard_demo_ready"] else "FAIL")
     print("Full development readiness:", "PASS" if result["full_development_ready"] else "FAIL")
+    if args.deployment_only:
+        return 0 if result["dashboard_demo_ready"] else 1
     return 0 if result["dashboard_demo_ready"] and result["full_development_ready"] else 1
 
 

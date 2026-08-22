@@ -11,6 +11,11 @@ from sqlalchemy import Engine
 from smartstock.database import queries
 from smartstock.database.connection import DatabaseSettings, create_database_engine, verify_connection
 from smartstock.database.loaders import ArtifactPaths, build_model_metadata, iter_history_chunks, validate_artifact_contracts, validate_loaded_database
+from smartstock.data.public_demo_bundle import (
+    PublicDemoPaths,
+    load_public_demo_metadata,
+    validate_public_demo_bundle,
+)
 
 
 def _filter_frame(frame: pd.DataFrame, filters: dict[str, Any] | None = None) -> pd.DataFrame:
@@ -113,7 +118,7 @@ class CsvDataSource:
         forecasts = _filter_frame(self._forecasts(), filters)
         recommendations = _filter_frame(self._recommendations(), filters)
         latest = history["date"].max() if not history.empty else pd.NaT
-        recent = history[history["date"].ge(latest - pd.Timedelta(days=29))] if pd.notna(latest) else history.iloc[0:0]
+        recent = history[history["date"].ge(latest - pd.Timedelta(29, unit="D"))] if pd.notna(latest) else history.iloc[0:0]
         return {
             "sales_observations": int(len(history)),
             "products": int(history["item_id"].nunique()),
@@ -200,21 +205,96 @@ class CsvDataSource:
         return build_model_metadata(self.paths).iloc[0].to_dict()
 
 
+class PublicDemoCsvDataSource(CsvDataSource):
+    """Read-only CSV source backed by the committed compact deployment bundle."""
+
+    label = "Compact public demo"
+
+    def __init__(self, paths: PublicDemoPaths = PublicDemoPaths()):
+        validate_public_demo_bundle(paths)
+        self.paths = paths
+        self._metadata = load_public_demo_metadata(paths)
+        self._history_cache = None
+        self._forecast_cache = None
+        self._snapshot_cache = None
+        self._recommendation_cache = None
+
+    def _history(self) -> pd.DataFrame:
+        if self._history_cache is None:
+            self._history_cache = pd.read_csv(self.paths.history, parse_dates=["date"])
+        return self._history_cache
+
+    def get_overview_metrics(
+        self, filters: dict[str, Any] | None = None
+    ) -> dict[str, float | int]:
+        metrics = super().get_overview_metrics(filters)
+        metrics["bundled_history_observations"] = int(len(self._history()))
+        metrics["bundled_history_days"] = int(self._history()["date"].nunique())
+        if not filters:
+            facts = self._metadata["portfolio_facts"]
+            metrics.update(
+                {
+                    "sales_observations": int(facts["source_observations"]),
+                    "products": int(facts["products"]),
+                    "stores": len(facts["stores"]),
+                    "series": int(facts["item_store_series"]),
+                }
+            )
+        return metrics
+
+    def get_model_metadata(self) -> dict[str, Any]:
+        return dict(self._metadata["model"])
+
+
 @dataclass(frozen=True)
 class DataSourceResolution:
-    source: PostgresDataSource | CsvDataSource
+    source: PostgresDataSource | CsvDataSource | PublicDemoCsvDataSource
     notice: str
     fallback_used: bool
+
+
+def _full_csv_artifacts_available(paths: ArtifactPaths) -> bool:
+    return all(
+        path.is_file()
+        for path in (
+            paths.history,
+            paths.forecasts,
+            paths.inventory_snapshot,
+            paths.recommendations,
+            paths.final_model_config,
+            paths.inventory_policy,
+            paths.deployment_model,
+        )
+    )
+
+
+def _resolve_csv_source(
+    paths: ArtifactPaths,
+    public_paths: PublicDemoPaths,
+) -> tuple[CsvDataSource | PublicDemoCsvDataSource, str]:
+    if _full_csv_artifacts_available(paths):
+        return CsvDataSource(paths), "using the complete local Stage 10 artifacts."
+    return (
+        PublicDemoCsvDataSource(public_paths),
+        "using the committed compact public bundle: 120 recent history days plus unchanged "
+        "saved forecasts and inventory decisions.",
+    )
 
 
 def resolve_data_source(
     settings: DatabaseSettings,
     paths: ArtifactPaths = ArtifactPaths(),
+    public_paths: PublicDemoPaths = PublicDemoPaths(),
 ) -> DataSourceResolution:
     """Prefer an initialized PostgreSQL database and fall back visibly in auto mode."""
 
     if settings.data_mode == "csv":
-        return DataSourceResolution(CsvDataSource(paths), "CSV demo mode was explicitly selected.", True)
+        source, detail = _resolve_csv_source(paths, public_paths)
+        return DataSourceResolution(
+            source,
+            f"CSV demo mode was explicitly selected; {detail}",
+            True,
+        )
     if settings.database_url:
         engine: Engine | None = None
         try:
@@ -231,13 +311,15 @@ def resolve_data_source(
                     "Run the database initializer and check DATABASE_URL."
                 ) from exc
             notice = (
-                f"PostgreSQL was unavailable ({exc.__class__.__name__}); using the read-only local CSV demo fallback."
+                f"PostgreSQL was unavailable ({exc.__class__.__name__}); using the read-only CSV fallback."
             )
-            return DataSourceResolution(CsvDataSource(paths), notice, True)
+            source, detail = _resolve_csv_source(paths, public_paths)
+            return DataSourceResolution(source, f"{notice} It is {detail}", True)
     if settings.data_mode == "postgres":
         raise RuntimeError("PostgreSQL mode requires DATABASE_URL.")
+    source, detail = _resolve_csv_source(paths, public_paths)
     return DataSourceResolution(
-        CsvDataSource(paths),
-        "DATABASE_URL is not configured; using the read-only local CSV demo fallback.",
+        source,
+        f"DATABASE_URL is not configured; using the read-only CSV fallback, {detail}",
         True,
     )

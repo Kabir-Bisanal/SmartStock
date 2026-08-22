@@ -26,7 +26,7 @@ REQUIRED_IMPORTS = {
     "joblib": "Joblib",
 }
 EXPECTED_DIRECTORIES = ["app", "config", "data", "docs", "reports", "sql", "src", "tests"]
-DEMO_ARTIFACTS = [
+FULL_LOCAL_DEMO_ARTIFACTS = [
     "data/interim/smartstock_v1_long.csv",
     "data/processed/production/smartstock_v1_30day_forecast.csv",
     "data/processed/inventory/smartstock_v1_error_calibration.csv",
@@ -34,6 +34,14 @@ DEMO_ARTIFACTS = [
     "data/simulated/smartstock_v1_inventory_snapshot.csv",
     "models/smartstock_v1_deployment_forecaster.joblib",
     "config/v1_final_model.json",
+    "config/v1_inventory_policy.json",
+]
+PUBLIC_DEMO_ARTIFACTS = [
+    "data/public_demo/history_120d.csv",
+    "data/public_demo/production_forecasts.csv",
+    "data/public_demo/inventory_snapshot.csv",
+    "data/public_demo/inventory_recommendations.csv",
+    "data/public_demo/metadata.json",
     "config/v1_inventory_policy.json",
 ]
 
@@ -77,9 +85,18 @@ def run_environment_check(
     for relative in EXPECTED_DIRECTORIES:
         path = project_root / relative
         checks.append(Check(f"Directory: {relative}", "PASS" if path.is_dir() else "FAIL", str(path)))
-    for relative in DEMO_ARTIFACTS:
+    for relative in PUBLIC_DEMO_ARTIFACTS:
         path = project_root / relative
-        checks.append(Check(f"Demo artifact: {relative}", "PASS" if path.is_file() else "FAIL", "available" if path.is_file() else "missing"))
+        checks.append(Check(f"Public demo artifact: {relative}", "PASS" if path.is_file() else "FAIL", "available" if path.is_file() else "missing"))
+    for relative in FULL_LOCAL_DEMO_ARTIFACTS:
+        path = project_root / relative
+        checks.append(
+            Check(
+                f"Optional full local artifact: {relative}",
+                "PASS" if path.is_file() else "WARN",
+                "available" if path.is_file() else "missing; compact public demo remains available",
+            )
+        )
     database_url = os.getenv("DATABASE_URL", "").strip()
     checks.append(
         Check(

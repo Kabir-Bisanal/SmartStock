@@ -54,6 +54,10 @@ data/processed/*
 data/simulated/*
 !data/simulated/.gitkeep
 
+# Intentionally committed compact recruiter-facing deployment data.
+!data/public_demo/
+!data/public_demo/**
+
 # Serialized production models are reproducible generated artifacts.
 models/*
 !models/.gitkeep

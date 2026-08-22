@@ -18,11 +18,11 @@ The interface deliberately groups sales context, inventory health, reorder prior
 
 ## Data-source modes
 
-- `SMARTSTOCK_DATA_MODE=csv` uses the generated Stage 10 files in read-only demo mode.
+- `SMARTSTOCK_DATA_MODE=csv` uses complete local Stage 10 artifacts when available. In a clean GitHub/cloud checkout it automatically uses the committed `data/public_demo/` bundle.
 - `SMARTSTOCK_DATA_MODE=postgres` requires a valid initialized PostgreSQL database.
 - `SMARTSTOCK_DATA_MODE=auto` prefers PostgreSQL and visibly falls back to CSV when unavailable.
 
-The sidebar always states the active source. PostgreSQL access uses SQLAlchemy Core queries with bound parameters. CSV mode reads the same frozen application contract and is intended for local reviews when a database is not practical.
+The sidebar always states the active source. PostgreSQL access uses SQLAlchemy Core queries with bound parameters. The compact CSV bundle contains the latest 120 days (36,000 rows) for charts, all 9,000 saved production forecast rows, 300 synthetic inventory snapshots, 300 authoritative recommendations, and metadata preserving the full 582,300-observation project scope. It contains no model because the public app performs no forecasting inference at runtime; scenario calculations continue to use the authoritative inventory engine in memory.
 
 ## Portfolio demonstration path
 
